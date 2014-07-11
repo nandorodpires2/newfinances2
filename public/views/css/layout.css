@@ -1,0 +1,97 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10/07/2014, 16:46:52
+    Author     : Fernando Rodrigues
+*/
+
+/* backgronds */
+.background-color-white {
+    background: #fff;
+}
+
+.background-color-orange {
+    background: #ec971f;
+}
+
+.background-color-blue {
+    background: #3071a9;
+}
+
+.background-color-green {
+    background: #4cae4c;
+}
+
+.bg-banner {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url(../img/bg-banner.png) left center repeat-y;    
+}
+
+/* paddings*/
+padding-5px {
+    padding: 5px;
+}
+
+.padding-10px {
+    padding: 10px;
+}
+
+.padding-20px {
+    padding: 20px;
+}
+
+.padding-top-10px {
+    padding-top: 10px;
+}
+
+/* margins */
+.no-margim {
+    margin: 0;
+}
+
+.margin-10px {
+    margin: 10px;
+}
+
+.margin-top-10px {
+    margin-top: 10px;
+}
+
+/* texts */
+.text-orange {
+    color: #ec971f;
+}
+
+.text-blue {
+    color: #3071a9;
+}
+
+.text-green {
+    color: #4cae4c;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.logo {
+    position: absolute;
+    left: 20px;;
+    top: 20px;    
+}
+
+.container-logo {
+    position: relative;
+}
+
+.direitos {
+    position: relative;
+    bottom: 0;
+}

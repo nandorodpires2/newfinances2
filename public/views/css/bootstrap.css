@@ -68,7 +68,7 @@ mark {
   background: #ff0;
 }
 small {
-  font-size: 80%;
+  font-size: 70%;
 }
 sub,
 sup {
@@ -288,12 +288,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #428bca;
+  color: #fff;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #2a6496;
+  color: #ec971f;
   text-decoration: underline;
 }
 a:focus {
@@ -3464,14 +3464,15 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   display: block;
 }
 .nav > li > a {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
+    color: #fff;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
-  text-decoration: none;
-  background-color: #eee;
+    background-color: #4cae4c;
+    text-decoration: none;  
 }
 .nav > li.disabled > a {
   color: #999;
@@ -3485,8 +3486,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav .open > a,
 .nav .open > a:hover,
-.nav .open > a:focus {
-  background-color: #eee;
+.nav .open > a:focus {  
   border-color: #428bca;
 }
 .nav .nav-divider {

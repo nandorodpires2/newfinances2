@@ -8,56 +8,223 @@
 
         <title>NewFinances</title>
 
+        <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/jquery-1.10.2.js')); ?>
+        <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/bootstrap.js')); ?>
+        
         <!-- Bootstrap core CSS -->
         <link href="<?php echo $this->baseUrl('views/css/bootstrap.css'); ?>" rel="stylesheet">
-
         <!-- Custom CSS for the 'Business Frontpage' Template -->
         <link href="<?php echo $this->baseUrl('views/css/business-frontpage.css'); ?>" rel="stylesheet">
+        <!-- Custom CSS for layout -->
+        <link href="<?php echo $this->baseUrl('views/css/layout.css'); ?>" rel="stylesheet">
+        
+        <!-- Facebook Conversion Code for Fernando Rodrigues -->
+        <script type="text/javascript">
+            var fb_param = {};
+            fb_param.pixel_id = '6018678121620';
+            fb_param.value = '0.00';
+            fb_param.currency = 'USD';
+            (function() {
+                var fpw = document.createElement('script');
+                fpw.async = true;
+                fpw.src = '//connect.facebook.net/en_US/fp.js';
+                var ref = document.getElementsByTagName('script')[0];
+                ref.parentNode.insertBefore(fpw, ref);
+            })();
+        </script>    
+        <noscript>
+            <img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6018678121620&amp;value=0&amp;currency=USD" />
+        </noscript>        
     </head>
 
-    <body>
+    <body id="body">
 
-        <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <nav class="navbar navbar-fixed-top background-color-blue" role="navigation">
             <div class="container">
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#about">Principal</a></li>
+                        <li><a href="#services">O Sistema</a></li>
+                        <li><a href="#contact">Cadastre-se</a></li>                        
+                        <li><a href="#contact">Contato</a></li>                        
                     </ul>
-                </div>
-                <!-- /.navbar-collapse -->
+                    <div class="navbar-right padding-top-10px">
+                        <form method="" class="form-inline" action="">                            
+                            <input class="input-sm" type="text" name="email" placeholder="e-mail" />                            
+                            <input class="input-sm" type="password" name="senha" placeholder="senha" />
+                            <input class="btn btn-sm" type="submit" name="submit" value="Logar" />
+                            <a class="small" href="">Esqueci a senha</a>                                
+                        </form>
+                    </div>
+                </div>                
+            </div>            
+        </nav>        
+        <div class="business-header">    
+            <div class="bg-banner"></div>
+            <div class="container container-logo">
+                <img class="img-responsive logo" src="<?php echo $this->baseUrl('views/img/logo_newfinances.png'); ?>" width="400"/>            
             </div>
-            <!-- /.container -->
-        </nav>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                </ol>
 
-        <div class="business-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- The background image is set in the custom CSS -->
-                        <h1 class="tagline">An Informative Tagline Goes Here</h1>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="<?php echo $this->baseUrl('views/img/banners/banner_1.png'); ?>" alt="">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="<?php echo $this->baseUrl('views/img/banners/banner_2.png'); ?>" alt="">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="<?php echo $this->baseUrl('views/img/banners/banner_3.png'); ?>" alt="">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="<?php echo $this->baseUrl('views/img/banners/banner_4.png'); ?>" alt="">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="<?php echo $this->baseUrl('views/img/banners/banner_5.png'); ?>" alt="">
+                        <div class="carousel-caption"></div>
                     </div>
                 </div>
-            </div>
+                <!-- Controls 
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+                -->
+            </div>                        
         </div>
         <div class="container">
-            <hr>
             <div class="row">
                 <div class="col-lg-12 col-sm-12">
                     <?php echo $this->layout()->content; ?>                    
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img class="img-circle img-responsive text-center" src="<?php echo $this->baseUrl('views/img/system/receitas.png'); ?>">
+                    <h2 class="text-center text-blue">Receitas</h2>
+                    <p class="text-justify">
+                        These marketing boxes are a great place to put some 
+                        information. These can contain summaries of what the 
+                        company does, promotional information, or anything else 
+                        that is relevant to the company. These will usually be 
+                        below-the-fold.
+                    </p>
+                    <div class="navbar-right">
+                        <a class="background-color-green padding-10px" href="">Leia mais...</a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-circle img-responsive" src="<?php echo $this->baseUrl('views/img/system/despesas.png'); ?>">
+                    <h2 class="text-center text-blue">Despesas</h2>
+                    <p class="text-justify">
+                        The images are set to be circular and responsive. 
+                        Fusce dapibus, tellus ac cursus commodo, tortor mauris 
+                        condimentum nibh, ut fermentum massa justo sit amet 
+                        risus. Etiam porta sem malesuada magna mollis euismod. 
+                        Donec sed odio dui.
+                    </p>
+                    <div class="navbar-right">
+                        <a class="background-color-green padding-10px" href="">Leia mais...</a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-circle img-responsive" src="<?php echo $this->baseUrl('views/img/system/cartoes_credito.png'); ?>">
+                    <h2 class="text-center text-blue">Cartões de Crédito</h2>
+                    <p class="text-justify">Donec id elit non mi porta gravida 
+                        at eget metus. Fusce dapibus, tellus ac cursus commodo, 
+                        tortor mauris condimentum nibh, ut fermentum massa justo 
+                        sit amet risus. Etiam porta sem malesuada magna mollis 
+                        euismod. Donec sed odio dui.
+                    </p>
+                    <div class="navbar-right">
+                        <a class="background-color-green padding-10px" href="">Leia mais...</a>
+                    </div>
                 </div>
             </div>
             <hr>            
-            <footer>
+        </div>
+        <footer class="background-color-orange">
+            <div class="container">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <p>Copyright &copy; Company 2013</p>
+                    <div class="col-lg-8">
+                        <p class="margin-10px">Acesse nossas redes sociais: </p>
+                        <a href="">
+                            <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_face_social2.png'); ?>" />
+                        </a>
+                        <a href="">
+                            <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_twitter_social2.png'); ?>" />
+                        </a>
+                        <a href="">
+                            <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_google_plus_social2.png'); ?>" />
+                        </a>
+                        <p>
+                            <h5 class="text-blue"><b>MAPA DO SITE</b></h5>
+                        </p>
+                        <ul class="nav">
+                            <li><a href="">Página principal</a></li>
+                            <li><a href="">Sobre o sistema</a></li>
+                            <li><a href="">Faça o seu cadastro</a></li>
+                            <li><a href="">Faça contato</a></li>
+                        </ul>                        
+                    </div>                    
+                    <div class="col-lg-4 margin-top-10px">                                                
+                        <div class="row">
+                            <div id="fb-root"></div>                        
+                            <script>
+                                (function(d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (d.getElementById(id))
+                                        return;
+                                    js = d.createElement(s);
+                                    js.id = id;
+                                    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));
+                            </script>
+                            <div class="fb-like-box background-color-white navbar-right" style="width: 100%; margin: 10px 0;"
+                                 data-href="http://www.facebook.com/sisnewfinances" 
+                                 data-colorscheme="dark"                                                               
+                                 data-header="false" 
+                                 fb-xfbml-state="rendered"
+                                 data-show-faces="true" 
+                                 data-header="true" 
+                                 data-stream="fasle" 
+                                 data-show-border="false">                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <a class="twitter-timeline" href="https://twitter.com/NewFinances" data-widget-id="423853342851223552">Tweets de @NewFinances</a>
+                            <script>
+                                !function(d,s,id){
+                                    var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+                                    if(!d.getElementById(id)){
+                                        js=d.createElement(s);
+                                        js.id=id;js.src=p+"://platform.twitter.com/widgets.js";
+                                        fjs.parentNode.insertBefore(js,fjs);
+                                    }
+                                }(document,"script","twitter-wjs");
+                            </script>
+                        </div>
                     </div>
                 </div>
-            </footer>
-        </div>
+            </div>            
+        </footer>
         <!-- /container -->
     </body>
 
