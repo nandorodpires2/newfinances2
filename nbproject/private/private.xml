@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/site/views/scripts/index/index.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/site/controllers/IndexController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/site/controllers/CadastroUsuarioController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/UsuariosController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/site/controllers/SistemaController.php</file>
             <file>file:/C:/wamp/www/newfinances2/public/views/css/layout.css</file>
-            <file>file:/C:/wamp/www/newfinances2/public/views/js/layout.js</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/site/views/scripts/index/index.phtml</file>
             <file>file:/C:/wamp/www/newfinances2/application/layouts/scripts/layout.phtml</file>
-            <file>file:/C:/wamp/www/newfinances2/public/views/css/business-frontpage.css</file>
-            <file>file:/C:/wamp/www/newfinances2/application/Bootstrap.php</file>
-            <file>file:/C:/wamp/www/newfinances2/public/views/css/bootstrap.css</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/site/controllers/ContatoController.php</file>
         </group>
     </open-files>
 </project-private>
