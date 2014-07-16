@@ -65,6 +65,29 @@ class Form_Site_Cadastro extends Zend_Form {
         ));
         
         // politica
+        $this->addElement('checkbox', 'politica', array(            
+            'required' => true,
+            'value' => '1',
+            'class' => 'checkbox',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',                
+                array(
+                    'Label', array(
+                        'tag' => 'span',
+                        'class' => 'control-label margin-top-10px'
+                    )
+                ),
+                array(
+                    'HtmlTag', array(
+                        'tag' => 'span',
+                        'class' => 'checkbox'
+                    )
+                ),
+            ),
+            'label' => "Li e concordo com a Política de Privacidade e o Termo de Uso"
+        ));
         
         // submit
         $this->addElement('submit', 'submit', array(
