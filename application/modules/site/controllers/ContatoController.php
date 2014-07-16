@@ -1,16 +1,16 @@
 <?php
 
-class ContatoController extends Zend_Controller_Action
-{
+class ContatoController extends Zend_Controller_Action {
 
-    public function init()
-    {
-        /* Initialize action controller here */
+    public function init() {
+        
     }
 
-    public function indexAction()
-    {
-        // action body
+    public function indexAction() {
+        
+        $formSiteContato = new Form_Site_Contato();        
+        $this->view->formSiteContato = $formSiteContato;
+        
     }
 
 

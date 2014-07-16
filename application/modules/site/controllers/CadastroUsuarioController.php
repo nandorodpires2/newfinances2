@@ -1,18 +1,17 @@
 <?php
 
-class CadastroUsuarioController extends Zend_Controller_Action
-{
+class CadastroUsuarioController extends Zend_Controller_Action {
 
-    public function init()
-    {
-        /* Initialize action controller here */
+    public function init() {
+        
     }
 
-    public function indexAction()
-    {
-        // action body
+    public function indexAction() {
+        
+        $formSiteCadastro = new Form_Site_Cadastro();
+        $this->view->formSiteCadastro = $formSiteCadastro;
+        
     }
-
 
 }
 

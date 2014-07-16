@@ -49,9 +49,9 @@
                     </ul>
                     <div class="navbar-right padding-top-10px">
                         <form method="" class="form-inline" action="">                            
-                            <input class="input-sm" type="text" name="email" placeholder="e-mail" />                            
-                            <input class="input-sm" type="password" name="senha" placeholder="senha" />
-                            <input class="btn btn-sm" type="submit" name="submit" value="Logar" />
+                            <input class="input-sm form-control" type="text" name="email" placeholder="e-mail" />                            
+                            <input class="input-sm form-control" type="password" name="senha" placeholder="senha" />
+                            <input class="btn btn-sm btn-success" type="submit" name="submit" value="Logar" />
                             <a class="small" href="<?php echo $this->url(array(
                                 'module' => 'cliente',
                                 'controller' => 'usuarios',
@@ -61,8 +61,8 @@
                     </div>
                 </div>                
             </div>            
-        </nav>        
-        <div class="business-header">                
+        </nav>                
+        <div class="business-header">              
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
@@ -105,11 +105,10 @@
                 </a>
                 -->
             </div>
-            <div class="bg-banner"></div>
-            <div class="row">            
+            <div class="bg-banner"></div>  
             <div class="container">
                 <img class="img-responsive logo" src="<?php echo $this->baseUrl('views/img/logo_newfinances.png'); ?>" width="350"/>            
-            </div>
+            </div>            
         </div>
         <div class="container">
             <div class="row">
@@ -135,7 +134,7 @@
                             <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_google_plus_social2.png'); ?>" />
                         </a>
                         <p>
-                            <h5 class="text-blue margin-10px"><b>MAPA DO SITE</b></h5>
+                            <h5 class="text-blue margin-10px"><b>Mapa do Site</b></h5>
                         </p>
                         <ul class="footer">
                             <li><a href="">Página principal</a></li>
@@ -144,18 +143,42 @@
                             <li><a href="">Faça contato</a></li>
                         </ul>                        
                     </div>              
-                    <div class="col-lg-4">
-                        <p class="margin-10px text-blue"><b>Nossa Políticas:</b></p>
-                        <p class="margin-10px">
-                            <a href="">Termo de Uso</a> | 
-                            <a href="">Política de Privacidade</a>
-                        </p>
-                        <p class="margin-10px text-blue"><b>Contato:</b></p>
-                        <p class="margin-10px">
-                            <a href="">contato@newfinances.com.br</a>
-                        </p>
+                    <div class="col-lg-3">
+                        <div class="row">
+                            <p class="margin-top-10px text-blue"><b>NewsLetter:</b></p>
+                            <p>
+                                Assine nossa newsletter e receba notícias e
+                                promoções.
+                            </p>
+                            <form class="" method="" action="" id="form_newsletter">
+                                <table class="table table-responsive">
+                                    <tr>
+                                        <td><input class="input-sm form-control" type="text" name="nome" placeholder="Digite seu nome" /></td>
+                                        <td><input class="input-sm form-control" type="text" name="email" placeholder="Digite seu e-mail" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class=""><input class="btn btn-sm btn-submit" type="submit" name="submit" value="Assinar" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <p class="text-blue"><b>Nossa Políticas:</b></p>
+                            <p class="">
+                                <a href="">Termo de Uso</a> | 
+                                <a href="">Política de Privacidade</a>
+                            </p>
+                            <p class="text-blue"><b>Contato:</b></p>
+                            <p class="">
+                                <a href="">contato@newfinances.com.br</a>
+                            </p>
+                        </div>
                     </div>
-                    <div class="col-lg-4 margin-top-10px">                                                
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-3 margin-top-10px">                                                
                         <div class="row">
                             <div id="fb-root"></div>                        
                             <script>
@@ -172,7 +195,7 @@
                             <div class="fb-like-box background-color-white navbar-right" style="width: 100%; margin: 10px 0;"
                                  data-href="http://www.facebook.com/sisnewfinances" 
                                  data-colorscheme="light"                                                               
-                                 data-header="true" 
+                                 data-header="false" 
                                  fb-xfbml-state="rendered"
                                  data-show-faces="true" 
                                  data-header="true" 
