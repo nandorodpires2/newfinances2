@@ -64,6 +64,10 @@ padding-5px {
     margin-top: 10px;
 }
 
+.margin-10px-0px {
+    margin: 10px 0;
+}
+
 /* texts */
 .text-orange {
     color: #ec971f;
@@ -85,6 +89,10 @@ padding-5px {
     font-weight: bold;
 }
 
+ul.error {
+    list-style: none;
+}
+
 /* inputs */
 .btn-submit {
     color: #fff;
@@ -96,6 +104,13 @@ padding-5px {
     background: #4cae4c;
 }
 
+
+.row-container-logo {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+}
 .logo {
     position: absolute;
     left: 20px;
@@ -103,7 +118,7 @@ padding-5px {
 }
 
 .container-logo {
-    position: absolute;
+    position: relative;
 }
 
 .img-banner {
@@ -118,6 +133,10 @@ padding-5px {
 
 footer a {
     padding: 5px;
+}
+
+footer a.redes-sociais:hover {
+    background: none;    
 }
 
 footer a:hover {

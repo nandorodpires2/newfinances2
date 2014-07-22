@@ -1,21 +1,50 @@
 <?php
 
-$environment = $_SERVER['REMOTE_ADDR'] == '127.0.0.1' ? 'development' : 'production';
-$library_path = $environment == 'development' ? '/../../library' : '/../library';
+// Define path to application directory
+defined('APPLICATION_PATH')
+    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
+
+if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+    $application_env = "development";
+} else {
+    $application_env = "production";
+}
+
+// Define application environment
+defined('APPLICATION_ENV')
+    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $application_env));
 
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
 
-// Define application environment
-defined('APPLICATION_ENV')
-    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : $environment));
+// Define path to emails layouts
+defined('EMAILS_SITE')
+    || define('EMAILS_SITE', APPLICATION_PATH . '/modules/site/views/emails');
 
-// Ensure library/ is on include_path
-set_include_path(implode(PATH_SEPARATOR, array(
-    realpath(APPLICATION_PATH . $library_path),
-    get_include_path(),
-)));
+// Define path to public directory
+defined('PUBLIC_PATH') || define('PUBLIC_PATH', realpath(dirname(__FILE__)));
+
+// Define path to public directory
+if ($application_env == 'production') {
+    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances.com.br/');
+} else {
+    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://localhost/newfinances2/');
+}
+
+if ($application_env == 'production') {
+    // Ensure library/ is on include_path
+    set_include_path(implode(PATH_SEPARATOR, array(
+        realpath(APPLICATION_PATH . '/../../../library'),
+        get_include_path(),
+    )));
+} else {
+    // Ensure library/ is on include_path
+    set_include_path(implode(PATH_SEPARATOR, array(
+        realpath(APPLICATION_PATH . '/../../library'),
+        get_include_path(),
+    )));
+}
 
 /** Zend_Application */
 require_once 'Zend/Application.php';

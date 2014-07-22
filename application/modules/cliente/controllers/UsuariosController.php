@@ -1,24 +1,23 @@
 <?php
 
-class Cliente_UsuariosController extends Zend_Controller_Action
-{
+class Cliente_UsuariosController extends Zend_Controller_Action {
 
-    public function init()
-    {
-        /* Initialize action controller here */
+    public function init() {
+        $messages = $this->_helper->FlashMessenger->getMessages();
+        $this->view->messages = $messages;
     }
 
-    public function indexAction()
-    {
-        // action body
+    public function indexAction() {
+        
     }
-
-    public function recuperarSenhaAction()
-    {
-        // action body
+    
+    public function logoutAction() {
+        
+        Zend_Auth::getInstance()->clearIdentity();
+        
+        $this->_redirect('usuarios/login');
+        
     }
-
-
 }
 
 

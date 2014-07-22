@@ -23,27 +23,63 @@ class Form_Site_Contato extends Zend_Form {
         // nome
         $this->addElement('text', 'nome', array(
             'label' => 'Nome: ',
-            'class' => 'form-control'
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',         
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // email
         $this->addElement('text', 'email', array(
             'label' => 'E-mail: ',
-            'class' => 'form-control'
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',         
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // assunto
         $this->addElement('text', 'assunto', array(
             'label' => 'Assunto: ',
-            'class' => 'form-control'
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',         
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // texto
         $this->addElement('textarea', 'texto', array(
-            'label' => 'Mensagem',            
+            'label' => 'Mensagem',         
+            'required' => true,
             'rows' => 10,
             'cols' => 80,
-            'class' => 'form-control'
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',         
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // submit

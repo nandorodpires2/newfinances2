@@ -11,8 +11,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'username' => $config->mail->username,
             'password' => $config->mail->password
         );
-        $transport = new Zend_Mail_Transport_Smtp($config->mail->host, $mail_config);
+        
+        if (APPLICATION_ENV === 'development') {
+            $transport = new Zend_Mail_Transport_File($config->mail->host, $mail_config);
+        } else {
+            $transport = new Zend_Mail_Transport_Smtp($config->mail->host, $mail_config);
+        }        
+        
         Zend_Registry::set('mail_transport', $transport);
+        
     }
     
     /**
@@ -44,7 +51,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * Configura o controller
      */
     protected function _initController() {
-    	$controller = Zend_Controller_Front::getInstance();              
+    	$controller = Zend_Controller_Front::getInstance(); 
+        $controller->registerPlugin(new Plugin_Auth());
+        $controller->registerPlugin(new Plugin_Layout());
     }
     
     /**
@@ -58,7 +67,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * Definindo a configuracao de Layout
      */
     protected function _initLayout() {
-        
+                
         $configs = array(
             'layout' => 'layout',
             'layoutPath' => APPLICATION_PATH . '/layouts/scripts'

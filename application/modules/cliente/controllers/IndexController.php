@@ -1,6 +1,6 @@
 <?php
 
-class IndexController extends Application_Controller {
+class Cliente_IndexController extends Application_Controller {
 
     public function init() {
         parent::init();

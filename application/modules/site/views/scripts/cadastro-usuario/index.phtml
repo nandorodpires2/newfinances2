@@ -1,5 +1,6 @@
 <div class="col-lg-12">
     <p><h3 class="text-green">Faça Seu Cadastro</h3></p>
+    <?php echo View_Helper_Messages::render($this->messages); ?>
 </div>
 <div class="col-lg-5">
     <img class="img-banner" src="<?php echo $this->baseUrl('views/img/img_cadastre-se.jpg'); ?>" />
