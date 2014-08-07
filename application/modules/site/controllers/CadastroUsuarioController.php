@@ -2,6 +2,9 @@
 
 class CadastroUsuarioController extends Zend_Controller_Action {
 
+    const PLANO_BASICO = 2;
+    const VALOR_PLANO_BASICO = 2;
+    
     public function init() {
         $messages = $this->_helper->FlashMessenger->getMessages();
         $this->view->messages = $messages;
@@ -53,6 +56,22 @@ class CadastroUsuarioController extends Zend_Controller_Action {
                         
                         try {
                             $id = $modelUsuario->insert($dadosCadastroUsuario);
+                            
+                            /**
+                             * cadastrar o plano basico para o usuario
+                             */
+                            
+                            $modelUsuarioPlano = new Model_UsuarioPlano();
+                            
+                            $planoBasico['id_usuario'] = $id;
+                            $planoBasico['id_plano'] = self::PLANO_BASICO;
+                            $planoBasico['data_aderido'] = Controller_Helper_Date::getDatetimeNowDb();
+                            $planoBasico['data_encerramento'] = Controller_Helper_Date::getDataEncerramentoPlano($planoBasico['data_aderido'], self::PLANO_BASICO);
+                            $planoBasico['ativo_plano'] = 1;
+                            $planoBasico['id_plano_valor'] = self::VALOR_PLANO_BASICO;
+
+                            $modelUsuarioPlano->insert($planoBasico);                            
+                            
                             $hash_id = md5($id);
                             
                             /* grava o hash */
@@ -64,7 +83,7 @@ class CadastroUsuarioController extends Zend_Controller_Action {
                             $modelUsuarioAtivar->insert($dadosUsuarioAtivar);
                             
                             /* envia o link para ativar a senha*/
-                            $this->sendHashAtivaUsuario($hash_id);
+                            $this->sendHashAtivaUsuario($hash_id, $dadosCadastroUsuario);
                             
                             $messages = array(
                                 'type' => 'success',
@@ -141,7 +160,7 @@ class CadastroUsuarioController extends Zend_Controller_Action {
     
     protected function sendHashAtivaUsuario($hash, $dados) {
         
-        $link = SYSTEM_URL  . "usuarios/ativar/hash/" . $hash;
+        $link = "http://newfinances2.newfinances.com.br/public/usuarios/ativar/hash/" . $hash;
         
         // envia um e-mail de resposta para o visitante
         $html = new Zend_View();

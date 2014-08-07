@@ -61,6 +61,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      */
     protected function _initSession() {
         Zend_Session::start();
+        Zend_Registry::set('auth', Zend_Auth::getInstance());
     }
 
     /**

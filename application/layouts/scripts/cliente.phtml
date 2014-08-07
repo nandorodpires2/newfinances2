@@ -1,3 +1,17 @@
+<?php $identity = Zend_Auth::getInstance()->hasIdentity(); ?>
+<?php $auth = Zend_Auth::getInstance()->getIdentity(); ?>
+<?php
+
+    $namePart = explode(" ", $auth->nome_completo);    
+    foreach ($namePart as $key => $value) {
+        $short_name = $namePart[0] . ' ';        
+        if ($key + 1 == count($namePart)) {
+            $short_name .= $value;
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -21,37 +35,67 @@
     </head>
 
     <body id="body">
-        <nav class="navbar navbar-fixed-top background-color-blue" role="navigation">
-            <div class="container">
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="<?php echo $this->url(array(
-                            'module' => 'cliente',
-                            'controller' => 'usuarios',
-                            'action' => 'logout'
-                        )); ?>">Sair</a></li>                       
-                    </ul>
-                    <div class="navbar-right padding-top-10px">                         
-                        <img src="" />
-                    </div>
-                </div>                
-            </div>            
-        </nav>                
-        
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-sm-12">
-                    <?php echo $this->layout()->content; ?>                    
-                </div>                
-            </div>            
-            <hr>            
+        <nav class="navbar navbar-fixed-top background-color-blue" role="navigation">            
+            <div class="container">                
+                <ul class="nav navbar-nav">                    
+                    <li class="active"><a href="<?php echo $this->url(array(
+                        'module' => 'cliente',
+                        'controller' => 'index',
+                        'action' => 'index'
+                    )); ?>">Início</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lançamentos <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                           <li><a href="#">Nova Receita</a></li>
+                           <li><a href="#">Nova Despesa</a></li>
+                           <li><a href="#">Transferência</a></li>
+                        </ul>
+                    </li>
+                    <li class="active"><a href="#">Orçamentos</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Relatórios <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                           <li><a href="#">Anual</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contas/Cartão <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                           <li><a href="#">Nova Conta</a></li>
+                           <li><a href="#">Novo Cartão</a></li>
+                        </ul>
+                    </li>
+                    <li class="active"><a href="#">Meus Chamados</a></li>
+                </ul>               
+                <ul class="nav navbar-nav navbar-right">                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $short_name; ?> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                           <li><a href="<?php echo $this->url(array(
+                               'module' => 'cliente',
+                               'controller' => 'meusdados',
+                               'action' => 'index'
+                           )); ?>">Meus Dados</a></li>
+                           <li class="divider"></li>
+                           <li><a href="<?php echo $this->url(array(
+                               'module' => 'cliente',
+                               'controller' => 'usuarios',
+                               'action' => 'logout'
+                           )); ?>">Sair</a></li>
+                        </ul>
+                    </li>
+               </ul>               
+            </div>
+        </nav>                    
+        <div class="container">            
+            <div class="col-lg-12 col-sm-12">
+                <?php echo $this->layout()->content; ?>                    
+            </div>             
         </div>
         <footer class="background-color-orange">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <p class="margin-10px text-blue"><b>Acesse nossas redes sociais:</b></p>
+                    <div class="col-lg-12">
                         <a class="redes-sociais" href="">
                             <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_face_social2.png'); ?>" />
                         </a>
@@ -61,95 +105,8 @@
                         <a class="redes-sociais" href="">
                             <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_google_plus_social2.png'); ?>" />
                         </a>
-                        <p>
-                            <h5 class="text-blue margin-10px"><b>Mapa do Site</b></h5>
-                        </p>
-                        <ul class="footer">
-                            <li><a href="">Página principal</a></li>
-                            <li><a href="">Sobre o sistema</a></li>
-                            <li><a href="">Faça o seu cadastro</a></li>
-                            <li><a href="">Faça contato</a></li>
-                        </ul>                        
-                    </div>              
-                    <div class="col-lg-3">
-                        <div class="row" id="form-newsletter">
-                            <p class="margin-top-10px text-blue"><b>NewsLetter:</b></p>
-                            <p>
-                                Assine nossa newsletter e receba notícias e
-                                promoções.
-                            </p>                            
-                            <table class="table table-responsive">
-                                <tr>
-                                    <td><input class="input-sm form-control" type="text" name="nome" id="nome-news" placeholder="Digite seu nome" /></td>
-                                    <td><input class="input-sm form-control" type="text" name="email" id="email-news" placeholder="Digite seu e-mail" /></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="">
-                                        <button class="btn btn-sm btn-submit" name="bt-newsletter" id="btn-newsletter">Assinar</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                </tr>
-                            </table>                            
-                        </div>
-                        <div class="row padding-10px margin-top-10px" id="newsletter-loader" style="display: none">
-                            <img class="img-responsive center-block" src="<?php echo $this->baseUrl('views/img/loader.gif'); ?>" />
-                        </div>
-                        <div class="row" id="newsletter-result" style="display: none"></div>
-                        <div class="row">
-                            <p class="text-blue"><b>Nossa Políticas:</b></p>
-                            <p class="">
-                                <a href="">Termo de Uso</a> | 
-                                <a href="">Política de Privacidade</a>
-                            </p>
-                            <p class="text-blue"><b>Contato:</b></p>
-                            <p class="">
-                                <a href="">contato@newfinances.com.br</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-3 margin-top-10px">                                                
-                        <div class="row">
-                            <div id="fb-root"></div>                        
-                            <script>
-                                (function(d, s, id) {
-                                    var js, fjs = d.getElementsByTagName(s)[0];
-                                    if (d.getElementById(id))
-                                        return;
-                                    js = d.createElement(s);
-                                    js.id = id;
-                                    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
-                                    fjs.parentNode.insertBefore(js, fjs);
-                                }(document, 'script', 'facebook-jssdk'));
-                            </script>
-                            <div class="fb-like-box background-color-white navbar-right" style="width: 100%; margin: 10px 0;"
-                                 data-href="http://www.facebook.com/sisnewfinances" 
-                                 data-colorscheme="light"                                                               
-                                 data-header="false" 
-                                 fb-xfbml-state="rendered"
-                                 data-show-faces="true" 
-                                 data-header="true" 
-                                 data-stream="false" 
-                                 data-show-border="false">                
-                            </div>
-                        </div>
-                        <div class="row">
-                            <a class="twitter-timeline" href="https://twitter.com/NewFinances" data-widget-id="423853342851223552">Tweets de @NewFinances</a>
-                            <script>
-                                !function(d,s,id){
-                                    var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
-                                    if(!d.getElementById(id)){
-                                        js=d.createElement(s);
-                                        js.id=id;js.src=p+"://platform.twitter.com/widgets.js";
-                                        fjs.parentNode.insertBefore(js,fjs);
-                                    }
-                                }(document,"script","twitter-wjs");
-                            </script>
-                        </div>
-                    </div>
-                </div>
+                    </div>                                                                          
+                </div>   
             </div>            
         </footer>
         <!-- /container -->

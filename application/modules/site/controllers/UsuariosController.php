@@ -30,7 +30,7 @@ class UsuariosController extends Zend_Controller_Action {
                 
                 $result = $ZendAuth->authenticate($adapter); 
                 
-                if ($result->isValid()) {                    
+                if ($result->isValid()) {                       
                     $ZendAuth->getStorage()->write($usuarioRow);   
                     
                     // gravando o log
@@ -57,8 +57,10 @@ class UsuariosController extends Zend_Controller_Action {
         $hash = $this->_getParam('hash');
         
         /* busca os dados do hash */
-        $modelUsuarioAtivar = new Model_UsuarioAtivar();
+        $modelUsuarioAtivar = new Model_UsuarioAtivar();        
         $dadosHashUsuario = $modelUsuarioAtivar->getDadosUsuarioHash($hash);
+        
+        $modelUsuario = new Model_Usuario();
         
         /* verificar se esta ativado */
         if (!$dadosHashUsuario->ativado) {
@@ -67,8 +69,11 @@ class UsuariosController extends Zend_Controller_Action {
                 'data_ativacao' => date('Y-m-d H:i:s')
             );
             $where = "id_usuario = " . $dadosHashUsuario->id_usuario;
+            
+            $whereUsuario = "id_usuario = " . $dadosHashUsuario->id_usuario;
             try {
                 $modelUsuarioAtivar->update($dadosAtivar, $where);
+                $modelUsuario->update(array('ativo_usuario' => 1), $whereUsuario);
 
                 $messages = array(
                     'type' => 'success',

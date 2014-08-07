@@ -21,7 +21,7 @@ class Form_Site_Login extends Zend_Form {
             )
         );
         
-        $this->setAction('usuarios/login')->setMethod('post');
+        $this->setMethod('post');
         
         // email
         $this->addElement('text', 'email_usuario', array(

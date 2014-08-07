@@ -27,7 +27,7 @@ defined('PUBLIC_PATH') || define('PUBLIC_PATH', realpath(dirname(__FILE__)));
 
 // Define path to public directory
 if ($application_env == 'production') {
-    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances.com.br/');
+    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances2.newfinances.com.br/');
 } else {
     defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://localhost/newfinances2/');
 }

@@ -1,0 +1,36 @@
+<?php echo $this->headScript()->appendFile($this->baseUrl('views/js/cliente/index/index.js')); ?>
+<?php echo $this->headScript()->appendFile($this->baseUrl('views/js/layout.js')); ?>
+        
+<div class="row">    
+    <div class="col-lg-12">        
+        <p><h4 class="text-green">Início</h4></p>
+        <div class="panel panel-info">
+            <div class="panel-heading"><span class="text-blue">Lançamentos de Hoje</span></div>
+            <div class="panel-body" id="movimentacoes"></div>
+        </div>    
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-info">
+            <div class="panel-heading"><span class="text-blue">Faturas</span></div>
+            <div class="panel-body">
+              
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-success">
+            <div class="panel-heading"><span class="text-green">Próximas Receitas</span></div>
+            <div class="panel-body">
+              
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading"><span class="text-red">Próximas Despesas</span></div>
+            <div class="panel-body">
+              
+            </div>
+        </div>
+    </div>
+</div>
