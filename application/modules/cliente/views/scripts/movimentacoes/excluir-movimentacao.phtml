@@ -1,0 +1,29 @@
+<?php echo $this->headLink()->appendStylesheet($this->baseUrl('views/css/movimentacoes/excluir.css')); ?>
+<div id="pages">
+    <div id="excluir-movimentacao">
+        <p class="message-excluir">
+            <label>Tem certeza que deseja excluir essa movimentacao?</label>
+        </p>
+        <p class="lancamento">            
+            <?php echo View_Helper_Date::getDataView($this->dadosMovimentacao->data_movimentacao); ?> | 
+            <?php echo $this->dadosMovimentacao->descricao_movimentacao; ?> | 
+            <?php echo View_Helper_Currency::getCurrency($this->dadosMovimentacao->valor_movimentacao); ?>
+        </p>        
+        <form method="post">
+            <?php if ($this->id_movimentacao_pai) : ?>
+            <p class="lancamento" style="color: #0000CD;">Essa movimentacao se repete. O que deseja fazer:</p>
+            <p class="lancamento">
+                <input type="radio" name="opt-delete" value="0" checked />Excluir somente essa
+                <input type="radio" name="opt-delete" value="1"/>Excluir essa e as anteriores
+                <input type="radio" name="opt-delete" value="2"/>Excluir essa e as posteriores
+                <input type="radio" name="opt-delete" value="3"/>Excluir todas
+            </p>
+            <?php endif; ?>
+            <p class="lancamento">
+                <input type="submit" class="submit" name="btnResposta" value="Sim Apagar" />
+                <input type="submit" class="submit" name="btnResposta" value="Cancelar" />
+            </p>        
+        </form>
+        
+    </div>
+</div>

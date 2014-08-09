@@ -5,32 +5,113 @@
     <div class="col-lg-12">        
         <p><h4 class="text-green">Início</h4></p>
         <div class="panel panel-info">
-            <div class="panel-heading"><span class="text-blue">Lançamentos de Hoje</span></div>
+            <div class="panel-heading">
+                <span class="text-blue">Lançamentos</span>
+                <div class="pull-right">
+                    <a href="" data-toggle="modal" data-target="#modalGraficosLancamentos" id="chart-movimentacao">
+                        <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_chart.png'); ?>" width="20" title="Visualizar Gráfico"/>
+                    </a>
+                </div>
+            </div>
             <div class="panel-body" id="movimentacoes"></div>
         </div>    
     </div>
     <div class="col-lg-12">
         <div class="panel panel-info">
             <div class="panel-heading"><span class="text-blue">Faturas</span></div>
-            <div class="panel-body">
-              
-            </div>
+            <div class="panel-body"></div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-info">
+            <div class="panel-heading"><span class="text-blue">Categorias/Orçamento</span></div>
+            <div class="panel-body"></div>
         </div>
     </div>
     <div class="col-lg-6">
         <div class="panel panel-success">
-            <div class="panel-heading"><span class="text-green">Próximas Receitas</span></div>
+            <div class="panel-heading">
+                <span class="text-green">Próximas Receitas</span>
+                <span class="small">(Máx. 5 registros)</span>
+            </div>
             <div class="panel-body">
-              
+                <?php if ($this->receitas->count() > 0) : ?>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Data</th>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>Ações</th>
+                        </tr>
+                        <?php foreach ($this->receitas as $receita) : ?>
+                        <tr class="text-green">
+                            <td><?php echo $receita->data_movimentacao; ?></td>
+                            <td><?php echo $receita->descricao_movimentacao; ?></td>
+                            <td class="text-right"><?php echo View_Helper_Currency::getCurrency($receita->valor_movimentacao); ?></td>
+                            <td>
+                                <a href="">
+                                    <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_edit.png'); ?>" width="20" title="Editar" />
+                                </a>
+                                <a href="">
+                                    <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_delete.png'); ?>" width="20" title="Excluir" />
+                                </a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                <?php else : ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
     <div class="col-lg-6">
         <div class="panel panel-danger">
-            <div class="panel-heading"><span class="text-red">Próximas Despesas</span></div>
+            <div class="panel-heading">
+                <span class="text-red">Próximas Despesas</span>
+                <span class="small">(Máx. 5 registros)</span>                
+            </div>
             <div class="panel-body">
-              
+                <?php if ($this->despesas->count() > 0) : ?>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Data</th>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>Ações</th>
+                        </tr>
+                        <?php foreach ($this->despesas as $despesa) : ?>
+                        <tr class="text-red">
+                            <td><?php echo $despesa->data_movimentacao; ?></td>
+                            <td><?php echo $despesa->descricao_movimentacao; ?></td>
+                            <td class="text-center"><?php echo View_Helper_Currency::getCurrency($despesa->valor_movimentacao); ?></td>
+                            <td>
+                                <a href="">
+                                    <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_edit.png'); ?>" width="20" title="Editar" />
+                                </a>
+                                <a href="">
+                                    <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_delete.png'); ?>" width="20" title="Excluir" />
+                                </a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                <?php else : ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+        
+    <!-- Modal de Graficos -->
+    <div class="modal fade" id="modalGraficosLancamentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Gráfico Lançamentos</h4>
+                </div>
+                <div class="modal-body" id="grafico-receitas-despesas"></div>
             </div>
         </div>
     </div>
 </div>
+
