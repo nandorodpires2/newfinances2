@@ -8,7 +8,8 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
     const TIPO_MOVIMENTACAO_TRANSFERENCIA = 4;
 
     public function init() {          
-        
+        $messages = $this->_helper->FlashMessenger->getMessages();
+        $this->view->messages = $messages;
     }
 
     public function indexAction() {        
@@ -42,17 +43,17 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
      */
     public function novaReceitaAction() {
      
+        $modelMovimentacao = New Model_Movimentacao();
+        $modelMovimentacaoRepeticao = New Model_MovimentacaoRepeticao();
+        
         $formMovimentacoesReceitas = new Form_Cliente_Movimentacoes_Receita();
         $this->view->formMovimentacoesReceitas = $formMovimentacoesReceitas;
         
         if ($this->_request->isPost()) {
             $dadosReceita = $this->_request->getPost();
-            if ($this->_formMovimentacoesReceitas->isValid($dadosReceita)) {
-                $dadosReceita = $this->_formMovimentacoesReceitas->getValues();
-                
-                $nova_receita = (int)$dadosReceita['nova_receita'];
-                unset($dadosReceita['nova_receita']);
-                
+            if ($formMovimentacoesReceitas->isValid($dadosReceita)) {
+                $dadosReceita = $formMovimentacoesReceitas->getValues();
+                                
                 $dadosReceita['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_RECEITA;
                 
                 $dadosReceita['realizado'] = Controller_Helper_Movimentacao::getStatusMovimentacao($dadosReceita['data_movimentacao']);
@@ -87,27 +88,29 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 unset($dadosReceita['modo_repeticao']);
                 
                 try {
-                    $this->_modelMovimentacao->insert($dadosReceita);
+                    $modelMovimentacao->insert($dadosReceita);
                     
                     // recuperando o id da movimentacao
                     if ($repetir) {                        
-                        $dadosRepeticao['id_movimentacao'] = $this->_modelMovimentacao->lastInsertId();                    
-                        $this->_modelMovimentacaoRepeticao->insert($dadosRepeticao);                    
+                        $dadosRepeticao['id_movimentacao'] = $modelMovimentacao->lastInsertId();                    
+                        $modelMovimentacaoRepeticao->insert($dadosRepeticao);                    
                     }
                     
                     // recupera o id da movimentacao repeticao
-                    $lastId = $this->_modelMovimentacaoRepeticao->lastInsertId();
+                    $lastId = $modelMovimentacaoRepeticao->lastInsertId();
                     
                     // atualiza o id pai 
                     $dadosUpdateMovimentacao['id_movimentacao_pai'] = $lastId;
-                    $whereUpdateMovimentacao = "id_movimentacao = " . $this->_modelMovimentacao->lastInsertId();
-                    $this->_modelMovimentacao->update($dadosUpdateMovimentacao, $whereUpdateMovimentacao);
+                    $whereUpdateMovimentacao = "id_movimentacao = " . $modelMovimentacao->lastInsertId();
+                    $modelMovimentacao->update($dadosUpdateMovimentacao, $whereUpdateMovimentacao);
                     
-                    if ($nova_receita) {
-                        $this->_redirect("movimentacoes/nova-receita");
-                    } else {
-                        $this->_redirect("index/index");
-                    }
+                    $this->_helper->flashMessenger->addMessage(array(
+                        'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                        'message' => 'Receita Cadastrada com sucesso!'
+                    ));
+                    
+                    $this->_redirect("cliente/index/index");
+                    
                 } catch (Zend_Exception $error) {
                     echo $error->getMessage();
                 }

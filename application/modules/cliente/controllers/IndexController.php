@@ -3,7 +3,8 @@
 class Cliente_IndexController extends Zend_Controller_Action {
 
     public function init() {
-        
+        $messages = $this->_helper->FlashMessenger->getMessages();
+        $this->view->messages = $messages;
     }
 
     public function indexAction() {
