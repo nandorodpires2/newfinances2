@@ -100,10 +100,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * Zend Locale
      */
     public function _initLocale() {
-        //instancia o componente usando  pt-BR como padr�o
-        $locale = new Zend_Locale('pt_BR');
+        //instancia o componente usando  pt-BR como padrao
+        //Zend_Debug::dump(Zend_Auth::getInstance()->getIdentity());
+        $lang = "pt_BR";
+        $locale = new Zend_Locale($lang);
         //salva o memso no Zend_Registry
         Zend_Registry::set('Zend_Locale', $locale);
+        $translationFile = APPLICATION_PATH . '/lang/' . $locale . '.php';
+        $translate = new Zend_Translate('array', $translationFile, $locale);
+        Zend_Registry::set('Zend_Translate', $translate);
     }
 
 }

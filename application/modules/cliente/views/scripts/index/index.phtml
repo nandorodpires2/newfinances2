@@ -1,9 +1,8 @@
 <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/cliente/index/index.js')); ?>
 <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/layout.js')); ?>
-        
 <div class="row">       
     <div class="col-lg-12">        
-        <p><h4 class="text-green">Início</h4></p>
+        <p><h4 class="text-green"><?php echo $this->translate('inicio'); ?></h4></p>
         <?php echo View_Helper_Messages::render($this->messages); ?>
         <div class="panel panel-info">
             <div class="panel-heading">
@@ -26,7 +25,10 @@
     <div class="col-lg-12">
         <div class="panel panel-info">
             <div class="panel-heading"><span class="text-blue">Categorias/Orçamento</span></div>
-            <div class="panel-body"></div>
+            <div class="panel-body">
+                <div class="col-lg-6" id="dados-categorias"></div>
+                <div class="col-lg-6" id="dados-orcamentos"></div>
+            </div>
         </div>
     </div>
     <div class="col-lg-6">
@@ -104,7 +106,7 @@
         
     <!-- Modal de Graficos -->
     <div class="modal fade" id="modalGraficosLancamentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -115,4 +117,3 @@
         </div>
     </div>
 </div>
-

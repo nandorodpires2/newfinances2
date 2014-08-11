@@ -56,10 +56,36 @@ class Cliente_AjaxController extends Zend_Controller_Action {
         $ano = date('Y');
         
         $modelRelatorios = new Model_Relatorios();
-        $dadosRelatorio = $modelRelatorios->getRelatorioAnual($ano, $id_usuario);
+        $relatorios = $modelRelatorios->getTotalValoresMes($id_usuario);
         
-        echo json_encode($dadosRelatorio);
+        $jsonData = array();
         
+        foreach ($relatorios as $key => $relatorio) {
+            if ($relatorio->id_tipo_movimentacao == 1) {
+                $jsonData['receita']['data'][] = $relatorio->total;
+            } else {
+                $jsonData['despesa']['data'][] = $relatorio->total * -1;
+            }
+        }
+        
+        echo json_encode($jsonData);
+        
+    }
+    
+    public function graficoCategoriasAction () {
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        $jsonData = array();
+        echo json_encode($jsonData);
+    }
+    
+    public function graficoOrcamentoAction() {
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        $jsonData = array();
+        echo json_encode($jsonData);
     }
 
 }

@@ -10,6 +10,9 @@ $(document).ready(function(){
 
     buscaMovimentacoesData(data, id_conta);
     
+    buscaGastosCategorias();
+    buscaGastosOrcamento();
+    
     $("#chart-movimentacao").click(function(){
         graficoReceitaDespesas();
     });
@@ -28,7 +31,7 @@ function buscaMovimentacoesData(data, id_conta) {
         },
         dataType: "html",
         beforeSend: function() {            
-            $("#movimentacoes").html("Buscando as movimentações...");
+            $("#movimentacoes").html("<span class='glyphicon glyphicon-refresh glyphicon-refresh-animate'></span> Buscando lançamentos...");
         },
         success: function(dados) { 
             $("#movimentacoes").html(dados);
@@ -41,60 +44,222 @@ function buscaMovimentacoesData(data, id_conta) {
 }
 
 function graficoReceitaDespesas() {
-    var base_url = baseUrl();        
-    base_url + 'cliente/ajax/grafico-receitas-despesas';
+    var base_url = baseUrl();            
     
-    FusionCharts.ready(function () {
-        var revenueChart = new FusionCharts({
-            type: 'column2d',
-            renderAt: 'grafico-receitas-despesas',
-            width: '500',
-            height: '300',
-            dataFormat: 'json',
-            dataSource: {
-                "chart": {
-                    "caption": "Comparison of Quarterly Revenue",
-                    "subCaption": "Harry's SuperMart",
-                    "xAxisname": "Quarter",
-                    "yAxisName": "Amount ($)",
-                    "numberPrefix": "$",
-                    // Theme can be set to "zune", "ocean" or "carbon"
-                    "theme": "zune"
+    $.ajax({        
+        url: base_url + 'cliente/ajax/grafico-receitas-despesas',
+        dataType: "json",
+        beforeSend: function() {            
+            $("#grafico-receitas-despesas").html("<span class='glyphicon glyphicon-refresh glyphicon-refresh-animate'></span> Gerando o gráfico...");
+        },
+        success: function(json) { 
+            $('#grafico-receitas-despesas').highcharts({
+                chart: {
+                    type: 'column',
+                    width: $(".modal-dialog").innerWidth() - 50
                 },
-                "categories": [{
-                    "category": [
-                        { "label": "Q1" },
-                        { "label": "Q2" },
-                        { "label": "Q3" },
-                        { "label": "Q4" }
+                title: {
+                    text: 'Gráfico Receitas e Despesas'
+                },
+                xAxis: {
+                    categories: [
+                        'Jan',
+                        'Fev',
+                        'Mar',
+                        'Abr',
+                        'Mai',
+                        'Jun',
+                        'Jul',
+                        'Ago',
+                        'Set',
+                        'Out',
+                        'Nov',
+                        'Dez'
                     ]
-                }],
-                "dataset": [
-                    {
-                        "seriesname": "Previous Year",
-                        "data": [
-                            { "value": "10000" },
-                            { "value": "11500" },
-                            { "value": "12500" },
-                            { "value": "15000" }
-                        ]
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Valores (R$)'
                     },
-                    {
-                        "seriesname": "Current Year",
-                        "data": [
-                            { "value": "25400" },
-                            { "value": "29800" },
-                            { "value": "21800" },
-                            { "value": "26800" }
-                        ]
+                    subtitle: {
+                        text: 'Anual'
+                    },
+                    labels: {
+                        formatter: function() {
+                            return Highcharts.numberFormat(this.value, 0, ',', '.');
+                        }
                     }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>R${point.y:,.2f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: "Receita",
+                    data: json.receita.data
+                }, {
+                    name: "Despesa",
+                    data: json.despesa.data
+                }
                 ]
-            }
-        });
-
-        revenueChart.render();
+            });
+        },
+        error: function(error) {
+            alert('Houve um erro');
+        }
     });
-    
 }
 
+function buscaGastosCategorias() {
+    var base_url = baseUrl();            
+    
+    $.ajax({        
+        url: base_url + 'cliente/ajax/grafico-categorias',
+        dataType: "json",
+        beforeSend: function() {            
+            $("#dados-categorias").html("<span class='glyphicon glyphicon-refresh glyphicon-refresh-animate'></span> Gerando o gráfico...");
+        },
+        success: function(json) { 
+            $('#dados-categorias').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: 1,//null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Gráfico Categorias'
+                },
+                subtitle: {
+                    text: 'Mês Atual'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Browser share',
+                    data: [
+                        ['Firefox',   45.0],
+                        ['IE',       26.8],
+                        {
+                            name: 'Chrome',
+                            y: 12.8,
+                            sliced: true,
+                            selected: true
+                        },
+                        ['Safari',    8.5],
+                        ['Opera',     6.2],
+                        ['Others',   0.7]
+                    ]
+                }]
+            });
+        },
+        error: function(error) {
+            alert('Houve um erro');
+        }
+    });
+}
+
+function buscaGastosOrcamento() {
+    
+    var base_url = baseUrl(); 
+    
+    $.ajax({        
+        url: base_url + 'cliente/ajax/grafico-orcamento',
+        dataType: "json",
+        beforeSend: function() {            
+            $("#dados-orcamentos").html("<span class='glyphicon glyphicon-refresh glyphicon-refresh-animate'></span> Gerando o gráfico...");
+        },
+        success: function(json) { 
+            $('#dados-orcamentos').highcharts({
+                chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Gráfico Orçamento'
+            },
+            subtitle: {
+                text: 'Mês Atual'
+            },
+            xAxis: {
+                categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Population (millions)',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' millions'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Year 1800',
+                data: [107, 31, 635, 203, 2]
+            }, {
+                name: 'Year 1900',
+                data: [133, 156, 947, 408, 6]
+            }, {
+                name: 'Year 2008',
+                data: [973, 914, 4054, 732, 34]
+            }]
+            });
+        },
+        error: function(error) {
+            alert('Houve um erro');
+        }
+    });
+}
 

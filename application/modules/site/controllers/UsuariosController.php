@@ -26,13 +26,13 @@ class UsuariosController extends Zend_Controller_Action {
                                 
                 $ZendAuth = Zend_Auth::getInstance();                
                 $adapter = $modelUsuario->login($dadosUsuariosLogin);
-                $usuarioRow = $modelUsuario->getDadosUsuario($dadosUsuariosLogin['email_usuario']);                
+                $usuarioRow = $modelUsuario->getDadosUsuario($dadosUsuariosLogin['email_usuario']); 
                 
                 $result = $ZendAuth->authenticate($adapter); 
                 
                 if ($result->isValid()) {                       
                     $ZendAuth->getStorage()->write($usuarioRow);   
-                    
+                                        
                     // gravando o log
                     $dadosInsertLog['id_usuario'] = $usuarioRow->id_usuario;
                     $modelUsuarioLogin = new Model_UsuarioLogin();

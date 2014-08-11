@@ -3,6 +3,10 @@
 class Cliente_IndexController extends Zend_Controller_Action {
 
     public function init() {
+        
+        $translate = Zend_Registry::get('Zend_Translate');
+        $this->view->translate = $translate;
+        
         $messages = $this->_helper->FlashMessenger->getMessages();
         $this->view->messages = $messages;
     }

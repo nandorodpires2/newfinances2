@@ -8,15 +8,6 @@
 
         <title>NewFinances</title>
 
-        <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/jquery-1.10.2.js')); ?>
-        <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/fusioncharts.js')); ?>
-        <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/jquery.maskMoney.js')); ?>
-        <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/jquery.maskedinput.js')); ?>
-        <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/jquery.ui.datepicker-pt-BR.js')); ?>        
-        <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/application.js')); ?>        
-        <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/bootstrap.js')); ?>
-        
-                
         <!-- Bootstrap core CSS -->
         <link href="<?php echo $this->baseUrl('views/css/bootstrap.css'); ?>" rel="stylesheet">
         <!-- Custom CSS for the 'Business Frontpage' Template -->
@@ -24,6 +15,10 @@
         <!-- Custom CSS for layout -->
         <link href="<?php echo $this->baseUrl('views/css/layout.css'); ?>" rel="stylesheet">
         
+        <script src="<?php echo $this->baseUrl("views/js/jquery-1.10.2.js"); ?>"></script>
+        <script src="<?php echo $this->baseUrl('views/js/highcharts/highcharts.js'); ?>"></script>
+        <script src="<?php echo $this->baseUrl('views/js/highcharts/modules/exporting.js'); ?>"></script>
+        <script src="<?php echo $this->baseUrl('views/js/bootstrap.js'); ?>"></script>        
     </head>
 
     <body id="body">
