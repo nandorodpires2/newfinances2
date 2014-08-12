@@ -61,7 +61,7 @@ class Model_Categoria extends Zend_Db_Table {
                 ->where ("mov.realizado = 1")
                 ->group("cat.id_categoria")
                 ->order("sum(mov.valor_movimentacao) asc");
-                        
+        
         return $this->fetchAll($select); 
     }
     

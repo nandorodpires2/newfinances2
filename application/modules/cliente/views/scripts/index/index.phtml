@@ -48,7 +48,7 @@
                         </tr>
                         <?php foreach ($this->receitas as $receita) : ?>
                         <tr class="text-green">
-                            <td><?php echo $receita->data_movimentacao; ?></td>
+                            <td><?php echo View_Helper_Date::getDataView($receita->data_movimentacao); ?></td>
                             <td><?php echo $receita->descricao_movimentacao; ?></td>
                             <td class="text-right"><?php echo View_Helper_Currency::getCurrency($receita->valor_movimentacao); ?></td>
                             <td>
@@ -84,7 +84,7 @@
                         </tr>
                         <?php foreach ($this->despesas as $despesa) : ?>
                         <tr class="text-red">
-                            <td><?php echo $despesa->data_movimentacao; ?></td>
+                            <td><?php echo View_Helper_Date::getDataView($despesa->data_movimentacao); ?></td>
                             <td><?php echo $despesa->descricao_movimentacao; ?></td>
                             <td class="text-center"><?php echo View_Helper_Currency::getCurrency($despesa->valor_movimentacao); ?></td>
                             <td>

@@ -61,6 +61,9 @@ function graficoReceitaDespesas() {
                 title: {
                     text: 'Gráfico Receitas e Despesas'
                 },
+                subtitle: {
+                    text: 'Anual'
+                },
                 xAxis: {
                     categories: [
                         'Jan',
@@ -144,7 +147,7 @@ function buscaGastosCategorias() {
                     text: 'Mês Atual'
                 },
                 tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    pointFormat: '<b>R${point.y:,.2f}</b>'
                 },
                 plotOptions: {
                     pie: {
@@ -161,20 +164,7 @@ function buscaGastosCategorias() {
                 },
                 series: [{
                     type: 'pie',
-                    name: 'Browser share',
-                    data: [
-                        ['Firefox',   45.0],
-                        ['IE',       26.8],
-                        {
-                            name: 'Chrome',
-                            y: 12.8,
-                            sliced: true,
-                            selected: true
-                        },
-                        ['Safari',    8.5],
-                        ['Opera',     6.2],
-                        ['Others',   0.7]
-                    ]
+                    data: json
                 }]
             });
         },
@@ -206,7 +196,7 @@ function buscaGastosOrcamento() {
                 text: 'Mês Atual'
             },
             xAxis: {
-                categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+                categories: json.categories,
                 title: {
                     text: null
                 }
@@ -214,7 +204,7 @@ function buscaGastosOrcamento() {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Population (millions)',
+                    text: 'Orçamento (R$)',
                     align: 'high'
                 },
                 labels: {
@@ -222,7 +212,8 @@ function buscaGastosOrcamento() {
                 }
             },
             tooltip: {
-                valueSuffix: ' millions'
+                valuePrefix: 'R$',
+                pointFormat: '<b>{point.y:,.2f}</b>'
             },
             plotOptions: {
                 bar: {
@@ -235,8 +226,8 @@ function buscaGastosOrcamento() {
                 layout: 'vertical',
                 align: 'right',
                 verticalAlign: 'top',
-                x: -40,
-                y: 100,
+                x: -20,
+                y: 50,
                 floating: true,
                 borderWidth: 1,
                 backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
@@ -245,16 +236,7 @@ function buscaGastosOrcamento() {
             credits: {
                 enabled: false
             },
-            series: [{
-                name: 'Year 1800',
-                data: [107, 31, 635, 203, 2]
-            }, {
-                name: 'Year 1900',
-                data: [133, 156, 947, 408, 6]
-            }, {
-                name: 'Year 2008',
-                data: [973, 914, 4054, 732, 34]
-            }]
+            series: json.series
             });
         },
         error: function(error) {
