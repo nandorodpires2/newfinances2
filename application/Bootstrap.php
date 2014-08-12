@@ -60,7 +60,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * init session
      */
     protected function _initSession() {
-        Zend_Session::start();
+        Zend_Session::start();        
+        $session = new Zend_Session_Namespace();
+        $session->lang = isset($session->lang) ? $session->lang : "pt_BR";
+       
         Zend_Registry::set('session', new Zend_Session_Namespace);
     }
     
@@ -101,9 +104,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      */
     public function _initLocale() {
         //instancia o componente usando  pt-BR como padrao
-        //Zend_Debug::dump(Zend_Auth::getInstance()->getIdentity());
-        $lang = "pt_BR";
-        $locale = new Zend_Locale($lang);
+        $session = Zend_Registry::get('session');
+        
+        $locale = new Zend_Locale($session->lang);
         //salva o memso no Zend_Registry
         Zend_Registry::set('Zend_Locale', $locale);
         $translationFile = APPLICATION_PATH . '/lang/' . $locale . '.php';

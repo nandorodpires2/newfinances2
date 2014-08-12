@@ -50,7 +50,7 @@
                         ), null, true); ?>">Contato</a></li>                        
                     </ul>
                     <div class="navbar-right padding-top-10px">                         
-                        <form method="post" class="form-inline" action="usuarios/login">                            
+                        <form method="post" class="form-inline" action="<?php echo $this->baseUrl('usuarios/login'); ?>">                            
                             <input class="input-sm form-control" type="text" name="email_usuario" placeholder="e-mail" />                            
                             <input class="input-sm form-control" type="password" name="senha_usuario" placeholder="senha" />
                             <input class="btn btn-sm btn-success" type="submit" name="submit" value="Logar" />
@@ -180,7 +180,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 margin-top-10px">
-                        <img class="img-responsive img-rounded center-block" src="<?php echo $this->baseUrl('views/img/icon_pagseguro.png'); ?>" />
+                        <!--<img class="img-responsive img-rounded center-block" src="<?php echo $this->baseUrl('views/img/icon_pagseguro.png'); ?>" />-->
                     </div>
                     <div class="col-lg-3 margin-top-10px" style="margin-left: -15px">                                                
                         <div class="row">
