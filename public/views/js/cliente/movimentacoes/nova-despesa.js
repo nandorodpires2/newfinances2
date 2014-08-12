@@ -16,6 +16,9 @@ $(document).ready(function (){
     $("#modo_repeticao-label").hide();
     $("#modo_repeticao-element").hide();    
     
+    $("#id_cartao").hide();
+    $("#id_conta").hide();
+    
     $("#tipo_pgto-conta").click(function(){
         $("#id_conta-label").show();
         $("#id_conta").show();

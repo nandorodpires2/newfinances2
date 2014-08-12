@@ -23,47 +23,55 @@
     </head>
 
     <body id="body">
-        <nav class="navbar navbar-fixed-top background-color-blue" role="navigation">
-            <div class="container">
+        <nav class="navbar navbar-default navbar-fixed-top background-color-blue" role="navigation">
+            <div class="container container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="<?php echo $this->url(array(
-                            'module' => 'site',
-                            'controller' => 'index',
-                            'action' => 'index'
+                                'module' => 'site',
+                                'controller' => 'index',
+                                'action' => 'index'
                         ), null, true); ?>">Principal</a></li>
                         <li><a href="<?php echo $this->url(array(
-                            'module' => 'site',
-                            'controller' => 'sistema',
-                            'action' => 'index'
+                                'module' => 'site',
+                                'controller' => 'sistema',
+                                'action' => 'index'
                         ), null, true); ?>">O Sistema</a></li>
                         <li><a href="<?php echo $this->url(array(
-                            'module' => 'site',
-                            'controller' => 'cadastro-usuario',
-                            'action' => 'index'
+                                'module' => 'site',
+                                'controller' => 'cadastro-usuario',
+                                'action' => 'index'
                         ), null, true); ?>">Cadastre-se</a></li>                        
                         <li><a href="<?php echo $this->url(array(
-                            'module' => 'site',
-                            'controller' => 'contato',
-                            'action' => 'index'
+                                'module' => 'site',
+                                'controller' => 'contato',
+                                'action' => 'index'
                         ), null, true); ?>">Contato</a></li>                        
                     </ul>
-                    <div class="navbar-right padding-top-10px">                         
-                        <form method="post" class="form-inline" action="usuarios/login">                            
-                            <input class="input-sm form-control" type="text" name="email_usuario" placeholder="e-mail" />                            
-                            <input class="input-sm form-control" type="password" name="senha_usuario" placeholder="senha" />
-                            <input class="btn btn-sm btn-success" type="submit" name="submit" value="Logar" />
-                            <a class="small" href="<?php echo $this->url(array(
+                    <form class="navbar-form navbar-right" method="post" action="<?php echo $this->baseUrl('usuarios/login'); ?>">
+                        <input class="input-sm form-control" type="text" name="email_usuario" placeholder="e-mail" />                            
+                        <input class="input-sm form-control" type="password" name="senha_usuario" placeholder="senha" />
+                        <input class="btn btn-sm btn-success" type="submit" name="submit" value="Logar" />
+                        <a class="small" href="<?php echo $this->url(array(
                                 'module' => 'site',
                                 'controller' => 'usuarios',
                                 'action' => 'recuperar-senha'
-                            )); ?>">Esqueci a senha</a>                                
-                        </form>
-                    </div>
-                </div>                
-            </div>            
-        </nav>                
+                        )); ?>">Esqueci a senha</a>
+                    </form>                    
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>              
         <div class="business-header">              
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
@@ -114,7 +122,7 @@
                 </div>
             </div>            
         </div>
-        <div class="container">
+        <div class="container container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-sm-12">
                     <?php echo $this->layout()->content; ?>                    
@@ -124,7 +132,7 @@
             <hr>            
         </div>
         <footer class="background-color-orange">
-            <div class="container">
+            <div class="container container-fluid">
                 <hr />
                 <div class="row">
                     <div class="col-lg-3">
@@ -180,7 +188,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 margin-top-10px">
-                        <img class="img-responsive img-rounded center-block" src="<?php echo $this->baseUrl('views/img/icon_pagseguro.png'); ?>" />
+                        <!--<img class="img-responsive img-rounded center-block" src="<?php echo $this->baseUrl('views/img/icon_pagseguro.png'); ?>" />-->
                     </div>
                     <div class="col-lg-3 margin-top-10px" style="margin-left: -15px">                                                
                         <div class="row">

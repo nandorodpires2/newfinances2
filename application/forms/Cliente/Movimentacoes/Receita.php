@@ -105,7 +105,7 @@ class Form_Cliente_Movimentacoes_Receita extends Zend_Form {
         
         // option parcelar
         $this->addElement("checkbox", "opt_repetir", array(
-            'label' => 'Repetir essa movimentação?  ',
+            'label' => 'Repetir essa movimentação',
             'decorators' => array(
                 'ViewHelper',
                 'Description',

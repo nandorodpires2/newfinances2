@@ -14,8 +14,9 @@ class Cliente_UsuariosController extends Zend_Controller_Action {
     public function logoutAction() {
         
         Zend_Auth::getInstance()->clearIdentity();
+        Zend_Session::destroy();
         
-        $this->_redirect('usuarios/login');
+        $this->_redirect('index/');
         
     }
 }

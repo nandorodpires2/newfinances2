@@ -43,10 +43,11 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
      */
     public function novaReceitaAction() {
      
-        $modelMovimentacao = New Model_Movimentacao();
+        $modelMovimentacao = New Model_Movimentacao();        
         $modelMovimentacaoRepeticao = New Model_MovimentacaoRepeticao();
         
         $formMovimentacoesReceitas = new Form_Cliente_Movimentacoes_Receita();
+        $formMovimentacoesReceitas->getElement('opt_repetir')->getDecorator('label')->setOption('placement', 'APPEND');
         $this->view->formMovimentacoesReceitas = $formMovimentacoesReceitas;
         
         if ($this->_request->isPost()) {
@@ -125,12 +126,18 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
      */
     public function novaDespesaAction() {
         
-        $this->view->formMovimentacoesDespesa = $this->_formMovimentacoesDespesa;
+        $formMovimentacoesDespesa = new Form_Cliente_Movimentacoes_Despesa();
+        $formMovimentacoesDespesa->getElement('opt_repetir')->getDecorator('label')->setOption('placement', 'APPEND');
+        
+        $this->view->formMovimentacoesDespesa = $formMovimentacoesDespesa;
+        
+        $modelMovimentacao = New Model_Movimentacao();
+        $modelMovimentacaoRepeticao = New Model_MovimentacaoRepeticao();
         
         if ($this->_request->isPost()) {
             $dadosDespesa = $this->_request->getPost();
-            if ($this->_formMovimentacoesDespesa->isValid($dadosDespesa)) {
-                $dadosDespesa = $this->_formMovimentacoesDespesa->getValues();
+            if ($formMovimentacoesDespesa->isValid($dadosDespesa)) {
+                $dadosDespesa = $formMovimentacoesDespesa->getValues();
                 
                 $dadosDespesa['valor_movimentacao'] = View_Helper_Currency::setCurrencyDb($dadosDespesa['valor_movimentacao']);
                 
@@ -173,25 +180,30 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 unset($dadosDespesa['modo_repeticao']);
                 
                 try {
-                    $this->_modelMovimentacao->insert($dadosDespesa);
+                    $modelMovimentacao->insert($dadosDespesa);
                     
                     // recuperando o id da movimentacao
                     if ($repetir) {
                         unset($dadosDespesa['opt_repetir']);
-                        $dadosRepeticao['id_movimentacao'] = $this->_modelMovimentacao->lastInsertId();                    
-                        $this->_modelMovimentacaoRepeticao->insert($dadosRepeticao);                    
+                        $dadosRepeticao['id_movimentacao'] = $modelMovimentacao->lastInsertId();                    
+                        $modelMovimentacaoRepeticao->insert($dadosRepeticao);                    
                         
                         // recupera o id da movimentacao repeticao
-                        $lastId = $this->_modelMovimentacaoRepeticao->lastInsertId();
+                        $lastId = $modelMovimentacaoRepeticao->lastInsertId();
 
                         // atualiza o id pai 
                         $dadosUpdateMovimentacao['id_movimentacao_pai'] = $lastId;
-                        $whereUpdateMovimentacao = "id_movimentacao = " . $this->_modelMovimentacao->lastInsertId();
-                        $this->_modelMovimentacao->update($dadosUpdateMovimentacao, $whereUpdateMovimentacao);
+                        $whereUpdateMovimentacao = "id_movimentacao = " . $modelMovimentacao->lastInsertId();
+                        $modelMovimentacao->update($dadosUpdateMovimentacao, $whereUpdateMovimentacao);
                         
                     }
                     
-                    $this->_redirect("index/index");
+                    $this->_helper->flashMessenger->addMessage(array(
+                        'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                        'message' => 'Despesa Cadastrada com sucesso!'
+                    ));
+                    
+                    $this->_redirect("cliente/index/index");
                 } catch (Zend_Exception $error) {
                     echo $error->getMessage();
                 }            
