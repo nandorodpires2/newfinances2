@@ -62,8 +62,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     protected function _initSession() {
         Zend_Session::start();        
         $session = new Zend_Session_Namespace();
-        $session->lang = isset($session->lang) ? $session->lang : "pt_BR";
-       
+        $session->lang = isset($session->lang) ? $session->lang : "pt_BR";        
         Zend_Registry::set('session', new Zend_Session_Namespace);
     }
     

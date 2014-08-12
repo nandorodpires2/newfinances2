@@ -218,7 +218,8 @@ function buscaGastosOrcamento() {
             plotOptions: {
                 bar: {
                     dataLabels: {
-                        enabled: true
+                        enabled: true,
+                        pointFormat: '<b>{point.y:,.2f}</b>'
                     }
                 }
             },
@@ -236,7 +237,7 @@ function buscaGastosOrcamento() {
             credits: {
                 enabled: false
             },
-            series: json.series
+            series: json.series,
             });
         },
         error: function(error) {
