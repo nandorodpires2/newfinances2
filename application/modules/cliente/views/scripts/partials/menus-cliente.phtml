@@ -28,7 +28,11 @@
                     'controller' => 'movimentacoes',
                     'action' => 'nova-receita'
                 )); ?>">Nova Receita</a></li>
-                <li><a href="<?php echo $this->url(array()); ?>">Nova Despesa</a></li>
+                <li><a href="<?php echo $this->url(array(
+                    'module' => 'cliente',
+                    'controller' => 'movimentacoes',
+                    'action' => 'nova-despesa'
+                )); ?>">Nova Despesa</a></li>
                 <li><a href="<?php echo $this->url(array()); ?>">Transferência</a></li>
             </ul>
         </li>

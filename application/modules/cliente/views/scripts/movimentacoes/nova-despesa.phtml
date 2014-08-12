@@ -1,29 +1,7 @@
-<?php echo $this->headLink()->appendStylesheet($this->baseUrl('views/css/movimentacoes/nova-despesa.css')); ?>
-<?php echo $this->headScript()->appendFile($this->baseUrl('views/js/movimentacoes/nova-despesa.js')); ?>
-<div id="pages">
-    <div id="movimentacoes-nova-despesa">
-        <fieldset style="border-color: #FF4040">
-            <legend style="color: #FF4040"><b>Nova Despesa</b></legend>
-            <form method="post">
-                <table>
-                    <?php foreach ($this->formMovimentacoesDespesa->getElements() as $key => $element) : ?>
-                    <tr>
-                        <?php if ($key === "valor_movimentacao") : ?>
-                        <div id="box-calc">
-                            <td><?php echo $this->formMovimentacoesDespesa->$key; ?></td>
-                            <!--
-                            <td valign="bottom">                        
-                                <img src="<?php echo $this->baseUrl('views/img/icon_calc.png'); ?>" id="calculator" width="20px" />
-                            </a>
-                            -->
-                        </div>
-                        <?php else : ?>
-                        <td><?php echo $this->formMovimentacoesDespesa->$key; ?></td>
-                        <?php endif; ?>
-                    </tr>
-                    <?php endforeach; ?>                
-                </table>
-            </form>        
-        </fieldset>
+<?php echo $this->headScript()->appendFile($this->baseUrl('views/js/cliente/movimentacoes/nova-despesa.js')); ?>
+<div class="row">    
+    <div class="col-lg-4">        
+        <p><h4 class="text-green">Nova Despesa</h4></p>
+        <?php echo $this->formMovimentacoesDespesa; ?>
     </div>
 </div>

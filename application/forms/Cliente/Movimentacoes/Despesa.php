@@ -10,7 +10,7 @@
  *
  * @author Realter
  */
-class Form_Movimentacoes_Despesa extends Zend_Form {
+class Form_Cliente_Movimentacoes_Despesa extends Zend_Form {
 
     public function init() {
         
@@ -29,46 +29,92 @@ class Form_Movimentacoes_Despesa extends Zend_Form {
         // descricao
         $this->addElement("text", "descricao_movimentacao", array(
             'label' => 'Descrição: ',
-            'required' => true
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',         
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // valor
         $this->addElement("text", "valor_movimentacao", array(
             'label' => 'Valor: ',
-            'required' => true
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',         
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // data
         $this->addElement("text", "data_movimentacao", array(
             'label' => 'Data: ',
             'value' => $zendDate->get(Zend_Date::DATE_MEDIUM),
-            'required' => true
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',         
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         $contas['conta'] = 'Conta';
-        
-        // verifica se o usuario tem permissao
-        if (View_Helper_Application::hasAcl("cliente:orcamentos")) {
-            $contas['cartao'] = 'Cartão de Crédito';
-        }
-        
+        $contas['cartao'] = 'Cartão de Crédito';
+                
         // tipo pagamento
         $this->addElement("radio", "tipo_pgto", array(
             'label' => 'Pagamento: ',
             'multioptions' => $contas,
-            'required' => true
+            'required' => true,
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // conta
         $this->addElement("select", "id_conta", array(
             'label' => 'Conta: ',
-            'multioptions' => $formDefault->getContasUsuario(1)
+            'multioptions' => $formDefault->getContasUsuario(1),
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // cartao credito
         $this->addElement("select", "id_cartao", array(
             'label' => 'Cartão: ',
-            'multioptions' => $formDefault->getCartoesUsuario(1)
+            'multioptions' => $formDefault->getCartoesUsuario(1),
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // categoria
@@ -76,12 +122,29 @@ class Form_Movimentacoes_Despesa extends Zend_Form {
             'label' => 'Categoria',
             'multioptions' => $formDefault->getCategorias(),
             'value' => 9,
-            'required' => true
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',         
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // option parcelar
         $this->addElement("checkbox", "opt_repetir", array(
-            'label' => 'Repetir: '
+            'label' => 'Repetir essa movimentação',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),                
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));        
         
         // modo repeticao
@@ -109,6 +172,14 @@ class Form_Movimentacoes_Despesa extends Zend_Form {
                 11 => '11X',
                 12 => '12X',
                 360 => '360X'
+            ),
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
             )
         ));
         
@@ -120,27 +191,24 @@ class Form_Movimentacoes_Despesa extends Zend_Form {
                 'week' => 'Semanal',
                 'month' => 'Mensal',
                 'year' => 'Anual'
+            ),
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',         
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
             )
         ));
         
         // submit
         $this->addElement("submit", "submit", array(
             'label' => 'Salvar',            
-            'class' => 'submit'
+            'class' => 'btn btn-submit navbar-right'
         ));        
         
     }
-    
-    protected function decorator() {
         
-        return array(
-            'ViewHelper',
-            'Description',
-            'Errors',
-            array(array('td' => 'HtmlTag'), array('tag' => 'td')),
-            array('Label', array('tag' => 'td')),
-        );
-    }
-    
 }
 

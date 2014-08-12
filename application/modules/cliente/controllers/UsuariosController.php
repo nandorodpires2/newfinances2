@@ -15,7 +15,7 @@ class Cliente_UsuariosController extends Zend_Controller_Action {
         
         Zend_Auth::getInstance()->clearIdentity();
         
-        $this->_redirect('usuarios/login');
+        $this->_redirect('index/');
         
     }
 }
