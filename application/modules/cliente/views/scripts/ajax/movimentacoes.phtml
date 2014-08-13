@@ -18,16 +18,37 @@
         <?php foreach ($this->movimentacoes as $movimentacao) : ?>
         <tr class="<?php echo View_Helper_Movimentacao::getClassRowMovimentacao($movimentacao->id_tipo_movimentacao); ?>">
             <td class="col-lg-1"><?php echo $movimentacao->tipo_movimentacao; ?></td>
-            <td class="col-lg-4"><?php echo $movimentacao->descricao_movimentacao; ?></td>
+            <td class="col-lg-4">
+                <?php echo $movimentacao->descricao_movimentacao; ?>
+                <?php if ($movimentacao->id_tipo_movimentacao == 3) : ?>
+                    <p class="small text-muted"><?php echo $movimentacao->descricao_cartao; ?></p>
+                <?php elseif ($movimentacao->id_tipo_movimentacao == 4) : ?>
+                    <p class="small text-muted">De <?php echo $movimentacao->descricao_conta; ?> para <?php echo $movimentacao->descricao_conta_destino; ?></p>                
+                <?php else : ?>
+                    <p class="small text-muted"><?php echo $movimentacao->descricao_conta; ?></p>
+                <?php endif; ?>
+            </td>
             <td class="col-lg-3"><?php echo $movimentacao->descricao_categoria; ?></td>
             <td class="col-lg-1 text-right"><?php echo View_Helper_Currency::getCurrency($movimentacao->valor_movimentacao); ?></td>
             <td class="col-lg-2 text-center">                
                 <?php if ($movimentacao->realizado) : ?>
-                    <a href="">
+                    <a href="<?php echo $this->url(array(
+                            'module' => 'cliente',
+                            'controller' => 'movimentacoes',
+                            'action' => 'status',
+                            'id_movimentacao' => $movimentacao->id_movimentacao,
+                            'status' => $movimentacao->realizado
+                        )); ?>">
                         <img class="" src="<?php echo $this->baseUrl('views/img/icon_cool.png'); ?>" width="30" title="Realizado" />
                     </a>
                 <?php else : ?>
-                    <a href="">
+                    <a href="<?php echo $this->url(array(
+                            'module' => 'cliente',
+                            'controller' => 'movimentacoes',
+                            'action' => 'status',
+                            'id_movimentacao' => $movimentacao->id_movimentacao,
+                            'status' => $movimentacao->realizado
+                    )); ?>">
                         <img class="" src="<?php echo $this->baseUrl('views/img/icon_bad.png'); ?>" width="30" title="Previsto" />
                     </a>
                 <?php endif; ?>
@@ -36,7 +57,12 @@
                 <a href="">
                     <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_edit.png'); ?>" width="20" title="Editar" />
                 </a>
-                <a href="">
+                <a href="<?php echo $this->url(array(
+                    'module' => 'cliente',
+                    'controller' => 'movimentacoes',
+                    'action' => 'excluir-movimentacao',
+                    'id_movimentacao' => $movimentacao->id_movimentacao
+                )); ?>">
                     <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_delete.png'); ?>" width="20" title="Excluir" />
                 </a>
             </td>
