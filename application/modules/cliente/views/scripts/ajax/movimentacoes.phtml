@@ -68,22 +68,26 @@
             </td>
         </tr>
         <?php endforeach; ?>        
-        <tr>
-            <td colspan="6">&nbsp;</td>
-        </tr>
-        <tr class="text-green">
-            <th colspan="5" class="text-right small">TOTAL RECEITAS:</th>
-            <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->totalReceita); ?></th>            
-        </tr>
-        <tr class="text-red">
-            <th colspan="5" class="text-right small">TOTAL DESPESAS:</th>
-            <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->totalDespesa); ?></th>            
-        </tr>
-        <tr class="<?php echo $this->saldo >= 0 ? 'text-green' : 'text-red'; ?>">
-            <th colspan="5" class="text-right small">SALDO DIA:</th>
-            <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->saldo); ?></th>            
-        </tr>
     </table>    
+    
+        <div class="col-lg-8"></div>
+        <div class="col-lg-4">
+            <table class="table">
+                <tr class="text-green">
+                    <th colspan="5" class="text-right small">TOTAL RECEITAS:</th>
+                    <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->totalReceita); ?></th>            
+                </tr>
+                <tr class="text-red">
+                    <th colspan="5" class="text-right small">TOTAL DESPESAS:</th>
+                    <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->totalDespesa); ?></th>            
+                </tr>
+                <tr class="<?php echo $this->saldo >= 0 ? 'text-green' : 'text-red'; ?>">
+                    <th colspan="5" class="text-right small">SALDO DIA:</th>
+                    <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->saldo); ?></th>            
+                </tr>
+            </table>
+        </div>
+    
     <?php else : ?>
     <div class="text-warning">Nenhuma movimentação hoje.</div>
     <?php endif; ?>
