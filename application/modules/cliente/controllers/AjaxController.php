@@ -20,6 +20,8 @@ class Cliente_AjaxController extends Zend_Controller_Action {
         $conta = $this->_getParam("id_conta", null);
         $data = $this->_getParam("data_movimentacao", date('Y-m-d'));        
         
+        $this->view->data_movimentacao = Controller_Helper_Date::getDateViewComplete($data);
+        
         $modelVwMovimentacao = new Model_VwMovimentacao();
         $movimentacoes = $modelVwMovimentacao->getMovimentacoesData($data, $id_usuario, $conta);   
         

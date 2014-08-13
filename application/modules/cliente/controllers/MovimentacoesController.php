@@ -462,8 +462,12 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     }
 
                     try {
-                        $this->_modelMovimentacao->delete($where);
-                        $this->_redirect("index/");
+                        $modelMovimentacao->delete($where);
+                         $this->_helper->flashMessenger->addMessage(array(
+                            'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                            'message' => 'Lançamento excluído com sucesso!'
+                        ));
+                        $this->_redirect("cliente/index/index");
                     } catch (Exception $error) {
                         echo $error->getMessage(); die('aki');
                     }

@@ -37,7 +37,7 @@ function buscaMovimentacoesData(data, id_conta) {
             $("#movimentacoes").html(dados);
         },
         error: function(error) {
-            alert('Houve um erro');
+            //alert('Houve um erro');
         }
     });
     
@@ -119,7 +119,7 @@ function graficoReceitaDespesas() {
             });
         },
         error: function(error) {
-            alert('Houve um erro');
+            //alert('Houve um erro');
         }
     });
 }
@@ -169,7 +169,7 @@ function buscaGastosCategorias() {
             });
         },
         error: function(error) {
-            alert('Houve um erro');
+            //alert('Houve um erro');
         }
     });
 }
@@ -241,7 +241,7 @@ function buscaGastosOrcamento() {
             });
         },
         error: function(error) {
-            alert('Houve um erro');
+            //alert('Houve um erro');
         }
     });
 }
