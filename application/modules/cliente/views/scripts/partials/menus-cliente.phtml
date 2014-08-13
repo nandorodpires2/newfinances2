@@ -33,7 +33,11 @@
                     'controller' => 'movimentacoes',
                     'action' => 'nova-despesa'
                 )); ?>">Nova Despesa</a></li>
-                <li><a href="<?php echo $this->url(array()); ?>">Transferência</a></li>
+                <li><a href="<?php echo $this->url(array(
+                    'module' => 'cliente',
+                    'controller' => 'movimentacoes',
+                    'action' => 'transferencia'
+                )); ?>">Transferência</a></li>
             </ul>
         </li>
         <li class="active"><a href="<?php echo $this->url(array()); ?>">Orçamentos</a></li>

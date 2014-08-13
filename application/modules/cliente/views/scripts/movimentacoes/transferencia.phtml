@@ -1,9 +1,16 @@
 <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/movimentacoes/transferencia.js')); ?>
-<div id="pages">
-    <div id="movimentacoes-transferencia">        
-        <fieldset style="border-color: #1d5fa1">
-            <legend style="color: #1d5fa1"><b>Nova Transferência</b></legend>
-            <?php echo $this->formMovimentacaoTransferencia; ?>
-        </fieldset>        
+<div class="row">    
+    <div class="col-lg-12">    
+        <div class="panel panel-info">
+            <div class="panel-heading">Transferência</div>
+            <div class="panel-body">                
+                <div class="col-lg-4">
+                    <?php echo $this->formMovimentacaoTransferencia; ?>
+                </div>
+                <div class="col-lg-8">
+                    
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -54,13 +54,23 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
             $dadosReceita = $this->_request->getPost();
             if ($formMovimentacoesReceitas->isValid($dadosReceita)) {
                 $dadosReceita = $formMovimentacoesReceitas->getValues();
-                                
-                $dadosReceita['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_RECEITA;
                 
-                $dadosReceita['realizado'] = Controller_Helper_Movimentacao::getStatusMovimentacao($dadosReceita['data_movimentacao']);
+                
+                
+                if ($dadosReceita['tipo_pgto'] == 'conta') {
+                    $dadosReceita['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_RECEITA;
+                    $dadosReceita['realizado'] = Controller_Helper_Movimentacao::getStatusMovimentacao($dadosReceita['data_movimentacao']);
+                    $dadosReceita['id_cartao'] = null;
+                } else {
+                    $dadosReceita['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_CARTAO;
+                    $dadosReceita['realizado'] = 1;
+                    $dadosReceita['id_conta'] = null;
+                }
+                
+                unset($dadosReceita['tipo_pgto']);
+                
                 $dadosReceita['data_movimentacao'] = Controller_Helper_Date::getDateDb($dadosReceita['data_movimentacao']);
-                $dadosReceita['data_inclusao'] = Controller_Helper_Date::getDatetimeNowDb();
-                $dadosReceita['id_cartao'] = null;
+                $dadosReceita['data_inclusao'] = Controller_Helper_Date::getDatetimeNowDb();                
                 $dadosReceita['valor_movimentacao'] = View_Helper_Currency::setCurrencyDb($dadosReceita['valor_movimentacao'], "positivo");
                 
                 
@@ -217,12 +227,16 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
      * transferencia
      */
     public function transferenciaAction() {
-        $this->view->formMovimentacaoTransferencia = $this->_formMovimentacoesTransferencia;
+        
+        $formMovimentacoesTransferencia = new Form_Cliente_Movimentacoes_Transferencia();
+        $this->view->formMovimentacaoTransferencia = $formMovimentacoesTransferencia;
+        
+        $modelMovimentacao = new Model_Movimentacao();
         
         if ($this->_request->isPost()) {
             $dadosTransferencia = $this->_request->getPost();
-            if ($this->_formMovimentacoesTransferencia->isValid($dadosTransferencia)) {
-                $dadosTransferencia = $this->_formMovimentacoesTransferencia->getValues();
+            if ($formMovimentacoesTransferencia->isValid($dadosTransferencia)) {
+                $dadosTransferencia = $formMovimentacoesTransferencia->getValues();
                 
                 $id_conta_origem = $dadosTransferencia['id_conta_origem'];
                 unset($dadosTransferencia['id_conta_origem']);
@@ -235,14 +249,20 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 $dadosTransferencia['valor_movimentacao'] = View_Helper_Currency::setCurrencyDb($dadosTransferencia['valor_movimentacao']) * -1;
                 
                 try {
-                    $this->_modelMovimentacao->insert($dadosTransferencia);                 
+                    $modelMovimentacao->insert($dadosTransferencia);                 
                 
                     // lancando a movimentacao de saida
                     $dadosTransferencia['id_conta'] = $id_conta_origem;
                     $dadosTransferencia['valor_movimentacao'] *= -1; 
                 
-                    $this->_modelMovimentacao->insert($dadosTransferencia);
-                    $this->_redirect("index/index");                            
+                    $modelMovimentacao->insert($dadosTransferencia);
+                    
+                    $this->_helper->flashMessenger->addMessage(array(
+                        'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                        'message' => 'Transferência Cadastrada com sucesso!'
+                    ));
+                    
+                    $this->_redirect("cliente/index/index");
                 } catch (Zend_Exception $error) {
                     echo $error->getMessage();
                 }
@@ -251,10 +271,9 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
         }
     }
     
-    /**
-     * altera o status de previsto para realizado e vice-versa (AJAX)
-     */
     public function statusAction() {
+        
+        $modelMovimentacao = new Model_Movimentacao();
         
         // desabilitando o layout
         $this->_helper->layout->disableLayout(true);
@@ -269,15 +288,20 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
         $statusUpdate['realizado'] = ((bool)$status) ? 0 : 1;
         
         try {
-            $this->_modelMovimentacao->update($statusUpdate, $where);
+            $modelMovimentacao->update($statusUpdate, $where);
             
-            // verificar de onde veio a solicitacao
-            if(!isset($_GET['ajax'])) {
-                $this->_redirect("index/");
-            }
+            $this->_helper->flashMessenger->addMessage(array(
+                'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                'message' => 'Status atualizado com sucesso!'
+            ));
+            $this->_redirect("cliente/index/index");
             
         } catch (Zend_Exception $error) {
-            echo $error->getMessage();
+            $this->_helper->flashMessenger->addMessage(array(
+                'class' => 'bg-danger text-danger padding-10px margin-10px-0px',
+                'message' => 'Houve um erro ao atualizar o status - ' . $error->getMessage()
+            ));
+            $this->_redirect("cliente/index/index");
         }
             
     }
@@ -405,22 +429,31 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
         
         $idMovimentacao = $this->_getParam("id_movimentacao");
         
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $modelMovimentacao = new Model_Movimentacao();
+        $modelVwMovimentacao = new Model_VwMovimentacao();
+        
         // buscando os dados da movimentacao
-        $dadosMovimentacao = $this->_modelMovimentacao->getDadosMovimentacao($idMovimentacao, $this->_session->id_usuario);
+        $dadosMovimentacao = $modelMovimentacao->getDadosMovimentacao($idMovimentacao, $id_usuario);
         $this->view->dadosMovimentacao = $dadosMovimentacao;
         
         // verificar se a movimentacao se repete                
-        $id_movimentacao_pai = $this->_modelMovimentacao->getIdMovimentacaoPai($idMovimentacao);
+        $id_movimentacao_pai = $modelMovimentacao->getIdMovimentacaoPai($idMovimentacao);
         $this->view->id_movimentacao_pai = $id_movimentacao_pai;
         
         if ($this->_request->isPost()) {
             $dadosExclusao = $this->_request->getPost();            
             if ($dadosExclusao['btnResposta'] == 'Cancelar') {                
-                $this->_redirect("index/");                
+                $this->_helper->flashMessenger->addMessage(array(
+                    'class' => 'bg-warning text-warning padding-10px margin-10px-0px',
+                    'message' => 'Exclusão cancelada!'
+                ));
+                $this->_redirect("cliente/index/index");                
             } else {                               
                 if (!$id_movimentacao_pai) {
                     
-                    $dadosVwMovimentacao = $this->_modelVwMovimentacao->fetchRow("id_movimentacao = {$idMovimentacao}");
+                    $dadosVwMovimentacao = $modelVwMovimentacao->fetchRow("id_movimentacao = {$idMovimentacao}");
                 
                     if ($dadosVwMovimentacao->id_tipo_movimentacao == 4) {
                         $where = "id_movimentacao in ({$idMovimentacao}, {$dadosVwMovimentacao->id_movimentacao_origem})";
@@ -429,8 +462,12 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     }
 
                     try {
-                        $this->_modelMovimentacao->delete($where);
-                        $this->_redirect("index/");
+                        $modelMovimentacao->delete($where);
+                         $this->_helper->flashMessenger->addMessage(array(
+                            'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                            'message' => 'Lançamento excluído com sucesso!'
+                        ));
+                        $this->_redirect("cliente/index/index");
                     } catch (Exception $error) {
                         echo $error->getMessage(); die('aki');
                     }
@@ -457,10 +494,14 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     }
                     
                     try {
-                        $this->_modelMovimentacao->delete($where);
-                        $this->_redirect("index/");
+                        $modelMovimentacao->delete($where);
+                        $this->_helper->flashMessenger->addMessage(array(
+                            'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                            'message' => 'Lançamento excluído com sucesso!'
+                        ));
+                        $this->_redirect("cliente/index/index");
                     } catch (Exception $error) {
-                        echo $error->getMessage(); die('aki');
+                        echo $error->getMessage(); 
                     }                   
                     
                 }                

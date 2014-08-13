@@ -71,6 +71,37 @@ class Form_Cliente_Movimentacoes_Receita extends Zend_Form {
             )
         ));
         
+        $contas['conta'] = 'Conta';
+        $contas['cartao'] = 'Cartão de Crédito';
+        
+        // tipo pagamento
+        $this->addElement("radio", "tipo_pgto", array(
+            'label' => 'Pagamento: ',
+            'multioptions' => $contas,
+            'required' => true,
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
+        ));
+        
+        // cartao credito
+        $this->addElement("select", "id_cartao", array(
+            'label' => 'Cartão: ',
+            'multioptions' => $formDefault->getCartoesUsuario(1),
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
+        ));
+                
         // conta
         $this->addElement("select", "id_conta", array(
             'label' => 'Conta: ',
@@ -80,7 +111,6 @@ class Form_Cliente_Movimentacoes_Receita extends Zend_Form {
                 'ViewHelper',
                 'Description',
                 'Errors',         
-                'Label',
                 array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
                 array('HtmlTag', array('tag' => 'div'))                
             )

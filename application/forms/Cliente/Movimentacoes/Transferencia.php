@@ -10,7 +10,7 @@
  *
  * @author Realter
  */
-class Form_Movimentacoes_Transferencia extends Zend_Form {
+class Form_Cliente_Movimentacoes_Transferencia extends Zend_Form {
 
     public function init() {
         
@@ -24,43 +24,103 @@ class Form_Movimentacoes_Transferencia extends Zend_Form {
         
         // descricao
         $this->addElement("text", "descricao_movimentacao", array(
-            'label' => 'Descrição: '
+            'label' => 'Descrição: ',
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // valor 
         $this->addElement("text", "valor_movimentacao", array(
-            'label' => 'Valor: '
+            'label' => 'Valor: ',
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // data
         $this->addElement("text", "data_movimentacao", array(
             'label' => 'Data: ',
-            'value' => $zendDate->get(Zend_Date::DATE_MEDIUM)
+            'value' => $zendDate->get(Zend_Date::DATE_MEDIUM),
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // categoria
         $this->addElement("select", "id_categoria", array(
             'label' => 'Categoria: ',
             'value' => 9,
-            'multioptions' => $formDefault->getCategorias()
+            'multioptions' => $formDefault->getCategorias(),
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // conta origem
         $this->addElement("select", "id_conta_origem", array(
             'label' => 'Origem: ',
-            'multioptions' => $formDefault->getContasUsuario(1)
+            'multioptions' => $formDefault->getContasUsuario(1),
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // conta destino
         $this->addElement("select", "id_conta", array(
             'label' => 'Destino: ',
-            'multioptions' => $formDefault->getContasUsuario(1)
+            'multioptions' => $formDefault->getContasUsuario(1),
+            'required' => true,
+            'class' => 'form-control',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
+                array('HtmlTag', array('tag' => 'div'))                
+            )
         ));
         
         // submit        
         $this->addElement("submit", "submit", array(
             'label' => 'Salvar',
-            'class' => 'submit'
+            'class' => 'btn btn-submit navbar-right'
         ));
         
     }

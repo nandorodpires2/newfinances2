@@ -1,10 +1,10 @@
-<div class="col-lg-4 text-center"><a href="" class="text-blue"><< Anterior</a></div>
-<div class="col-lg-4 text-center">
-    <input type="text" name="data_lancamento" id="data_lancamento" />
+<div class="col-lg-6">
+    <h5>Lançamentos de <?php echo $this->data_movimentacao; ?></h5>
 </div>
-<div class="col-lg-4 text-center"><a href="" class="text-blue">Seguinte >></a></div>
-
-<div class="col-lg-12 margin-top-10px">
+<div class="col-lg-12">
+    
+</div>
+<div class="col-lg-12 margin-top-10px">    
     <?php if ($this->movimentacoes->count() > 0) : ?>
     <table class="table table-striped table-responsive">
         <tr>
@@ -18,16 +18,37 @@
         <?php foreach ($this->movimentacoes as $movimentacao) : ?>
         <tr class="<?php echo View_Helper_Movimentacao::getClassRowMovimentacao($movimentacao->id_tipo_movimentacao); ?>">
             <td class="col-lg-1"><?php echo $movimentacao->tipo_movimentacao; ?></td>
-            <td class="col-lg-4"><?php echo $movimentacao->descricao_movimentacao; ?></td>
+            <td class="col-lg-4">
+                <?php echo $movimentacao->descricao_movimentacao; ?>
+                <?php if ($movimentacao->id_tipo_movimentacao == 3) : ?>
+                    <p class="small text-muted"><?php echo $movimentacao->descricao_cartao; ?></p>
+                <?php elseif ($movimentacao->id_tipo_movimentacao == 4) : ?>
+                    <p class="small text-muted">De <?php echo $movimentacao->descricao_conta; ?> para <?php echo $movimentacao->descricao_conta_destino; ?></p>                
+                <?php else : ?>
+                    <p class="small text-muted"><?php echo $movimentacao->descricao_conta; ?></p>
+                <?php endif; ?>
+            </td>
             <td class="col-lg-3"><?php echo $movimentacao->descricao_categoria; ?></td>
             <td class="col-lg-1 text-right"><?php echo View_Helper_Currency::getCurrency($movimentacao->valor_movimentacao); ?></td>
             <td class="col-lg-2 text-center">                
                 <?php if ($movimentacao->realizado) : ?>
-                    <a href="">
+                    <a href="<?php echo $this->url(array(
+                            'module' => 'cliente',
+                            'controller' => 'movimentacoes',
+                            'action' => 'status',
+                            'id_movimentacao' => $movimentacao->id_movimentacao,
+                            'status' => $movimentacao->realizado
+                        )); ?>">
                         <img class="" src="<?php echo $this->baseUrl('views/img/icon_cool.png'); ?>" width="30" title="Realizado" />
                     </a>
                 <?php else : ?>
-                    <a href="">
+                    <a href="<?php echo $this->url(array(
+                            'module' => 'cliente',
+                            'controller' => 'movimentacoes',
+                            'action' => 'status',
+                            'id_movimentacao' => $movimentacao->id_movimentacao,
+                            'status' => $movimentacao->realizado
+                    )); ?>">
                         <img class="" src="<?php echo $this->baseUrl('views/img/icon_bad.png'); ?>" width="30" title="Previsto" />
                     </a>
                 <?php endif; ?>
@@ -36,28 +57,37 @@
                 <a href="">
                     <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_edit.png'); ?>" width="20" title="Editar" />
                 </a>
-                <a href="">
+                <a href="<?php echo $this->url(array(
+                    'module' => 'cliente',
+                    'controller' => 'movimentacoes',
+                    'action' => 'excluir-movimentacao',
+                    'id_movimentacao' => $movimentacao->id_movimentacao
+                )); ?>">
                     <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_delete.png'); ?>" width="20" title="Excluir" />
                 </a>
             </td>
         </tr>
         <?php endforeach; ?>        
-        <tr>
-            <td colspan="6">&nbsp;</td>
-        </tr>
-        <tr class="text-green">
-            <th colspan="5" class="text-right small">TOTAL RECEITAS:</th>
-            <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->totalReceita); ?></th>            
-        </tr>
-        <tr class="text-red">
-            <th colspan="5" class="text-right small">TOTAL DESPESAS:</th>
-            <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->totalDespesa); ?></th>            
-        </tr>
-        <tr class="<?php echo $this->saldo >= 0 ? 'text-green' : 'text-red'; ?>">
-            <th colspan="5" class="text-right small">SALDO DIA:</th>
-            <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->saldo); ?></th>            
-        </tr>
     </table>    
+    
+        <div class="col-lg-8"></div>
+        <div class="col-lg-4">
+            <table class="table">
+                <tr class="text-green">
+                    <th colspan="5" class="text-right small">TOTAL RECEITAS:</th>
+                    <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->totalReceita); ?></th>            
+                </tr>
+                <tr class="text-red">
+                    <th colspan="5" class="text-right small">TOTAL DESPESAS:</th>
+                    <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->totalDespesa); ?></th>            
+                </tr>
+                <tr class="<?php echo $this->saldo >= 0 ? 'text-green' : 'text-red'; ?>">
+                    <th colspan="5" class="text-right small">SALDO DIA:</th>
+                    <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->saldo); ?></th>            
+                </tr>
+            </table>
+        </div>
+    
     <?php else : ?>
     <div class="text-warning">Nenhuma movimentação hoje.</div>
     <?php endif; ?>
