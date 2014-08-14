@@ -13,6 +13,10 @@ and open the template in the editor.
     background: #fff;
 }
 
+.background-color-snow {
+    background: #f7f7f7;
+}
+
 .background-color-orange {
     background: #ec971f;
 }

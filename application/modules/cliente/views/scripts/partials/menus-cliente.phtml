@@ -18,7 +18,7 @@
                 'module' => 'cliente',
                 'controller' => 'index',
                 'action' => 'index'
-            ));
+            ), null, true);
             ?>">Início</a></li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lançamentos <b class="caret"></b></a>
@@ -27,20 +27,24 @@
                     'module' => 'cliente',
                     'controller' => 'movimentacoes',
                     'action' => 'nova-receita'
-                )); ?>">Nova Receita</a></li>
+                ), null, true); ?>">Nova Receita</a></li>
                 <li><a href="<?php echo $this->url(array(
                     'module' => 'cliente',
                     'controller' => 'movimentacoes',
                     'action' => 'nova-despesa'
-                )); ?>">Nova Despesa</a></li>
+                ), null, true); ?>">Nova Despesa</a></li>
                 <li><a href="<?php echo $this->url(array(
                     'module' => 'cliente',
                     'controller' => 'movimentacoes',
                     'action' => 'transferencia'
-                )); ?>">Transferência</a></li>
+                ), null, true); ?>">Transferência</a></li>
             </ul>
         </li>
-        <li class="active"><a href="<?php echo $this->url(array()); ?>">Orçamentos</a></li>
+        <li class="active"><a href="<?php echo $this->url(array(
+            'module' => 'cliente',
+            'controller' => 'orcamentos',
+            'action' => 'index'
+        ), null, true); ?>">Orçamentos</a></li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Relatórios <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -65,7 +69,7 @@
                         'module' => 'cliente',
                         'controller' => 'meusdados',
                         'action' => 'index'
-                    ));
+                    ), null, true);
                     ?>">Meus Dados</a></li>
                 <li class="divider"></li>
                 <li><a href="<?php
@@ -73,7 +77,7 @@
                         'module' => 'cliente',
                         'controller' => 'usuarios',
                         'action' => 'logout'
-                    ));
+                    ), null, true);
                     ?>">Sair</a></li>
             </ul>
         </li>

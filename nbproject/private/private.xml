@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
@@ -5,3 +6,19 @@
         <group/>
     </open-files>
 </project-private>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/movimentacoes/nova-receita.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/public/views/js/cliente/index/index.js</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/movimentacoes/transferencia.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/ajax/movimentacoes.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/movimentacoes/nova-despesa.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/index/index.phtml</file>
+        </group>
+    </open-files>
+</project-private>
+>>>>>>> 3e244d06c1b7815bc6157522c05de941dff22e10
