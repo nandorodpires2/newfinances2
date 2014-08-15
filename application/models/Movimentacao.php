@@ -107,14 +107,20 @@ class Model_Movimentacao extends Zend_Db_Table {
     public function getPendencias($id_usuario) {
         
         $select = $this->select()
-                ->from($this->_name, array(
+                ->from(array('mov' => $this->_name), array(
                     '*'
                 ))
+                ->setIntegrityCheck(false)
+                ->joinInner(array('tmv' => 'tipo_movimentacao'), 'mov.id_tipo_movimentacao = tmv.id_tipo_movimentacao', array(
+                    'tipo_movimentacao'
+                ))
+                ->joinInner(array('ct' => 'conta'), 'mov.id_conta = ct.id_conta', array('*'))
+                ->joinInner(array('cat' => 'categoria'), 'mov.id_categoria = cat.id_categoria', array('*'))
                 ->where("realizado = ?", 0)
-                ->where("id_tipo_movimentacao <> ?", 3)
-                ->where("id_usuario = ?", $id_usuario)
-                ->where("data_movimentacao < date_sub(now(), interval 1 day)")
-                ->order("data_movimentacao asc");
+                ->where("mov.id_tipo_movimentacao <> ?", 3)
+                ->where("mov.id_usuario = ?", $id_usuario)
+                ->where("mov.data_movimentacao < date_sub(now(), interval 1 day)")
+                ->order("mov.data_movimentacao asc");
         
         return $this->fetchAll($select);
         

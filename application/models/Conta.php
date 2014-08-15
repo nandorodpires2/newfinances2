@@ -76,5 +76,16 @@ class Model_Conta extends Zend_Db_Table {
         
         return $this->fetchAll($select);
     }
+    
+    public function isConta($id_usuario) {
+        
+        $contas = $this->getContasUsuario($id_usuario);
+        
+        if ($contas->count() > 0) {
+            return true;
+        }
+        return false;
+        
+    }
 }
 

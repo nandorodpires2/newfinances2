@@ -105,15 +105,14 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     if ($repetir) {                        
                         $dadosRepeticao['id_movimentacao'] = $modelMovimentacao->lastInsertId();                    
                         $modelMovimentacaoRepeticao->insert($dadosRepeticao);                    
+                        // recupera o id da movimentacao repeticao
+                        $lastId = $modelMovimentacaoRepeticao->lastInsertId();
+
+                        // atualiza o id pai 
+                        $dadosUpdateMovimentacao['id_movimentacao_pai'] = $lastId;
+                        $whereUpdateMovimentacao = "id_movimentacao = " . $modelMovimentacao->lastInsertId();
+                        $modelMovimentacao->update($dadosUpdateMovimentacao, $whereUpdateMovimentacao);
                     }
-                    
-                    // recupera o id da movimentacao repeticao
-                    $lastId = $modelMovimentacaoRepeticao->lastInsertId();
-                    
-                    // atualiza o id pai 
-                    $dadosUpdateMovimentacao['id_movimentacao_pai'] = $lastId;
-                    $whereUpdateMovimentacao = "id_movimentacao = " . $modelMovimentacao->lastInsertId();
-                    $modelMovimentacao->update($dadosUpdateMovimentacao, $whereUpdateMovimentacao);
                     
                     $this->_helper->flashMessenger->addMessage(array(
                         'class' => 'bg-success text-success padding-10px margin-10px-0px',
@@ -313,11 +312,15 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
 
         $idMovimentacao = $this->_getParam("id_movimentacao");
         // buscando os dados da movimentacao
-        $dadosMovimentacao = $this->_modelMovimentacao->getDadosMovimentacao($idMovimentacao, $this->_session->id_usuario);
+        $modelMovimentacao = new Model_Movimentacao;
+        
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $dadosMovimentacao = $modelMovimentacao->getDadosMovimentacao($idMovimentacao, $id_usuario);
 
         // data da movimentacao
         $data_movimentacao = $dadosMovimentacao->data_movimentacao;
-        
+                
         if ($dadosMovimentacao) {
 
             $dadosMovimentacao = $dadosMovimentacao->toArray();
@@ -343,7 +346,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
             
             // verifica se a movimentacao se repete
             if ($dadosMovimentacao['id_movimentacao_pai'] != null) {                 
-                $this->view->dadosRepeticao = false;                
+                $this->view->dadosRepeticao = true;                
             } else {
                 $this->view->dadosRepeticao = false;
             }
@@ -392,19 +395,23 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     $whereUpdate = "id_movimentacao = " . $idMovimentacao;
 
                     try {
-                        $this->_modelMovimentacao->update($dadosMovimentacaoUpdate, $whereUpdate);
-
-                        // atualizando a movimentacao de origem no caso de transferencia
-                        $idMovimentacao++;
-                        $whereOrigem = "id_movimentacao = " . $idMovimentacao;
-                        $dadosMovimentacaoUpdate['id_conta'] = $id_conta_origem;
-                        $dadosMovimentacaoUpdate['valor_movimentacao'] *= -1; 
+                        $modelMovimentacao->update($dadosMovimentacaoUpdate, $whereUpdate);
 
                         if ($dadosMovimentacao['id_tipo_movimentacao'] == self::TIPO_MOVIMENTACAO_TRANSFERENCIA) {                        
-                            $this->_modelMovimentacao->update($dadosMovimentacaoUpdate, $whereOrigem);
+                            // atualizando a movimentacao de origem no caso de transferencia
+                            $idMovimentacao++;
+                            $whereOrigem = "id_movimentacao = " . $idMovimentacao;
+                            $dadosMovimentacaoUpdate['id_conta'] = $id_conta_origem;
+                            $dadosMovimentacaoUpdate['valor_movimentacao'] *= -1; 
+                            $modelMovimentacao->update($dadosMovimentacaoUpdate, $whereOrigem);
                         }
 
-                        $this->_redirect("index/index");
+                        $this->_helper->flashMessenger->addMessage(array(
+                            'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                            'message' => 'Lançamento alterado com sucesso!'
+                        ));
+                        $this->_redirect("cliente/index/index");
+                        
                     } catch (Exception $erro) {
                         echo $erro->getMessage();
                     }
@@ -413,12 +420,12 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
             }
             
         } else {
-            $messeges = array(
-                array(
-                    "error" => "Página não encontrada."
-                )                
-            );
-            $this->view->messages = $messeges;
+            $modelMovimentacao->delete($where);
+            $this->_helper->flashMessenger->addMessage(array(
+                'class' => 'bg-DANGER text-danger padding-10px margin-10px-0px',
+                'message' => 'Página não encontrada!'
+            ));
+            $this->_redirect("cliente/index/index");
         }
     }
 
@@ -513,10 +520,14 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
     
     protected function populateMovimentacao($dadosMovimentacao) {
         
+        $formMovimentacoesReceitas = new Form_Cliente_Movimentacoes_Receita();
+        $formMovimentacoesDespesa = new Form_Cliente_Movimentacoes_Despesa();
+        $formMovimentacoesTransferencia = new Form_Cliente_Movimentacoes_Transferencia();
+                
         switch ($dadosMovimentacao['id_tipo_movimentacao']) {
             case self::TIPO_MOVIMENTACAO_RECEITA:
                 if ($dadosMovimentacao['id_movimentacao_pai'] != null) {
-                    $this->_formMovimentacoesReceitas->addElement('radio', 'modo_edicao', array(
+                    $formMovimentacoesReceitas->addElement('radio', 'modo_edicao', array(
                         'label' => 'Essa movimentacao se repete, escolha um modo de edição:',
                         'multioptions' => array(
                             1 => 'Atualizar somente o registro atual',
@@ -526,14 +537,17 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                         ),
                         'value' => 1
                     ));
+                    $formMovimentacoesDespesa->getElement('modo_edicao')->setOrder(7);                    
                 }
-                $this->_formMovimentacoesReceitas->populate($dadosMovimentacao);
-                $this->view->formMovimentacoes = $this->_formMovimentacoesReceitas;
-                return $this->_formMovimentacoesReceitas;
+                $formMovimentacoesDespesa->removeElement('opt_repetir');
+                $formMovimentacoesReceitas->populate($dadosMovimentacao);
+                $this->view->formMovimentacoes = $formMovimentacoesReceitas;
+                $this->view->class = "panel-success";
+                return $formMovimentacoesReceitas;
                 break;
             case self::TIPO_MOVIMENTACAO_DESPESA:
-                if ($dadosMovimentacao['id_movimentacao_pai'] != null) {
-                    $this->_formMovimentacoesDespesa->addElement('radio', 'modo_edicao', array(
+                if ($dadosMovimentacao['id_movimentacao_pai'] != null) {                    
+                    $formMovimentacoesDespesa->addElement('radio', 'modo_edicao', array(
                         'label' => 'Essa movimentacao se repete, escolha um modo de edição:',
                         'multioptions' => array(
                             1 => 'Atualizar somente o registro atual',
@@ -543,20 +557,25 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                         ),
                         'value' => 1
                     ));
+                    $formMovimentacoesDespesa->getElement('modo_edicao')->setOrder(7);                    
                 }
-                $this->_formMovimentacoesDespesa->populate($dadosMovimentacao);
-                $this->view->formMovimentacoes = $this->_formMovimentacoesDespesa;
-                return $this->_formMovimentacoesDespesa;
+                $formMovimentacoesDespesa->removeElement('opt_repetir');
+                $formMovimentacoesDespesa->populate($dadosMovimentacao);
+                $this->view->formMovimentacoes = $formMovimentacoesDespesa;
+                $this->view->class = "panel-danger";
+                return $formMovimentacoesDespesa;
                 break;
             case self::TIPO_MOVIMENTACAO_TRANSFERENCIA:                
-                $this->_formMovimentacoesTransferencia->populate($dadosMovimentacao);
-                $this->view->formMovimentacoes = $this->_formMovimentacoesTransferencia;
+                $formMovimentacoesTransferencia->populate($dadosMovimentacao);
+                $this->view->formMovimentacoes = $formMovimentacoesTransferencia;
                 return $this->_formMovimentacoesTransferencia;
                 break;
             case self::TIPO_MOVIMENTACAO_CARTAO:
-                $this->_formMovimentacoesDespesa->populate($dadosMovimentacao);
-                $this->view->formMovimentacoes = $this->_formMovimentacoesDespesa;
-                return $this->_formMovimentacoesDespesa;
+                $formMovimentacoesDespesa->removeElement('opt_repetir');
+                $formMovimentacoesDespesa->populate($dadosMovimentacao);
+                $this->view->formMovimentacoes = $formMovimentacoesDespesa;
+                $this->view->class = "panel-warning";
+                return $formMovimentacoesDespesa;
                 break;
             default :
                 die('Nenhum tipo');

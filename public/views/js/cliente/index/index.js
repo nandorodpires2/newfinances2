@@ -137,7 +137,7 @@ function buscaGastosCategorias() {
             $('#dados-categorias').highcharts({
                 chart: {
                     plotBackgroundColor: null,
-                    plotBorderWidth: 1,//null,
+                    plotBorderWidth: 0,//null,
                     plotShadow: false
                 },
                 title: {
@@ -187,57 +187,60 @@ function buscaGastosOrcamento() {
         success: function(json) { 
             $('#dados-orcamentos').highcharts({
                 chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'Gráfico Orçamento'
-            },
-            subtitle: {
-                text: 'Mês Atual'
-            },
-            xAxis: {
-                categories: json.categories,
-                title: {
-                    text: null
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Orçamento (R$)',
-                    align: 'high'
+                    type: 'column'
+                    //width: $(".modal-dialog").innerWidth() - 50
                 },
-                labels: {
-                    overflow: 'justify'
-                }
-            },
-            tooltip: {
-                valuePrefix: 'R$',
-                pointFormat: '<b>{point.y:,.2f}</b>'
-            },
-            plotOptions: {
-                bar: {
-                    dataLabels: {
-                        enabled: true,
-                        pointFormat: '<b>{point.y:,.2f}</b>'
+                title: {
+                    text: 'Gráfico Receitas e Despesas'
+                },
+                subtitle: {
+                    text: 'Anual'
+                },
+                xAxis: {
+                    categories: json.categories.data
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Valores (R$)'
+                    },
+                    subtitle: {
+                        text: 'Mês Atual'
+                    },
+                    labels: {
+                        formatter: function() {
+                            return Highcharts.numberFormat(this.value, 0, ',', '.');
+                        }
                     }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:,.2f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: "Valor Orçamento (R$)",
+                    data: json.total_orcamento.data
+                }, {
+                    name: "Total Despesa (R$)",
+                    data: json.total_despesa.data
+                }, {
+                    name: "Porcentagem (%)",
+                    data: json.porcentagem.data
+                }, {
+                    name: "Projeção (%)",
+                    data: json.projecao.data
                 }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -20,
-                y: 50,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
-                shadow: true
-            },
-            credits: {
-                enabled: false
-            },
-            series: json.series,
+                ]
             });
         },
         error: function(error) {

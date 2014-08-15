@@ -19,14 +19,20 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
         $this->view->metas = $metas;
         
         $total_meta = $modelMeta->getTotalMetaMes($id_usuario, $mes, $ano);
+        if ($total_meta > 0) {
         $this->view->total_meta = $total_meta;
         
         $total_gastos = $modelMeta->getTotalGastoMetas($id_usuario, $mes, $ano);
         $this->view->total_gastos = $total_gastos;
         
+        $porcentagem_orcamento = ($total_gastos * 100) / $total_meta;        
+        $this->view->porcentagem_orcamento = $porcentagem_orcamento;      
+        }
     }
     
     public function novoOrcamentoAction() {
+        
+        $modelMeta = new Model_Meta();
         
         $formClienteMetasMeta = new Form_Cliente_Metas_Meta();
         
@@ -38,13 +44,11 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
             if ($formClienteMetasMeta->isValid($dadosMeta)) {
                 $dadosMeta = $formClienteMetasMeta->getValues();
                 
-                Zend_Debug::dump($dadosMeta); die();
-                
                 $dadosMeta['valor_meta'] = View_Helper_Currency::setCurrencyDb($dadosMeta['valor_meta'], "positivo");
                 $dadosMeta['data_cadastro'] = Controller_Helper_Date::getDatetimeNowDb();
                 
                 try {
-                    $this->_modelMeta->insert($dadosMeta);                    
+                    $modelMeta->insert($dadosMeta);                    
                 } catch (Exception $error) {
                     echo $error->getMessage();
                 }
@@ -60,10 +64,10 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
                     for ($i = 1; $i <= 12; $i++) {    
                         $dadosInsert['mes_meta'] = $zendDate->addMonth(1)->toString("MM");                        
                         $dadosInsert['ano_meta'] = $zendDate->toString("yyyy");
-                        $this->_modelMeta->insert($dadosInsert);
+                        $modelMeta->insert($dadosInsert);
                     }
                 }
-                $this->_redirect("metas/");
+                $this->_redirect("cliente/orcamentos");
             }
         }   
     }

@@ -6,11 +6,16 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <span class="text-blue">Lançamentos</span>
+                <?php if ($this->isConta) : ?>
                 <div class="pull-right">
+                    <a href="" data-toggle="modal" data-target="#modalSaldoContas" id="saldo-contas">
+                        <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_balance.png'); ?>" width="20" title="Ver Saldo"/>
+                    </a>
                     <a href="" data-toggle="modal" data-target="#modalGraficosLancamentos" id="chart-movimentacao">
                         <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_chart.png'); ?>" width="20" title="Visualizar Gráfico"/>
                     </a>
                 </div>
+                <?php endif; ?>
             </div>
             <div class="panel-body" id="movimentacoes"></div>
         </div>    
@@ -25,8 +30,12 @@
         <div class="panel panel-info">
             <div class="panel-heading"><span class="text-blue">Categorias/Orçamento</span></div>
             <div class="panel-body">
+                <?php if ($this->isConta) : ?>
                 <div class="col-lg-6" id="dados-categorias"></div>
                 <div class="col-lg-6" id="dados-orcamentos"></div>
+                <?php else : ?>
+                <div class="text-warning">Nenhum registro encontrado.</div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -62,6 +71,7 @@
                         <?php endforeach; ?>
                     </table>
                 <?php else : ?>
+                <div class="text-warning">Nenhum registro encontrado.</div>
                 <?php endif; ?>
             </div>
         </div>
@@ -98,6 +108,7 @@
                         <?php endforeach; ?>
                     </table>
                 <?php else : ?>
+                <div class="text-warning">Nenhum registro encontrado.</div>
                 <?php endif; ?>
             </div>
         </div>
@@ -112,6 +123,49 @@
                     <h4 class="modal-title" id="myModalLabel">Gráfico Lançamentos</h4>
                 </div>
                 <div class="modal-body" id="grafico-receitas-despesas"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Saldo de contas -->
+    <div class="modal" id="modalSaldoContas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title text-success" id="myModalLabel">Saldo</h3>
+                </div>
+                <div class="modal-body" id="saldo-contas">
+                    <table class="table table-striped table-responsive bold">
+                        <tr>
+                            <th class="text-blue">CONTA/TIPO</th>
+                            <th class="text-blue text-right">SALDO</th>
+                        </tr>
+                        <?php foreach ($this->saldos as $saldo) : ?>
+                        <tr>
+                            <td>
+                                <?php echo $saldo->descricao_conta; ?>
+                                <p class="small text-muted"><?php echo $saldo->descricao_tipo_conta; ?></p>
+                            </td>
+                            <td class="text-right <?php echo $saldo->saldo > 0 ? 'text-success' : 'text-danger'; ?>">
+                                <?php echo View_Helper_Currency::getCurrency($saldo->saldo); ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>                        
+                    </table>                    
+                </div>
+                <div class="modal-footer">
+                    <div class="col-lg-6 pull-right">
+                        <table class="table bold large">
+                            <tr>
+                                <td>TOTAL:</td>
+                                <td class="<?php echo $saldo->saldo > 0 ? 'text-success' : 'text-danger'; ?>">
+                                    <?php echo View_Helper_Currency::getCurrency($this->saldo_total); ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
