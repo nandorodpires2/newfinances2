@@ -1,6 +1,7 @@
 <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/cliente/orcamentos/index.js')); ?>
 <div class="row">    
     <div class="col-lg-12">    
+        <?php echo View_Helper_Messages::render($this->messages); ?>
         <div class="panel panel-info">
             <div class="panel-heading">
                 Orçamentos

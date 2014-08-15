@@ -3,7 +3,8 @@
 class Cliente_OrcamentosController extends Zend_Controller_Action {
 
     public function init() {
-        
+        $messages = $this->_helper->FlashMessenger->getMessages();
+        $this->view->messages = $messages;
     }
 
     public function indexAction() {
@@ -30,6 +31,8 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
         
         $formClienteMetasMeta = new Form_Cliente_Metas_Meta();
         
+        $modelMeta = new Model_Meta();
+        
         $formClienteMetasMeta->getElement('repetir')->getDecorator('label')->setOption('placement', 'APPEND');
         $this->view->formMeta = $formClienteMetasMeta;
         
@@ -38,32 +41,38 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
             if ($formClienteMetasMeta->isValid($dadosMeta)) {
                 $dadosMeta = $formClienteMetasMeta->getValues();
                 
-                Zend_Debug::dump($dadosMeta); die();
-                
                 $dadosMeta['valor_meta'] = View_Helper_Currency::setCurrencyDb($dadosMeta['valor_meta'], "positivo");
                 $dadosMeta['data_cadastro'] = Controller_Helper_Date::getDatetimeNowDb();
                 
                 try {
-                    $this->_modelMeta->insert($dadosMeta);                    
+                    $modelMeta->insert($dadosMeta);                    
+                    
+                    if ($dadosMeta['repetir'] == 1) {
+                        $data = $dadosMeta['ano_meta'] . '-' . $dadosMeta['mes_meta'] . '-' . date('d');
+                        $zendDate = new Zend_Date($data);                    
+                        $dadosInsert = array();
+                        $dadosInsert['valor_meta'] = $dadosMeta['valor_meta'];
+                        $dadosInsert['id_categoria'] = $dadosMeta['id_categoria'];
+                        $dadosInsert['id_usuario'] = $dadosMeta['id_usuario'];
+                        $dadosInsert['repetir'] = 0;
+                        for ($i = 1; $i <= 12; $i++) {    
+                            $dadosInsert['mes_meta'] = $zendDate->addMonth(1)->toString("MM");                        
+                            $dadosInsert['ano_meta'] = $zendDate->toString("yyyy");
+                            $modelMeta->insert($dadosInsert);
+                        }
+                    }
+                    
+                    $this->_helper->flashMessenger->addMessage(array(
+                        'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                        'message' => "Orçamento cadastrado com sucesso!"
+                    ));
+                    
+                    $this->_redirect("cliente/orcamentos");
+                    
                 } catch (Exception $error) {
                     echo $error->getMessage();
                 }
                 
-                if ($dadosMeta['repetir'] == 1) {
-                    $data = $dadosMeta['ano_meta'] . '-' . $dadosMeta['mes_meta'] . '-' . date('d');
-                    $zendDate = new Zend_Date($data);                    
-                    $dadosInsert = array();
-                    $dadosInsert['valor_meta'] = $dadosMeta['valor_meta'];
-                    $dadosInsert['id_categoria'] = $dadosMeta['id_categoria'];
-                    $dadosInsert['id_usuario'] = $dadosMeta['id_usuario'];
-                    $dadosInsert['repetir'] = 0;
-                    for ($i = 1; $i <= 12; $i++) {    
-                        $dadosInsert['mes_meta'] = $zendDate->addMonth(1)->toString("MM");                        
-                        $dadosInsert['ano_meta'] = $zendDate->toString("yyyy");
-                        $this->_modelMeta->insert($dadosInsert);
-                    }
-                }
-                $this->_redirect("metas/");
             }
         }   
     }
