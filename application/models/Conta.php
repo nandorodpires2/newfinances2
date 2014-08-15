@@ -21,7 +21,8 @@ class Model_Conta extends Zend_Db_Table {
                 ->from(array('ct' => $this->_name), array(
                     'ct.id_conta',
                     'ct.descricao_conta',
-                    'ct.saldo_inicial'
+                    'ct.saldo_inicial',
+                    'ct.ativo_conta'
                 ))
                 ->setIntegrityCheck(false)
                 ->joinInner(array('tct' => 'tipo_conta'), 'ct.id_tipo_conta = tct.id_tipo_conta', array(

@@ -54,8 +54,26 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contas/Cartão <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><a href="<?php echo $this->url(array()); ?>">Nova Conta</a></li>
-                <li><a href="<?php echo $this->url(array()); ?>">Novo Cartão</a></li>
+                <li><a href="<?php echo $this->url(array(
+                    'module' => 'cliente',
+                    'controller' => 'contas',
+                    'action' => 'index'
+                ), null, true); ?>">Minhas Contas</a></li>
+                <li><a href="<?php echo $this->url(array(
+                    'module' => 'cliente',
+                    'controller' => 'contas',
+                    'action' => 'nova-conta'
+                ), null, true); ?>">Nova Conta</a></li>
+                <li><a href="<?php echo $this->url(array(
+                    'module' => 'cliente',
+                    'controller' => 'cartoes',
+                    'action' => 'index'
+                ), null, true); ?>">Meus Cartões</a></li>
+                <li><a href="<?php echo $this->url(array(
+                    'module' => 'cliente',
+                    'controller' => 'cartoes',
+                    'action' => 'novo-cartao'
+                ), null, true); ?>">Novo Cartão</a></li>
             </ul>
         </li>
         <li class="active"><a href="<?php echo $this->url(array()); ?>">Meus Chamados</a></li>

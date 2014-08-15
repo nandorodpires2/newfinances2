@@ -52,7 +52,6 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
                 
                 try {
                     $modelMeta->insert($dadosMeta);                    
-<<<<<<< HEAD
                     
                     if ($dadosMeta['repetir'] == 1) {
                         $data = $dadosMeta['ano_meta'] . '-' . $dadosMeta['mes_meta'] . '-' . date('d');
@@ -75,15 +74,11 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
                     ));
                     
                     $this->_redirect("cliente/orcamentos");
-                    
-=======
->>>>>>> 24e0913418d4f5b1c47f58312110f92eb485d0d9
+
                 } catch (Exception $error) {
                     echo $error->getMessage();
                 }
-                
-<<<<<<< HEAD
-=======
+
                 if ($dadosMeta['repetir'] == 1) {
                     $data = $dadosMeta['ano_meta'] . '-' . $dadosMeta['mes_meta'] . '-' . date('d');
                     $zendDate = new Zend_Date($data);                    
@@ -99,7 +94,6 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
                     }
                 }
                 $this->_redirect("cliente/orcamentos");
->>>>>>> 24e0913418d4f5b1c47f58312110f92eb485d0d9
             }
         }   
     }

@@ -21,6 +21,14 @@ class Cliente_IndexController extends Zend_Controller_Action {
         $modelConta = new Model_Conta();
         $contas = $modelConta->isConta($id_usuario);
         
+        /**
+         * lancamentos de hoje
+         */
+        $conta = $this->_getParam("id_conta", null);
+        $data = $this->_getParam("data_movimentacao", date('Y-m-d'));        
+        
+        $this->view->data_movimentacao = Controller_Helper_Date::getDateViewComplete($data);
+        
         if (!$contas) {            
             $url_pendencias = SYSTEM_URL . "cliente/contas/nova-conta";
             $messages = array(
