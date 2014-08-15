@@ -106,7 +106,9 @@ class Model_Meta extends Zend_Db_Table {
                 ->where("mov.realizado = ?", 1)
                 ->where("mov.id_tipo_movimentacao in (2,3)")
                 ->where("met.mes_meta = ?", $mes)
-                ->where("met.ano_meta = ?", $ano);
+                ->where("met.ano_meta = ?", $ano)
+                ->where("month(mov.data_movimentacao) = met.mes_meta")
+                ->where("year(mov.data_movimentacao) = met.ano_meta");
         
         $query = $this->fetchRow($select);
         return $query->total;

@@ -15,7 +15,8 @@
                     </a>
                 </div>
             </div>
-            <div class="panel-body">                
+            <div class="panel-body">       
+                <?php if ($this->metas->count() > 0) : ?>
                 <table class="table table-responsive table-striped">
                     <tr>
                         <th class="text-left">Categoria</th>
@@ -67,14 +68,17 @@
                         </tr>
                         <tr>
                             <td>Porcentagem Orçamento:</td>
-                            <td class="text-right"></td>
+                            <td class="text-right"><?php echo View_Helper_Meta::getStatusMeta($this->porcentagem_orcamento); ?>%</td>
                         </tr>
                         <tr>
                             <td>Projeção Orçamento:</td>
-                            <td class="text-right"></td>
+                            <td class="text-right"><?php echo View_Helper_Meta::getStatusMeta(View_Helper_Meta::getProjecaoMeta($this->porcentagem_orcamento)); ?>%</td>
                         </tr>
                     </table>
                 </div>
+                <?php else : ?>
+                <div class="text-warning">Nenhum registro encontrado.</div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

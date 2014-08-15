@@ -20,14 +20,20 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
         $this->view->metas = $metas;
         
         $total_meta = $modelMeta->getTotalMetaMes($id_usuario, $mes, $ano);
+        if ($total_meta > 0) {
         $this->view->total_meta = $total_meta;
         
         $total_gastos = $modelMeta->getTotalGastoMetas($id_usuario, $mes, $ano);
         $this->view->total_gastos = $total_gastos;
         
+        $porcentagem_orcamento = ($total_gastos * 100) / $total_meta;        
+        $this->view->porcentagem_orcamento = $porcentagem_orcamento;      
+        }
     }
     
     public function novoOrcamentoAction() {
+        
+        $modelMeta = new Model_Meta();
         
         $formClienteMetasMeta = new Form_Cliente_Metas_Meta();
         
@@ -46,6 +52,7 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
                 
                 try {
                     $modelMeta->insert($dadosMeta);                    
+<<<<<<< HEAD
                     
                     if ($dadosMeta['repetir'] == 1) {
                         $data = $dadosMeta['ano_meta'] . '-' . $dadosMeta['mes_meta'] . '-' . date('d');
@@ -69,10 +76,30 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
                     
                     $this->_redirect("cliente/orcamentos");
                     
+=======
+>>>>>>> 24e0913418d4f5b1c47f58312110f92eb485d0d9
                 } catch (Exception $error) {
                     echo $error->getMessage();
                 }
                 
+<<<<<<< HEAD
+=======
+                if ($dadosMeta['repetir'] == 1) {
+                    $data = $dadosMeta['ano_meta'] . '-' . $dadosMeta['mes_meta'] . '-' . date('d');
+                    $zendDate = new Zend_Date($data);                    
+                    $dadosInsert = array();
+                    $dadosInsert['valor_meta'] = $dadosMeta['valor_meta'];
+                    $dadosInsert['id_categoria'] = $dadosMeta['id_categoria'];
+                    $dadosInsert['id_usuario'] = $dadosMeta['id_usuario'];
+                    $dadosInsert['repetir'] = 0;
+                    for ($i = 1; $i <= 12; $i++) {    
+                        $dadosInsert['mes_meta'] = $zendDate->addMonth(1)->toString("MM");                        
+                        $dadosInsert['ano_meta'] = $zendDate->toString("yyyy");
+                        $modelMeta->insert($dadosInsert);
+                    }
+                }
+                $this->_redirect("cliente/orcamentos");
+>>>>>>> 24e0913418d4f5b1c47f58312110f92eb485d0d9
             }
         }   
     }

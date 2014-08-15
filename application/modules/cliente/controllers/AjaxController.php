@@ -106,24 +106,21 @@ class Cliente_AjaxController extends Zend_Controller_Action {
         $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
         
         $modelMeta = new Model_Meta();
-        $totalGastos = $modelMeta->getGastosMetasUsuario($id_usuario);
+        $metas = $modelMeta->getGastosMetasUsuario($id_usuario);
         
         $jsonData = array();
-        foreach ($totalGastos as $key => $gasto) {
-            $jsonData['categories'][$key] = $gasto->descricao_categoria;              
+        
+        foreach ($metas as $key => $meta) {
+            //$jsonData['receita']['data'][] = $relatorio->total;
+            $jsonData['categories']['data'][] = $meta->descricao_categoria;
+            $jsonData['total_orcamento']['data'][] = $meta->valor_meta;
+            $jsonData['total_despesa']['data'][] = $meta->total * -1;
+            $jsonData['porcentagem']['data'][] = $meta->porcentagem;
+            $jsonData['projecao']['data'][] = View_Helper_Meta::getProjecaoMeta($meta->porcentagem);
         }
-        $jsonData['series'][0]['name'] = 'Valor Meta';
-        foreach ($totalGastos as $key => $gasto) {
-            $jsonData['series'][0]['data'][] = (float)number_format($gasto->valor_meta, 2, '.', '');
-        }
-        $jsonData['series'][1]['name'] = 'Total Gasto';
-        foreach ($totalGastos as $key => $gasto) {
-            $jsonData['series'][1]['data'][] = (float)number_format($gasto->total * -1, 2, '.', '');
-        }
-        $jsonData['series'][2]['name'] = 'Porcentagem';
-        foreach ($totalGastos as $key => $gasto) {
-            $jsonData['series'][2]['data'][] = (float)number_format($gasto->porcentagem, 2, '.', '');
-        }
+        
+        //Zend_Debug::dump($metas);
+        
         echo json_encode($jsonData);
     }
 

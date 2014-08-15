@@ -25,4 +25,19 @@ $(document).ready(function(){
         $("#id_conta-label").hide();
         $("#id_conta").hide();
     }
+    
+    $("#tipo_pgto-conta").click(function(){
+        $("#id_conta-label").show();
+        $("#id_conta").show();
+        $("#id_cartao-label").hide();
+        $("#id_cartao").hide();
+    })
+    
+    $("#tipo_pgto-cartao").click(function(){
+        $("#id_cartao-label").show();
+        $("#id_cartao").show();
+        $("#id_conta-label").hide();
+        $("#id_conta").hide();
+    })
+    
 });
