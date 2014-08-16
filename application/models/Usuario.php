@@ -78,7 +78,10 @@ class Model_Usuario extends Zend_Db_Table {
     public function getDadosUsuario($email) {
         
         $select = $this->select()
-                ->from(array('u' => $this->_name), array('*'))
+                ->from(array('u' => $this->_name), array(
+                    '*',
+                    'data' => "date(now())"
+                ))
                 ->setIntegrityCheck(false)
                 ->joinInner(array('up' => 'usuario_plano'), 'u.id_usuario = up.id_usuario', array('*'))
                 ->joinInner(array('p' => 'plano'), 'up.id_plano = p.id_plano', array(

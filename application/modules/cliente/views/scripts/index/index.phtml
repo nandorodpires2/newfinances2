@@ -17,7 +17,21 @@
                 </div>
                 <?php endif; ?>
             </div>
-            <div class="panel-body" id="movimentacoes"></div>
+            <div class="panel-body">
+                <div class="col-lg-6">    
+                    <div class="form-inline pull-left">                        
+                        <input class="form-control" placeholder="Ir para a data" type="text" name="data_movimentacao" id="data_movimentacao"/>
+                        <input class="btn btn-success btn-sm" type="submit" name="submit" id="btn_data_movimentacao" value="Ir" />                        
+                    </div>    
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-inline pull-right">
+                        <input class="form-control" placeholder="Pesquisar" type="text" name="data_movimentacao" />
+                        <input class="" type="image" src="<?php echo $this->baseUrl('views/img/icon_search.png'); ?>" name="submit" id="btn_busca" />
+                    </div>    
+                </div>
+                <div id="movimentacoes"></div>
+            </div>
         </div>    
     </div>
     <div class="col-lg-12">
