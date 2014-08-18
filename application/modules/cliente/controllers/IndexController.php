@@ -20,7 +20,7 @@ class Cliente_IndexController extends Zend_Controller_Action {
          */
         $modelConta = new Model_Conta();
         $contas = $modelConta->isConta($id_usuario);
-        
+                
         if (!$contas) {            
             $url_pendencias = SYSTEM_URL . "cliente/contas/nova-conta";
             $messages = array(

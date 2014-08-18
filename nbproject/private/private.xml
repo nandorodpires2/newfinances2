@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
@@ -8,3 +9,33 @@
         </group>
     </open-files>
 </project-private>
+=======
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group/>
+    </open-files>
+</project-private>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/site/controllers/UsuariosController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/PendenciasController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/pendencias/index.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/movimentacoes/nova-despesa.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/forms/Cliente/Movimentacoes/Despesa.php</file>
+            <file>file:/C:/wamp/www/newfinances2/public/views/js/cliente/movimentacoes/editar-movimentacao.js</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/movimentacoes/editar-movimentacao.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/ajax/movimentacoes.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/MovimentacoesController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/public/views/js/cliente/movimentacoes/nova-despesa.js</file>
+        </group>
+    </open-files>
+</project-private>
+>>>>>>> 24e0913418d4f5b1c47f58312110f92eb485d0d9
+>>>>>>> a86b84d3445f540a9ce290fdca9d49596f2a66ca

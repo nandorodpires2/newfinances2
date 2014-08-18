@@ -42,6 +42,18 @@
             <controllerFile controllerName="Orcamentos">
               <actionMethod actionName="index"/>
             </controllerFile>
+            <controllerFile controllerName="Contas">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="novaConta"/>
+              <actionMethod actionName="editarConta"/>
+              <actionMethod actionName="excluirConta"/>
+            </controllerFile>
+            <controllerFile controllerName="Cartoes">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="novoCartao"/>
+              <actionMethod actionName="editarCartao"/>
+              <actionMethod actionName="excluirCartao"/>
+            </controllerFile>
           </controllersDirectory>
           <formsDirectory enabled="false"/>
           <layoutsDirectory enabled="false"/>
@@ -66,6 +78,30 @@
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Orcamentos">
                 <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Contas">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Contas">
+                <viewScriptFile forActionName="novaConta"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Contas">
+                <viewScriptFile forActionName="editarConta"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Contas">
+                <viewScriptFile forActionName="excluirConta"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Cartoes">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Cartoes">
+                <viewScriptFile forActionName="novoCartao"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Cartoes">
+                <viewScriptFile forActionName="editarCartao"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Cartoes">
+                <viewScriptFile forActionName="excluirCartao"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>

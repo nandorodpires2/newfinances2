@@ -1,0 +1,64 @@
+<div class="row">    
+    <div class="col-lg-12">    
+        <?php echo View_Helper_Messages::render($this->messages); ?>       
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Meus Cartões
+                <div class="pull-right">
+                    <a href="<?php echo $this->url(array(
+                        'module' => 'cliente',
+                        'controller' => 'cartoes',
+                        'action' => 'novo-cartao'
+                    ), null, true); ?>">
+                        <img src="<?php echo $this->baseUrl('views/img/icon_add.png'); ?>" width="25px" title="Cadastrar Cartão"/>
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <?php if ($this->cartoes->count() > 0) : ?>
+                <table class="table table-striped table-responsive">
+                    <tr>
+                        <th>Bandeira</th>
+                        <th>Descrição</th>
+                        <th>Limite</th>
+                        <th>Fechamento</th>
+                        <th>Vencimento</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                    <?php foreach ($this->cartoes as $cartao) : ?>
+                    <tr>
+                        <td><?php echo $cartao->bandeira_cartao; ?></td>
+                        <td><?php echo $cartao->descricao_cartao; ?></td>
+                        <td><?php echo $cartao->limite_cartao; ?></td>
+                        <td><?php echo $cartao->fechamento_cartao; ?></td>
+                        <td><?php echo $cartao->vencimento_cartao; ?></td>
+                        <td><?php echo $cartao->ativo_cartao ? 'Ativo' : 'Inativo'; ?></td>
+                        <td>
+                            <a href="<?php echo $this->url(array(
+                                'module' => 'cliente',
+                                'controller' => 'cartoes',
+                                'action' => 'editar-cartao',
+                                'id_conta' => $cartao->id_cartao
+                            )); ?>">
+                                <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_edit.png'); ?>" width="20" title="Editar" />
+                            </a>
+                            <a href="<?php echo $this->url(array(
+                                'module' => 'cliente',
+                                'controller' => 'cartoes',
+                                'action' => 'excluir-cartao',
+                                'id_conta' => $cartao->id_cartao
+                            )); ?>">
+                                <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_delete.png'); ?>" width="20" title="Excluir" />
+                            </a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+                <?php else : ?>
+                <div class="text-warning">Nenhum registro</div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
