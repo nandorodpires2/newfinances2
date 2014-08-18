@@ -3,16 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/site/controllers/UsuariosController.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/PendenciasController.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/pendencias/index.phtml</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/movimentacoes/nova-despesa.phtml</file>
-            <file>file:/C:/wamp/www/newfinances2/application/forms/Cliente/Movimentacoes/Despesa.php</file>
-            <file>file:/C:/wamp/www/newfinances2/public/views/js/cliente/movimentacoes/editar-movimentacao.js</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/movimentacoes/editar-movimentacao.phtml</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/ajax/movimentacoes.phtml</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/MovimentacoesController.php</file>
-            <file>file:/C:/wamp/www/newfinances2/public/views/js/cliente/movimentacoes/nova-despesa.js</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/orcamentos/index.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/OrcamentosController.php</file>
         </group>
     </open-files>
 </project-private>
