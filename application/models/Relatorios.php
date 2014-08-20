@@ -19,8 +19,10 @@ class Model_Relatorios extends Zend_Db_Table {
         
         $select = $this->select()
                 ->from($this->_name, array(
+                    'ano' => 'year(data_movimentacao)',
+                    'mes' => 'month(data_movimentacao)',                    
                     'id_tipo_movimentacao',
-                    'total' => 'sum(valor_movimentacao)'
+                    'total' => 'ifnull(sum(valor_movimentacao), 0)'
                 ))
                 ->where('id_usuario = ?', $id_usuario)
                 ->where('id_tipo_movimentacao in (1,2)')

@@ -69,9 +69,17 @@ class Cliente_AjaxController extends Zend_Controller_Action {
         );
         
         if ($relatorios->count() > 0) {
-            $jsonData['receita']['data'][0] = 0;
-            $jsonData['despesa']['data'][0] = 0;
+            $jsonData['categories']['data'] = array();
+            $jsonData['receita']['data'] = array();
+            $jsonData['despesa']['data'] = array();
             foreach ($relatorios as $key => $relatorio) {
+                
+                $relatorio->mes = Controller_Helper_Date::getNameMonth($relatorio->mes);
+                
+                if (!in_array($relatorio->mes, $jsonData['categories']['data'])) {
+                    $jsonData['categories']['data'][] = $relatorio->mes;
+                }                
+                
                 if ($relatorio->id_tipo_movimentacao == 1) {
                     $jsonData['receita']['data'][] = $relatorio->total;
                 } else {

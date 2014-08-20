@@ -141,4 +141,13 @@ class Controller_Helper_Date extends Zend_Controller_Action_Helper_Abstract {
         
     }
     
+    public static function getNameMonth($mes) {
+                
+        $zendDate = new Zend_Date();
+        $zendDate->setMonth($mes);
+        
+        return $zendDate->get(Zend_Date::MONTH_NAME);        
+        
+    }
+    
 }
