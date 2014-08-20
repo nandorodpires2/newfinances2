@@ -22,14 +22,15 @@ class Model_Conta extends Zend_Db_Table {
                     'ct.id_conta',
                     'ct.descricao_conta',
                     'ct.saldo_inicial',
-                    'ct.ativo_conta'
+                    'ct.ativo_conta',                    
                 ))
                 ->setIntegrityCheck(false)
                 ->joinInner(array('tct' => 'tipo_conta'), 'ct.id_tipo_conta = tct.id_tipo_conta', array(
                     'tct.descricao_tipo_conta',
                 ))
                 ->joinLeft(array('ban' => 'banco'), 'ct.id_banco = ban.id_banco', array(
-                    'ban.nome_banco'
+                    'ban.nome_banco',
+                    'ban.logo_banco'
                 ))
                 ->where("ct.ativo_conta = ?", 1)
                 ->where("ct.id_usuario = ?", $idUsuario);

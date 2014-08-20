@@ -28,7 +28,7 @@
                     </tr>
                     <?php foreach ($this->cartoes as $cartao) : ?>
                     <tr>
-                        <td><?php echo $cartao->bandeira_cartao; ?></td>
+                        <td><?php echo View_Helper_Cartoes::getBandeiraCartao($cartao->bandeira_cartao); ?></td>
                         <td><?php echo $cartao->descricao_cartao; ?></td>
                         <td><?php echo $cartao->limite_cartao; ?></td>
                         <td><?php echo $cartao->fechamento_cartao; ?></td>

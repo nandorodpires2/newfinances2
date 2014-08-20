@@ -47,7 +47,7 @@ class Cliente_ContasController extends Zend_Controller_Action
                         'message' => "Conta Cadastada com sucesso!"
                     ));
                     
-                    $this->_redirect("cliente/cartoes");
+                    $this->_redirect("cliente/contas");
                     
                 } catch (Zend_Exception $erro) {
                     $this->_helper->flashMessenger->addMessage(array(
