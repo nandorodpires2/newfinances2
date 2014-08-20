@@ -25,6 +25,17 @@ $(document).ready(function(){
             buscaMovimentacoesData(data, id_conta);
         }
     });
+    
+    /**
+     * campo de pesquisa
+     */
+    jQuery("#pesquisar").focus(function() {
+        jQuery(this).attr('style', 'width: 400px')
+    });
+    
+    jQuery("#pesquisar").blur(function() {
+        jQuery(this).attr('style', 'width: 200px')
+    });
         
 });
 

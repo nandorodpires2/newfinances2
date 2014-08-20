@@ -116,6 +116,18 @@ ul.error {
     background: #3071a9;    
 }
 
+.input-xsmall {
+    width: 30%;
+}
+
+.input-small {
+    width: 50%;
+}
+
+.input-large {
+    width: 100%;
+}
+
 .btn-submit:hover {
     color: #fff;
     background: #4cae4c;
@@ -168,3 +180,4 @@ footer a:hover {
     margin-left: -30px;
     padding: 5px 0;
 }
+

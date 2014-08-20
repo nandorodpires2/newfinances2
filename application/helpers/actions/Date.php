@@ -91,6 +91,7 @@ class Controller_Helper_Date extends Zend_Controller_Action_Helper_Abstract {
     }
     
     public static function getDateDb($date) {
+        Zend_Debug::dump($date);
         $datePart = explode("/", $date);
         return $datePart[2] . '-' . $datePart[1] . '-' . $datePart[0];
     }

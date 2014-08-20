@@ -6,6 +6,8 @@ defined('APPLICATION_PATH')
 
 if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
     $application_env = "development";
+} elseif ($_SERVER['REMOTE_ADDR'] == '177.157.170.76') {
+    $application_env = "testing";
 } else {
     $application_env = "production";
 }
@@ -26,22 +28,30 @@ defined('EMAILS_SITE')
 defined('PUBLIC_PATH') || define('PUBLIC_PATH', realpath(dirname(__FILE__)));
 
 // Define path to public directory
-if ($application_env == 'production') {
-    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances2.newfinances.com.br/');
-} else {
+if ($application_env == 'testing') {
+    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances2.newfinances.com.br/public/');
+} elseif ($application_env == 'development') {
     defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://localhost/newfinances2/public/');
+} else {
+    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances.com.br/');
 }
 
-if ($application_env == 'production') {
+if ($application_env == 'testing') {
     // Ensure library/ is on include_path
     set_include_path(implode(PATH_SEPARATOR, array(
         realpath(APPLICATION_PATH . '/../../../library'),
         get_include_path(),
     )));
-} else {
+} elseif ($application_env == 'development' ) {
     // Ensure library/ is on include_path
     set_include_path(implode(PATH_SEPARATOR, array(
         realpath(APPLICATION_PATH . '/../../library'),
+        get_include_path(),
+    )));
+} else {
+    // Ensure library/ is on include_path
+    set_include_path(implode(PATH_SEPARATOR, array(
+        realpath(APPLICATION_PATH . '/../../../library'),
         get_include_path(),
     )));
 }

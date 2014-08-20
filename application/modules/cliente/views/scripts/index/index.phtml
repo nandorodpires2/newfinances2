@@ -2,10 +2,10 @@
 <?php echo $this->headScript()->appendFile($this->baseUrl('views/js/layout.js')); ?>
 <div class="row">       
     <div class="col-lg-12">        
-        <?php echo View_Helper_Messages::render($this->messages); ?>
+        <?php echo View_Helper_Messages::render($this->messages, $this->alerts); ?>
         <div class="panel panel-info">
             <div class="panel-heading">
-                <span class="text-blue">Lançamentos</span>
+                <span class="text-info">Lançamentos</span>
                 <?php if ($this->isConta) : ?>
                 <div class="pull-right">
                     <a href="" data-toggle="modal" data-target="#modalSaldoContas" id="saldo-contas">
@@ -18,18 +18,26 @@
                 <?php endif; ?>
             </div>
             <div class="panel-body">
-                <div class="col-lg-6">    
-                    <div class="form-inline pull-left">                        
-                        <input class="form-control" placeholder="Ir para a data" type="text" name="data_movimentacao" id="data_movimentacao"/>
-                        <input class="btn btn-success btn-sm" type="submit" name="submit" id="btn_data_movimentacao" value="Ir" />                        
-                    </div>    
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-inline pull-right">
-                        <input class="form-control" placeholder="Pesquisar" type="text" name="data_movimentacao" />
-                        <input class="" type="image" src="<?php echo $this->baseUrl('views/img/icon_search.png'); ?>" name="submit" id="btn_busca" />
-                    </div>    
-                </div>
+                <div class="panel panel-success">
+                    <div class="panel-body">
+                        <div class="col-lg-4">    
+                            <div class="form-inline pull-left">                        
+                                <input class="form-control input-sm" placeholder="Ir para a data" type="text" name="data_movimentacao" id="data_movimentacao"/>
+                                <input class="btn btn-success btn-sm" type="submit" name="submit" id="btn_data_movimentacao" value="Ir" />                        
+                            </div>    
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-inline pull-right">
+                                <input class="form-control input-sm" placeholder="Pesquisar" type="text" name="data_movimentacao" id='pesquisar' />
+                                <a class="btn btn-xs btn-info" href="<?php echo $this->url(array(
+                                    'module' => 'cliente',
+                                    'controller' => 'pesquisas',
+                                    'action' => 'avancada'
+                                ), null, true); ?>">Pesquisa Avançada</a>
+                            </div>    
+                        </div>                
+                    </div>
+                </div>                
                 <div id="movimentacoes"></div>
             </div>
         </div>    

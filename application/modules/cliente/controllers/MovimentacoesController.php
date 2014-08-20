@@ -346,7 +346,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
             
             // verifica se a movimentacao se repete
             if ($dadosMovimentacao['id_movimentacao_pai'] != null) {                 
-                $this->view->dadosRepeticao = true;                
+                $this->view->dadosRepeticao = false;                
             } else {
                 $this->view->dadosRepeticao = false;
             }
@@ -526,6 +526,15 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 
         switch ($dadosMovimentacao['id_tipo_movimentacao']) {
             case self::TIPO_MOVIMENTACAO_RECEITA:
+                $formMovimentacoesReceitas->addElement('radio', 'realizado', array(
+                    'label' => 'Marcar como realizado?',
+                    'multioptions' => array(
+                        1 => 'Sim',
+                        0 => 'Não'
+                    ),
+                    'order' => 8
+                ));
+                /*
                 if ($dadosMovimentacao['id_movimentacao_pai'] != null) {
                     $formMovimentacoesReceitas->addElement('radio', 'modo_edicao', array(
                         'label' => 'Essa movimentacao se repete, escolha um modo de edição:',
@@ -539,6 +548,8 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     ));
                     $formMovimentacoesDespesa->getElement('modo_edicao')->setOrder(7);                    
                 }
+                 * 
+                 */
                 $formMovimentacoesDespesa->removeElement('opt_repetir');
                 $formMovimentacoesReceitas->populate($dadosMovimentacao);
                 $this->view->formMovimentacoes = $formMovimentacoesReceitas;
@@ -546,6 +557,15 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 return $formMovimentacoesReceitas;
                 break;
             case self::TIPO_MOVIMENTACAO_DESPESA:
+                $formMovimentacoesDespesa->addElement('radio', 'realizado', array(
+                    'label' => 'Marcar como realizado?',
+                    'multioptions' => array(
+                        1 => 'Sim',
+                        0 => 'Não'
+                    ),
+                    'order' => 8
+                ));
+                /*
                 if ($dadosMovimentacao['id_movimentacao_pai'] != null) {                    
                     $formMovimentacoesDespesa->addElement('radio', 'modo_edicao', array(
                         'label' => 'Essa movimentacao se repete, escolha um modo de edição:',
@@ -559,6 +579,8 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     ));
                     $formMovimentacoesDespesa->getElement('modo_edicao')->setOrder(7);                    
                 }
+                 * 
+                 */
                 $formMovimentacoesDespesa->removeElement('opt_repetir');
                 $formMovimentacoesDespesa->populate($dadosMovimentacao);
                 $this->view->formMovimentacoes = $formMovimentacoesDespesa;
