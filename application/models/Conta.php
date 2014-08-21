@@ -39,6 +39,29 @@ class Model_Conta extends Zend_Db_Table {
         
     }
     
+    public function getConta($id_conta, $id_usuario) {
+        
+        $select = $this->select()
+                ->from(array('ct' => $this->_name), array(
+                    'ct.id_conta',
+                    'ct.descricao_conta',
+                    'ct.saldo_inicial',
+                    'ct.ativo_conta',                    
+                ))
+                ->setIntegrityCheck(false)
+                ->joinInner(array('tct' => 'tipo_conta'), 'ct.id_tipo_conta = tct.id_tipo_conta', array(
+                    'tct.descricao_tipo_conta',
+                ))
+                ->joinLeft(array('ban' => 'banco'), 'ct.id_banco = ban.id_banco', array(
+                    'ban.nome_banco',
+                    'ban.logo_banco'
+                ))
+                ->where("ct.id_conta = ?", $id_conta)
+                ->where("ct.id_usuario = ?", $id_usuario);
+        
+        return $this->fetchRow($select);
+    }
+
     public function getLastId() {
         
         $select = $this->select()

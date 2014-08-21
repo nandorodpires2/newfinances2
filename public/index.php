@@ -33,7 +33,7 @@ if ($application_env == 'testing') {
 } elseif ($application_env == 'development') {
     defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://localhost/newfinances2/public/');
 } else {
-    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances.com.br/');
+    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances2.newfinances.com.br/public/');
 }
 
 if ($application_env == 'testing') {

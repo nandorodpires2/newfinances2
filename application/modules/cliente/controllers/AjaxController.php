@@ -13,23 +13,26 @@ class Cliente_AjaxController extends Zend_Controller_Action {
     public function movimentacoesAction() {
         
         $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
-                                
+        $data_movimentacao = Zend_Auth::getInstance()->getIdentity()->data_usuario;
+        $data_movimentacao = View_Helper_Date::getDataView($data_movimentacao);
+        
         /**
          * lancamentos de hoje
          */
         $conta = $this->_getParam("id_conta", null);
-        $data = $this->_getParam("data", Zend_Auth::getInstance()->getIdentity()->data);        
+        $data = $this->_getParam("data", $data_movimentacao);         
+        $data_pesquisa = Controller_Helper_Date::getDateDb($data);
+                        
+        $this->view->data_movimentacao = Controller_Helper_Date::getDateViewComplete($data_pesquisa);
         
-        $this->view->data_movimentacao = Controller_Helper_Date::getDateViewComplete($data);
-        
-        if ($data != Zend_Auth::getInstance()->getIdentity()->data) {
-            Zend_Auth::getInstance()->getIdentity()->data = $data;
-        }
-                
         $modelVwMovimentacao = new Model_VwMovimentacao();
-        $movimentacoes = $modelVwMovimentacao->getMovimentacoesData($data, $id_usuario, $conta);   
-        
+        $movimentacoes = $modelVwMovimentacao->getMovimentacoesData($data_pesquisa, $id_usuario, $conta);   
+                
         $this->view->movimentacoes = $movimentacoes;
+        
+        if ($data !== Zend_Auth::getInstance()->getIdentity()->data_usuario) {
+            Zend_Auth::getInstance()->getIdentity()->data_usuario = $data;
+        }
         
         /**
          * total receitas e despesas

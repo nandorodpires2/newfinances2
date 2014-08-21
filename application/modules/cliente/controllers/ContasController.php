@@ -63,16 +63,27 @@ class Cliente_ContasController extends Zend_Controller_Action
         
     }
 
-    public function editarContaAction()
-    {
+    public function editarContaAction() {
         // action body
     }
 
-    public function excluirContaAction()
-    {
-        // action body
+    public function excluirContaAction() {
+     
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $id_conta = $this->_getParam('id_conta');
+        
+        $modelConta = new Model_Conta();
+        $conta = $modelConta->getConta($id_conta, $id_usuario);
+        $this->view->conta = $conta;
+        
+        Zend_Debug::dump($conta);
+        
+        if ($this->_request->isPost()) {
+            
+        }
+        
     }
-
 
 }
 

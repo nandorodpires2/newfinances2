@@ -1,6 +1,6 @@
 <?php
 
-class AjaxController extends Zend_Controller_Action
+class Site_AjaxController extends Zend_Controller_Action
 {
 
     public function init()

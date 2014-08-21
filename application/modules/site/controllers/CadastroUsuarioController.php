@@ -1,6 +1,6 @@
 <?php
 
-class CadastroUsuarioController extends Zend_Controller_Action {
+class Site_CadastroUsuarioController extends Zend_Controller_Action {
 
     const PLANO_BASICO = 2;
     const VALOR_PLANO_BASICO = 2;

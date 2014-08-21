@@ -1,6 +1,6 @@
 <?php
 
-class SistemaController extends Zend_Controller_Action
+class Site_SistemaController extends Zend_Controller_Action
 {
 
     public function init()

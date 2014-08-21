@@ -80,7 +80,7 @@ class Model_Usuario extends Zend_Db_Table {
         $select = $this->select()
                 ->from(array('u' => $this->_name), array(
                     '*',
-                    'data' => "date(now())"
+                    'data_usuario' => "now()"
                 ))
                 ->setIntegrityCheck(false)
                 ->joinInner(array('up' => 'usuario_plano'), 'u.id_usuario = up.id_usuario', array('*'))

@@ -1,6 +1,6 @@
 <?php
 
-class ContatoController extends Zend_Controller_Action {
+class Site_ContatoController extends Zend_Controller_Action {
 
     public function init() {
         $messages = $this->_helper->FlashMessenger->getMessages();

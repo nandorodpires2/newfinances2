@@ -1,6 +1,6 @@
 <?php
 
-class UsuariosController extends Zend_Controller_Action {
+class Site_UsuariosController extends Zend_Controller_Action {
 
     public function init() {
         $messages = $this->_helper->FlashMessenger->getMessages();
