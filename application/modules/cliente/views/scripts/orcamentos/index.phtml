@@ -27,12 +27,16 @@
                         <th class="text-center">Ações</th>
                     </tr>
                     <?php foreach ($this->metas as $meta) : ?>
+                    <?php 
+                        $total_gasto = View_Helper_Movimentacao::getTotalGastoCategoriaMes($meta->id_categoria);
+                        $porcentagem = View_Helper_Meta::getPorcentagemTotalGastos($meta->valor_meta, $total_gasto);
+                    ?>
                     <tr class="text-right">
                         <td class="text-left"><?php echo $meta->descricao_categoria; ?></td>
                         <td><?php echo View_Helper_Currency::getCurrency($meta->valor_meta); ?></td>
-                        <td><?php echo View_Helper_Currency::getCurrency($meta->total); ?></td>
-                        <td><?php echo View_Helper_Meta::getStatusMeta($meta->porcentagem); ?>%</td>
-                        <td><?php echo View_Helper_Meta::getStatusMeta(View_Helper_Meta::getProjecaoMeta($meta->porcentagem)); ?>%</td>
+                        <td><?php echo View_Helper_Currency::getCurrency($total_gasto); ?></td>
+                        <td><?php echo View_Helper_Meta::getStatusMeta($porcentagem); ?>%</td>
+                        <td><?php echo View_Helper_Meta::getStatusMeta(View_Helper_Meta::getProjecaoMeta($porcentagem)); ?>%</td>
                         <td class="col-lg-1 text-center">
                             <a href="">
                                 <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_edit.png'); ?>" width="20" title="Editar" />

@@ -35,4 +35,15 @@ class View_Helper_Movimentacao extends Zend_View_Helper_Abstract {
         
     }
     
+    public static function getTotalGastoCategoriaMes($id_categoria) {
+        
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $modelMovimentacao = new Model_Movimentacao();
+        $total = $modelMovimentacao->getTotalRealizadoCategoriaMes($id_categoria, $id_usuario);
+        
+        return $total->total_categoria;
+        
+    }
+    
 }

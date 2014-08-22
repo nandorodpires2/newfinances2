@@ -23,6 +23,7 @@ class Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstract {
         $testRequest->setModuleName($request->getModuleName())
                     ->setControllerName($error->getErrorHandlerController())
                     ->setActionName($error->getErrorHandlerAction());
+        
         if ($front->getDispatcher()->isDispatchable($testRequest)) {
             $error->setErrorHandlerModule($request->getModuleName());
         }

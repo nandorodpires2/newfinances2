@@ -143,7 +143,7 @@ class Cliente_AjaxController extends Zend_Controller_Action {
                 //$jsonData['receita']['data'][] = $relatorio->total;
                 $jsonData['categories']['data'][] = $meta->descricao_categoria;
                 $jsonData['total_orcamento']['data'][] = $meta->valor_meta;
-                $jsonData['total_despesa']['data'][] = $meta->total * -1;
+                $jsonData['total_despesa']['data'][] = View_Helper_Movimentacao::getTotalGastoCategoriaMes($meta->id_categoria) * -1;
                 //$jsonData['porcentagem']['data'][] = $meta->porcentagem;
                 //$jsonData['projecao']['data'][] = View_Helper_Meta::getProjecaoMeta($meta->porcentagem);
             }
