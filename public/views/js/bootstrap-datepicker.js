@@ -1,4 +1,3 @@
-<<<<<<< .mine
 /* =========================================================
  * bootstrap-datepicker.js
  * Repo: https://github.com/eternicode/bootstrap-datepicker/
@@ -1680,7 +1679,6 @@
 
 }(window.jQuery));
 
-=======
 /* =========================================================
  * bootstrap-datepicker.js
  * Repo: https://github.com/eternicode/bootstrap-datepicker/
@@ -3362,4 +3360,4 @@
 	});
 
 }(window.jQuery));
->>>>>>> .theirs
+
