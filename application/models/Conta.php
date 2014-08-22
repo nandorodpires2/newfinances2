@@ -16,7 +16,8 @@ class Model_Conta extends Zend_Db_Table {
     
     protected $_primary = "id_conta";
     
-    public function getContasUsuario($idUsuario) {
+    public function getContasUsuario($idUsuario, $status = null) {
+        
         $select = $this->select()
                 ->from(array('ct' => $this->_name), array(
                     'ct.id_conta',
@@ -31,9 +32,12 @@ class Model_Conta extends Zend_Db_Table {
                 ->joinLeft(array('ban' => 'banco'), 'ct.id_banco = ban.id_banco', array(
                     'ban.nome_banco',
                     'ban.logo_banco'
-                ))
-                ->where("ct.ativo_conta = ?", 1)
+                ))                
                 ->where("ct.id_usuario = ?", $idUsuario);
+        
+        if (null !== $status) {
+            $select->where("ct.ativo_conta = ?", $status);
+        }
         
         return $this->fetchAll($select);
         

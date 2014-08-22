@@ -13,8 +13,13 @@ class Cliente_ContasController extends Zend_Controller_Action
         
         $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
         $modelConta = new Model_Conta();
-        $contas = $modelConta->getContasUsuario($id_usuario);
-        $this->view->contas = $contas;
+        $contas_ativas = $modelConta->getContasUsuario($id_usuario, 1);
+        $this->view->contas_ativas = $contas_ativas;
+        
+        $contas_inativas = $modelConta->getContasUsuario($id_usuario, 0);
+        $this->view->contas_inativas = $contas_inativas;
+     
+        //Zend_Debug::dump($contas_inativas);
         
     }
 
@@ -75,11 +80,36 @@ class Cliente_ContasController extends Zend_Controller_Action
         
         $modelConta = new Model_Conta();
         $conta = $modelConta->getConta($id_conta, $id_usuario);
+        if (!$conta) {
+            $this->_helper->flashMessenger->addMessage(array(
+                'class' => 'bg-danger text-danger padding-10px margin-10px-0px',
+                'message' => 'Nenhuma conta encontrada!'
+            ));
+            $this->_redirect("cliente/contas");
+        }
         $this->view->conta = $conta;
         
-        Zend_Debug::dump($conta);
-        
         if ($this->_request->isPost()) {
+            $dados = $this->_request->getPost();
+            
+            if ($dados['btn-opt'] == 'Cancelar') {                
+                $this->_helper->flashMessenger->addMessage(array(
+                    'class' => 'bg-warning text-warning padding-10px margin-10px-0px',
+                    'message' => 'Exclusão cancelada!'
+                ));
+                $this->_redirect("cliente/contas");
+            } else {
+                $dadosUpdate['ativo_conta'] = 0;
+                $whereUpdate = "id_conta = " . $id_conta;
+                $modelConta->update($dadosUpdate, $whereUpdate);
+                
+                $this->_helper->flashMessenger->addMessage(array(
+                    'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                    'message' => 'Conta excluída com sucesso!'
+                ));
+                $this->_redirect("cliente/contas");
+                
+            }
             
         }
         

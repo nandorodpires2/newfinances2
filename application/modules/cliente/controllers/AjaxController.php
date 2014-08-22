@@ -144,8 +144,8 @@ class Cliente_AjaxController extends Zend_Controller_Action {
                 $jsonData['categories']['data'][] = $meta->descricao_categoria;
                 $jsonData['total_orcamento']['data'][] = $meta->valor_meta;
                 $jsonData['total_despesa']['data'][] = $meta->total * -1;
-                $jsonData['porcentagem']['data'][] = $meta->porcentagem;
-                $jsonData['projecao']['data'][] = View_Helper_Meta::getProjecaoMeta($meta->porcentagem);
+                //$jsonData['porcentagem']['data'][] = $meta->porcentagem;
+                //$jsonData['projecao']['data'][] = View_Helper_Meta::getProjecaoMeta($meta->porcentagem);
             }
         }
 

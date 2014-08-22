@@ -6,7 +6,8 @@
 /**
  * funcoes padrao para todo a aplicacao
  */
-window.onload = function(){
+window.onload = function() {
+    
     // campo valor movimentacao
     $("#valor_movimentacao").maskMoney({symbol:'', thousands:'.', decimal:',', symbolStay: true});    
     
@@ -35,6 +36,7 @@ window.onload = function(){
         language: "pt", 
         format: 'dd/mm/yyyy',
         autoclose: true,
+        todayHighlight: true
     });
     
 }
