@@ -47,26 +47,18 @@ class Model_Meta extends Zend_Db_Table {
         $select = $this->select()
                 ->from(array('met' => $this->_name), array(
                     'met.id_meta',
-                    'met.valor_meta',
-                    'porcentagem' => '(sum(mov.valor_movimentacao) * -100) / met.valor_meta'
+                    'met.valor_meta'
                 ))
                 ->setIntegrityCheck(false)
                 ->joinInner(array('cat' => 'categoria'), 'met.id_categoria = cat.id_categoria', array(
+                    'cat.id_categoria',
                     'cat.descricao_categoria'
-                ))
-                ->joinInner(array('mov' => 'movimentacao'), 'met.id_usuario = mov.id_usuario and met.id_categoria = mov.id_categoria', array(
-                    'total' => 'sum(mov.valor_movimentacao)'
-                ))
-                ->where("mov.id_usuario = ?", $id_usuario)
+                ))                
                 ->where("met.id_usuario = ?", $id_usuario)
                 ->where("met.mes_meta = month(now())")
-                ->where("met.ano_meta = year(now())")
-                ->where("mov.realizado = ?", 1)
-                ->where("mov.id_tipo_movimentacao in (2,3)")
-                ->where("month(mov.data_movimentacao) = month(now())")
-                ->where("year(mov.data_movimentacao) = year(now())")
+                ->where("met.ano_meta = year(now())")                
                 ->group("cat.id_categoria")
-                ->order("(sum(mov.valor_movimentacao) * -100) / met.valor_meta desc");
+                ->order("cat.descricao_categoria asc");
         
         return $this->fetchAll($select);        
         

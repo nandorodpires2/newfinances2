@@ -40,12 +40,7 @@ class View_Helper_Meta extends Zend_View_Helper_Abstract {
         
         $total_gasto *= -1;
         
-        $porcentagem = $porcentagem_gastos = number_format(
-            ($total_gasto * 100) / $total_meta, 
-            2, 
-            ',', 
-            ''
-        );        
+        $porcentagem = ($total_gasto * 100) / $total_meta;
         
         return $porcentagem;        
         

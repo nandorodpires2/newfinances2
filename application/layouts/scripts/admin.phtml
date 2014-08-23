@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>NewFinances</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="<?php echo $this->baseUrl('views/css/bootstrap.css'); ?>" rel="stylesheet">
+        <!-- Custom CSS for the 'Business Frontpage' Template -->
+        <link href="<?php echo $this->baseUrl('views/css/business-frontpage.css'); ?>" rel="stylesheet">
+        <!-- Custom CSS for layout -->
+        <link href="<?php echo $this->baseUrl('views/css/layout.css'); ?>" rel="stylesheet">
+        <!-- Custom datepicker -->
+        <link href="<?php echo $this->baseUrl('views/css/datepicker.css'); ?>" rel="stylesheet">
+        
+        <script src="<?php echo $this->baseUrl("views/js/jquery-1.10.2.js"); ?>"></script>        
+        <script src="<?php echo $this->baseUrl('views/js/highcharts/highcharts.js'); ?>"></script>
+        <script src="<?php echo $this->baseUrl('views/js/highcharts/modules/exporting.js'); ?>"></script>
+        <script src="<?php echo $this->baseUrl('views/js/bootstrap-datepicker.js'); ?>"></script>        
+        <script src="<?php echo $this->baseUrl('views/js/jquery.maskMoney.js'); ?>"></script>                
+        <script src="<?php echo $this->baseUrl('views/js/jquery.maskedinput.js'); ?>"></script>                        
+        <script src="<?php echo $this->baseUrl('views/js/bootstrap.js'); ?>"></script>     
+        <script src="<?php echo $this->baseUrl('views/js/application.js'); ?>"></script>     
+    </head>
+
+    <body id="body" class="background-color-snow">
+        <nav class="navbar navbar-fixed-top background-color-blue" role="navigation">            
+            <div class="background-color-snow">
+                <div class="container container-logo">
+                    <img class="img-responsive margin-10px-0px" src="<?php echo $this->baseUrl('views/img/logo_newfinances.png'); ?>" width="250"/>            
+                </div>
+            </div>
+            <?php echo $this->partial('partials/menus-cliente.phtml'); ?>
+        </nav>  
+        <div class="container" style="margin-top: 150px;">            
+            <div class="col-lg-12 col-sm-12">
+                <?php echo $this->layout()->content; ?>                    
+            </div>             
+        </div>
+        <footer class="background-color-orange">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a class="redes-sociais" href="">
+                            <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_face_social2.png'); ?>" />
+                        </a>
+                        <a class="redes-sociais" href="">
+                            <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_twitter_social2.png'); ?>" />
+                        </a>
+                        <a class="redes-sociais" href="">
+                            <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_google_plus_social2.png'); ?>" />
+                        </a>
+                    </div>                                                                          
+                </div>   
+            </div>            
+        </footer>
+        <!-- /container -->
+    </body>
+
+</html>
+
+

@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/AjaxController.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/models/Relatorios.php</file>
-            <file>file:/C:/wamp/www/newfinances2/public/views/js/cliente/index/index.js</file>
-            <file>file:/C:/wamp/www/newfinances2/application/helpers/actions/Date.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/controllers/AnotacoesController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/views/scripts/anotacoes/index.phtml</file>
         </group>
     </open-files>
 </project-private>

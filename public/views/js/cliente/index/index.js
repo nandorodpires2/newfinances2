@@ -159,7 +159,7 @@ function buscaGastosCategorias() {
                     chart: {
                         plotBackgroundColor: null,
                         plotBorderWidth: 0,//null,
-                        plotShadow: false
+                        plotShadow: false                        
                     },
                     title: {
                         text: 'Gráfico Categorias'
@@ -186,7 +186,7 @@ function buscaGastosCategorias() {
                     series: [{
                         type: 'pie',
                         data: json.data
-                    }]
+                    }]                
                 });
             } else {
                 $('#dados-categorias').html("<div class='text-warning'>Nenhum gráfico a ser exibido</div>");

@@ -173,7 +173,26 @@ class Model_Movimentacao extends Zend_Db_Table {
         
         return $this->fetchRow($select);
     }
-
+    
+    /**
+     * retornao o total previsto para o mes da categoria
+     */
+    public function getTotalRealizadoCategoriaMes($id_categoria, $id_usuario) {
+        $select = $this->select()
+                ->from(array('mov' => $this->_name), array(
+                    'total_categoria' => 'sum(mov.valor_movimentacao)'
+                ))
+                ->setIntegrityCheck(false)
+                ->where("mov.id_usuario = ?", $id_usuario)
+                ->where("mov.id_categoria = ?", $id_categoria)
+                ->where("mov.id_tipo_movimentacao in (2,3)")                
+                ->where("mov.realizado = ?", 1)
+                ->where("month(mov.data_movimentacao) = month(now())")
+                ->where("year(mov.data_movimentacao) = year(now())");
+        
+        return $this->fetchRow($select);
+    }
+    
     /**
      * get media movimentacao categoria
      */

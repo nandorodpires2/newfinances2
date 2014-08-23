@@ -1,0 +1,59 @@
+<div class="row">    
+    <div class="col-lg-12">    
+        <?php echo View_Helper_Messages::render($this->messages); ?>       
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Minhas Anotações
+                <div class="pull-right">
+                    <a href="<?php echo $this->url(array(
+                        'module' => 'admin',
+                        'controller' => 'anotacoes',
+                        'action' => 'nova-anotacao'
+                    ), null, true); ?>">
+                        <img src="<?php echo $this->baseUrl('views/img/icon_add.png'); ?>" width="25px" title="Cadastrar Anotação"/>
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <?php if ($this->anotacoes->count() > 0) : ?>
+                <form method="post" action="anotacoes/atualizar-status">                    
+                    <table class="table table-responsive table-striped">
+                        <tr>
+                            <th>Título</th>
+                            <th>Descrição</th>
+                            <th class="text-center">Data Cadastro</th>
+                            <th class="text-center">Prioridade</th>
+                            <th class="text-center">Status</th>
+                        </tr>
+                        <?php foreach ($this->anotacoes as $anotacao) : ?>
+                        <input type="hidden" name="id_anotacao[]" value="<?php echo $anotacao->id_anotacao; ?>" />
+                        <tr>
+                            <td><?php echo $anotacao->titulo_anotacao; ?></td>
+                            <td><?php echo $anotacao->descricao_anotacao; ?></td>
+                            <td class="text-center"><?php echo View_Helper_Date::getDataView($anotacao->data_cadastro); ?></td>
+                            <td class="text-center"><?php echo $anotacao->prioridade_anotacao; ?></td>
+                            <td class="text-center col-md-2">
+                                <select name="status_anotacao[]" class="form-control">
+                                    <option value="<?php echo $anotacao->status_anotacao; ?>" selected><?php echo $anotacao->status_anotacao; ?></option>
+                                    <option value="1 - Pendente">1 - Pendente</option>
+                                    <option value="2 - Em desenvolvimento">2 - Em desenvolvimento</option>
+                                    <option value="3 - Finalizado">3 - Finalizado</option>
+                                    <option value="4 - Cancelado">4 - Cancelado</option>                                    
+                                </select>                            
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                        <tr>
+                            <td colspan="5" class="text-right">
+                                <input type="submit" class="btn btn-sm btn-success" name="submit" value="Atualizar Status" />
+                            </td>
+                        </tr>                        
+                    </table>
+                </form>
+                <?php else : ?>
+                <div class="text-warning padding-10px-0">Nenhum registro.</div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
