@@ -161,6 +161,12 @@ ul.error {
     border-bottom: 1px solid #dcdcdc;
 }
 
+.panel-bordered {
+    border-left: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
+}
+
 .row-container-logo {
     position: absolute;
     left: 0px;
