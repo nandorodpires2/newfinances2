@@ -14,6 +14,9 @@
         <controllerFile controllerName="Sistema">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Chamados">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -53,6 +56,9 @@
               <actionMethod actionName="novoCartao"/>
               <actionMethod actionName="editarCartao"/>
               <actionMethod actionName="excluirCartao"/>
+            </controllerFile>
+            <controllerFile controllerName="Chamados">
+              <actionMethod actionName="index"/>
             </controllerFile>
           </controllersDirectory>
           <formsDirectory enabled="false"/>
@@ -102,6 +108,9 @@
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Cartoes">
                 <viewScriptFile forActionName="excluirCartao"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Chamados">
+                <viewScriptFile forActionName="index"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>
@@ -207,6 +216,9 @@
             <viewScriptFile forActionName="error"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Sistema">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Chamados">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

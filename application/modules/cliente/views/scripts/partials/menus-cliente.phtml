@@ -76,7 +76,11 @@
                 ), null, true); ?>">Novo Cartão</a></li>
             </ul>
         </li>
-        <li class="active"><a href="<?php echo $this->url(array()); ?>">Meus Chamados</a></li>
+        <li class="active"><a href="<?php echo $this->url(array(
+            'module' => 'cliente',
+            'controller' => 'chamados',
+            'action' => 'index'
+        ), null, true); ?>">Meus Chamados</a></li>
     </ul>               
     <ul class="nav navbar-nav navbar-right">        
         <li class="dropdown">

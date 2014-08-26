@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/controllers/AnotacoesController.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/views/scripts/anotacoes/index.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/CartoesController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/chamados/index.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/public/views/css/layout.css</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/ChamadosController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/models/Chamado.php</file>
         </group>
     </open-files>
 </project-private>

@@ -92,7 +92,7 @@ class Form_Cliente_Movimentacoes_Despesa extends Zend_Form {
         // conta
         $this->addElement("select", "id_conta", array(
             'label' => 'Conta: ',
-            'multioptions' => $formDefault->getContasUsuario(1),
+            'multioptions' => $formDefault->getContasUsuario(),
             'class' => 'form-control',
             'decorators' => array(
                 'ViewHelper',
@@ -106,7 +106,7 @@ class Form_Cliente_Movimentacoes_Despesa extends Zend_Form {
         // cartao credito
         $this->addElement("select", "id_cartao", array(
             'label' => 'Cartão: ',
-            'multioptions' => $formDefault->getCartoesUsuario(1),
+            'multioptions' => $formDefault->getCartoesUsuario(),
             'class' => 'form-control',
             'decorators' => array(
                 'ViewHelper',

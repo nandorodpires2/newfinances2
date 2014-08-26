@@ -40,7 +40,12 @@ class Site_UsuariosController extends Zend_Controller_Action {
                     
                     $this->_redirect("cliente/index/");
                 } else {         
-                    Zend_Debug::dump($result->getMessages());
+                    $this->view->messages = array(
+                        array(
+                            'class' => "bg-danger text-danger padding-10px margin-10px-0px",
+                            'message' => "Usuário e/ou senha iválidos!"
+                        )
+                    );
                 }                                
                 
             }

@@ -30,7 +30,7 @@ class View_Helper_Cartoes extends Zend_View_Helper_Abstract {
                 break;
         }
         
-        $return = "<img class='img img-thumbnail' src='{$img_path}' />";
+        $return = "<img class='img' src='{$img_path}' />";
         
         return $return;
         
