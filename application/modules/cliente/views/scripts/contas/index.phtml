@@ -18,8 +18,8 @@
                 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="bg-success"><a href="#ativo" role="tab" data-toggle="tab"><span class="text-success">Ativo</span></a></li>
-                    <li class="bg-danger"><a href="#inativo" role="tab" data-toggle="tab"><span class="text-danger">Inativo</span></a></li>                  
+                    <li class="bg-success"><a href="#ativo" role="tab" data-toggle="tab"><span class="text-success">Contas Ativas</span></a></li>
+                    <li class="bg-danger"><a href="#inativo" role="tab" data-toggle="tab"><span class="text-danger">Contas Inativas</span></a></li>                  
                 </ul>
                 
                 <!-- Tab panes -->
@@ -38,9 +38,9 @@
                             <tr>
                                 <td>
                                     <?php if ($conta->logo_banco) : ?>
-                                    <img class="img img-thumbnail" src="<?php echo $this->baseUrl('views/img/bancos/' . $conta->logo_banco); ?>" />
+                                    <img class="img" src="<?php echo $this->baseUrl('views/img/bancos/' . $conta->logo_banco); ?>" />
                                     <?php else : ?>
-                                    <img class="img img-thumbnail" src="<?php echo $this->baseUrl('views/img/bancos/icon_no.png'); ?>" />
+                                    <img class="img" src="<?php echo $this->baseUrl('views/img/bancos/icon_no.png'); ?>" />
                                     <?php endif; ?>
                                     <?php echo $conta->nome_banco ? $conta->nome_banco : 'Nenhum'; ?>
                                 </td>
@@ -86,9 +86,9 @@
                             <tr>
                                 <td>
                                     <?php if ($conta->logo_banco) : ?>
-                                    <img class="img img-thumbnail" src="<?php echo $this->baseUrl('views/img/bancos/' . $conta->logo_banco); ?>" />
+                                    <img class="img" src="<?php echo $this->baseUrl('views/img/bancos/' . $conta->logo_banco); ?>" />
                                     <?php else : ?>
-                                    <img class="img img-thumbnail" src="<?php echo $this->baseUrl('views/img/bancos/icon_no.png'); ?>" />
+                                    <img class="img" src="<?php echo $this->baseUrl('views/img/bancos/icon_no.png'); ?>" />
                                     <?php endif; ?>
                                     <?php echo $conta->nome_banco ? $conta->nome_banco : 'Nenhum'; ?>
                                 </td>
@@ -99,18 +99,10 @@
                                     <a href="<?php echo $this->url(array(
                                         'module' => 'cliente',
                                         'controller' => 'contas',
-                                        'action' => 'editar-conta',
+                                        'action' => 'reativar-conta',
                                         'id_conta' => $conta->id_conta
                                     )); ?>">
-                                        <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_edit.png'); ?>" width="20" title="Editar" />
-                                    </a>
-                                    <a href="<?php echo $this->url(array(
-                                        'module' => 'cliente',
-                                        'controller' => 'contas',
-                                        'action' => 'excluir-conta',
-                                        'id_conta' => $conta->id_conta
-                                    )); ?>">
-                                        <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_delete.png'); ?>" width="20" title="Excluir" />
+                                        <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_reativar.png'); ?>" width="20" title="Reativar Conta" />
                                     </a>
                                 </td>
                             </tr>

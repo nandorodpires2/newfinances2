@@ -16,14 +16,28 @@ class Model_Cartao extends Zend_Db_Table {
     
     protected $_primary = "id_cartao";
     
-    public function getCartoesUsuario($id_usuario) {
+    public function getCartoesUsuario($id_usuario, $status = null) {
         
         $select = $this->select()
                 ->from(array('ct' => $this->_name), array('*'))
-                ->where("ct.id_usuario = ?", $id_usuario)
-                ->where("ct.ativo_cartao = ?", 1);
+                ->where("ct.id_usuario = ?", $id_usuario);                
                 
+        if (null !== $status) {
+            $select->where("ct.ativo_cartao = ?", $status);
+        }
+        
         return $this->fetchAll($select);
+        
+    }
+    
+    public function getCartaoById($id_cartao, $id_usuario) {
+        
+        $select = $this->select()
+                ->from(array('ct' => $this->_name), array('*'))
+                ->where("ct.id_usuario = ?", $id_usuario)                
+                ->where("ct.id_cartao = ?", $id_cartao);                
+                
+        return $this->fetchRow($select);
         
     }
     

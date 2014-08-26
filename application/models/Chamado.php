@@ -35,6 +35,24 @@ class Model_Chamado extends Zend_Db_Table {
     }
 
     /**
+     * retorna os chamados do usuario
+     */
+    public function getChamadosUsuario($id_usuario, $status = null) {
+        $select = $this->select()
+                ->from(array('c' => $this->_name), array('*'))
+                ->setIntegrityCheck(false)
+                ->joinInner(array('tc' => 'tipo_chamado'), 'c.id_tipo_chamado = tc.id_tipo_chamado', array('*'))
+                ->where("c.id_usuario = ?", $id_usuario)
+                ->order("c.status asc");
+        
+        if (null !== $status) {
+            $select->where('c.status = ?', $status);
+        }
+        
+        return $this->fetchAll($select);
+    }
+
+    /**
      * busca dados dos chamado
      */
     public function getDadosChamado($id_chamado) {

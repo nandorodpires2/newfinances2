@@ -43,7 +43,7 @@ class Form_Site_Login extends Zend_Form {
         $this->addElement('password', 'senha_usuario', array(
             'label' => 'Senha: ',
             'required' => true,                        
-            'class' => 'input-sm form-control',
+            'class' => 'form-control',
             'decorators' => array(
                 'ViewHelper',
                 'Description',

@@ -135,86 +135,9 @@
             
             <hr>            
         </div>
-        <footer class="background-color-orange">
+        <footer class="background-color-orange">               
             <div class="container container-fluid">
-                <hr />
-                <div class="row">  
-                    <div class="col-lg-3">
-                        <p>
-                            <h5 class="text-blue margin-top-10px"><b>Mapa do Site</b></h5>
-                        </p>
-                        <ul class="footer">
-                            <li><a href="">Página principal</a></li>
-                            <li><a href="">Sobre o sistema</a></li>
-                            <li><a href="">Faça o seu cadastro</a></li>
-                            <li><a href="">Faça contato</a></li>
-                        </ul>  
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="row" id="form-newsletter">
-                            <p class="margin-top-10px text-blue"><b>NewsLetter:</b></p>                  
-                            <table class="table table-responsive">
-                                <tr>
-                                    <td><input class="input-sm form-control" type="text" name="nome" id="nome-news" placeholder="Digite seu nome" /></td>
-                                    <td><input class="input-sm form-control" type="text" name="email" id="email-news" placeholder="Digite seu e-mail" /></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="">
-                                        <button class="btn btn-sm btn-submit" name="bt-newsletter" id="btn-newsletter">Assinar</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                </tr>
-                            </table>                                                        
-                        </div>                        
-                        <div class="row" style="display: none; margin-bottom: 45px;" id="newsletter-result"></div>
-                        <div class="row padding-10px margin-top-10px" id="newsletter-loader" style="display: none">
-                            <img class="img-responsive center-block" src="<?php echo $this->baseUrl('views/img/loader.gif'); ?>" />
-                        </div>                        
-                        <div class="row" style="margin-top: -25px;">                            
-                            <p class="">
-                                <a href="">Termo de Uso</a> | 
-                                <a href="">Política de Privacidade</a>
-                            </p>
-                            <p class="">
-                                <a href="">contato@newfinances.com.br</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 margin-top-10px">
-                        <!--<img class="img-responsive img-rounded center-block" src="<?php echo $this->baseUrl('views/img/icon_pagseguro.png'); ?>" />-->
-                    </div>
-                    <div class="col-lg-3 margin-top-10px" style="margin-left: -15px">                                                
-                        <div class="row">
-                            <div id="fb-root"></div>                        
-                            <script>
-                                (function(d, s, id) {
-                                    var js, fjs = d.getElementsByTagName(s)[0];
-                                    if (d.getElementById(id))
-                                        return;
-                                    js = d.createElement(s);
-                                    js.id = id;
-                                    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
-                                    fjs.parentNode.insertBefore(js, fjs);
-                                }(document, 'script', 'facebook-jssdk'));
-                            </script>
-                            <div class="fb-like-box background-color-white navbar-right" style="width: 100%; margin: 10px 0;"
-                                 data-href="http://www.facebook.com/sisnewfinances" 
-                                 data-colorscheme="light"                                                               
-                                 data-header="false" 
-                                 fb-xfbml-state="rendered"
-                                 data-show-faces="true" 
-                                 data-header="true" 
-                                 data-stream="false" 
-                                 data-show-border="false">                
-                            </div>
-                        </div>
-                    </div>                    
-                </div>                   
-            </div>   
-            <div class="container container-fluid">
-                <div class="col-lg-12 pull-right">
+                <div class="col-lg-4 text-left">
                     <a class="redes-sociais" href="">
                         <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_face_social2.png'); ?>" />
                     </a>
@@ -223,8 +146,14 @@
                     </a>
                     <a class="redes-sociais" href="">
                         <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_google_plus_social2.png'); ?>" />
-                    </a>                                          
-                    <hr />
+                    </a>                                     
+                </div>              
+                <div class="col-lg-4 padding-top-10px text-center">                    
+                    <a href="">Termo de Uso</a> | 
+                    <a href="">Política de Privacidade</a>                    
+                </div>
+                <div class="col-lg-4 padding-top-10px text-right">
+                    <a href="">contato@newfinances.com.br</a>
                 </div>                
                 <div class="col-lg-12 small text-white text-center padding-10px">Todos os direitos reservados</div>
             </div>

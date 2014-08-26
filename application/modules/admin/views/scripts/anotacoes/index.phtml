@@ -17,8 +17,9 @@
             <div class="panel-body">
                 <?php if ($this->anotacoes->count() > 0) : ?>
                 <form method="post" action="anotacoes/atualizar-status">                    
-                    <table class="table table-responsive table-striped">
+                    <table class="table table-responsive">
                         <tr>
+                            <th>Módulo</th>
                             <th>Título</th>
                             <th>Descrição</th>
                             <th class="text-center">Data Cadastro</th>
@@ -27,7 +28,31 @@
                         </tr>
                         <?php foreach ($this->anotacoes as $anotacao) : ?>
                         <input type="hidden" name="id_anotacao[]" value="<?php echo $anotacao->id_anotacao; ?>" />
-                        <tr>
+                        
+                        <?php 
+                        
+                            $bg_class = "";
+                            switch ($anotacao->status_anotacao) {
+                                case '1 - Pendente':
+                                    $bg_class = "bg-warning";
+                                    break;
+                                case '2 - Em desenvolvimento':
+                                    $bg_class = "bg-info";
+                                    break;
+                                case '3 - Finalizado':
+                                    $bg_class = "bg-success";
+                                    break;
+                                case '4 - Cancelado':
+                                    $bg_class = "bg-danger";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            
+                        ?>
+                        
+                        <tr class="<?php echo $bg_class; ?>">
+                            <td><?php echo $anotacao->modulo_anotacao; ?></td>
                             <td><?php echo $anotacao->titulo_anotacao; ?></td>
                             <td><?php echo $anotacao->descricao_anotacao; ?></td>
                             <td class="text-center"><?php echo View_Helper_Date::getDataView($anotacao->data_cadastro); ?></td>
@@ -44,7 +69,7 @@
                         </tr>
                         <?php endforeach; ?>
                         <tr>
-                            <td colspan="5" class="text-right">
+                            <td colspan="6" class="text-right">
                                 <input type="submit" class="btn btn-sm btn-success" name="submit" value="Atualizar Status" />
                             </td>
                         </tr>                        

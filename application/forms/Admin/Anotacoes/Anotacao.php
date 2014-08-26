@@ -18,6 +18,13 @@ class Form_Admin_Anotacoes_Anotacao extends Zend_Form {
         $this->setAttrib('id', 'formAnotacao')
                 ->setMethod('post');
         
+        // modulo_anotacao
+        $this->addElement('text', 'modulo_anotacao', array(
+            'label' => 'Módulo:',
+            'class' => 'form-control',
+            'required' => true
+        ));
+        
         // titulo_anotacao
         $this->addElement('text', 'titulo_anotacao', array(
             'label' => 'Título:',

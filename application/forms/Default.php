@@ -77,7 +77,7 @@ class Form_Default extends Zend_Form {
     public function getContasUsuario() {
         
         $modelConta = new Model_Conta();
-        $contas = $modelConta->getContasUsuario($this->id_usuario);
+        $contas = $modelConta->getContasUsuario($this->id_usuario, 1);
         
         if ($contas->count() == 0 ) {            
             return $multiOptions = array('' => "Nenhuma conta cadastrada");

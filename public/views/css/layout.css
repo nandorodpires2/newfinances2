@@ -13,6 +13,14 @@ and open the template in the editor.
     background: #fff;
 }
 
+.background-color-black {
+    background: #000;
+}
+
+.background-color-gray {
+    background: #363636;
+}
+
 .background-color-snow {
     background: #f7f7f7;
 }
@@ -136,7 +144,28 @@ ul.error {
     color: #fff;
     background: #4cae4c;
 }
+/* borders */
+.border-top {
+    border-top: 1px solid;
+}
 
+.border-left {
+    border-left: 1px solid #dcdcdc;
+}
+
+.border-right {
+    border-right: 1px solid #dcdcdc;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.panel-bordered {
+    border-left: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
+}
 
 .row-container-logo {
     position: absolute;

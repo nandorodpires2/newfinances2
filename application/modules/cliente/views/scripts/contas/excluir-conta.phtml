@@ -7,7 +7,7 @@
                 <h4>Dados da Conta</h4>                
                 <div class="row">
                     <div class="col-md-1">Banco:</div>
-                    <div class="col-md-8"><?php echo $this->conta->nome_banco; ?></div>
+                    <div class="col-md-8"><?php echo $this->conta->nome_banco ? $this->conta->nome_banco : 'Nenhum'; ?></div>
                 </div>
                 <div class="row">
                     <div class="col-md-1">Descrição:</div>
@@ -17,10 +17,13 @@
                     <div class="col-md-1">Tipo:</div>
                     <div class="col-md-8"><?php echo $this->conta->descricao_tipo_conta; ?></div>
                 </div>
+                <!--
                 <div class="row">
                     <div class="col-md-1">Saldo Atual:</div>
                     <div class="col-md-8"><?php ?></div>
                 </div>
+                -->
+                <hr />
                 <form method="post">
                     <div class="row">
                         <div class="col-md-1"></div>
