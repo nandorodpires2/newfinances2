@@ -2,16 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/CartoesController.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/chamados/index.phtml</file>
-            <file>file:/C:/wamp/www/newfinances2/public/views/css/layout.css</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/contas/index.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/chamados/conversas.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/helpers/views/Date.php</file>
             <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/ChamadosController.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/models/Chamado.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/index/index.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/helpers/actions/Date.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/forms/Cliente/Chamados/Responder.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/forms/Cliente/Chamados/Chamado.php</file>
         </group>
->>>>>>> 36c1b689c4d435a065ba6821d08b1d240d4a3cde
     </open-files>
 </project-private>

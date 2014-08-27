@@ -30,7 +30,6 @@ class View_Helper_Date extends Zend_View_Helper_Abstract {
     }
 
     /**
-<<<<<<< .mine
      * 
      * @param type $date
      * @return type
@@ -42,7 +41,22 @@ class View_Helper_Date extends Zend_View_Helper_Abstract {
     }
     
     /**
-=======
+     * 
+     * @param type $date
+     * @return type
+     */
+    public static function getDateTimeCompleteView($date) {
+        $zendDate = new Zend_Date($date);
+        
+        return $zendDate->get(Zend_Date::DATETIME_FULL);
+    }
+    
+    public static function getTimeView($date) {
+        $zendDate = new Zend_Date($date);        
+        return $zendDate->get(Zend_Date::TIME_SHORT);
+    }
+    
+    /**
      * retorna o nome do mes
      * @param type $mes
      */
@@ -54,7 +68,6 @@ class View_Helper_Date extends Zend_View_Helper_Abstract {
     }
 
     /**
->>>>>>> .theirs
      * verifica se uma movimentacao nao paga esta atrasada
      */
     public static function isPending($movimentacao) {

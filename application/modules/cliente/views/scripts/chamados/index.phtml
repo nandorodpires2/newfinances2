@@ -40,17 +40,20 @@
                                     <th>Abertura</th>
                                     <th>Tipo</th>
                                     <th>Assunto</th>
-                                    <th>Fechamento</th>
                                     <th>Ações</th>
                                 </tr>
                                 <?php foreach ($this->chamados_abertos as $chamado) : ?>
                                     <tr>
                                         <td><?php echo View_Helper_Date::getDateTimeView($chamado->data_abertura); ?></td>
                                         <td><?php echo $chamado->descricao; ?></td>
-                                        <td><?php echo $chamado->assunto; ?></td>                                        
-                                        <td>dd/mm/YYYY H:i:s</td>
+                                        <td><?php echo $chamado->assunto; ?></td>                                                                                
                                         <td>
-                                            <a class="btn btn-sm btn-info" href="">Ver conversas</a>
+                                            <a class="btn btn-sm btn-info" href="<?php echo $this->url(array(
+                                                'module' => 'cliente',
+                                                'controller' => 'chamados',
+                                                'action' => 'conversas',
+                                                'id_chamado' => $chamado->id_chamado
+                                            ), null, true); ?>">Ver conversas</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
