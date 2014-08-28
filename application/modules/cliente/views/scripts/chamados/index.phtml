@@ -37,6 +37,7 @@
                         
                             <table class="table table-responsive table-striped margin-top-10px">
                                 <tr>
+                                    <th>#</th>
                                     <th>Abertura</th>
                                     <th>Tipo</th>
                                     <th>Assunto</th>
@@ -44,6 +45,7 @@
                                 </tr>
                                 <?php foreach ($this->chamados_abertos as $chamado) : ?>
                                     <tr>
+                                        <td><?php echo $chamado->id_chamado; ?></td>
                                         <td><?php echo View_Helper_Date::getDateTimeView($chamado->data_abertura); ?></td>
                                         <td><?php echo $chamado->descricao; ?></td>
                                         <td><?php echo $chamado->assunto; ?></td>                                                                                
@@ -68,6 +70,7 @@
                         <?php if ($this->chamados_finalizados->count() > 0) : ?>                        
                             <table class="table table-responsive table-striped margin-top-10px">
                                 <tr>
+                                    <th>#</th>
                                     <th>Abertura</th>
                                     <th>Tipo</th>
                                     <th>Assunto</th>
@@ -75,6 +78,7 @@
                                 </tr>
                                 <?php foreach ($this->chamados_finalizados as $chamado) : ?>
                                     <tr>
+                                        <td><?php echo $chamado->id_chamado; ?></td>
                                         <td><?php echo $chamado->data_abertura; ?></td>
                                         <td><?php echo $chamado->descricao; ?></td>
                                         <td><?php echo $chamado->assunto; ?></td>

@@ -3472,7 +3472,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
-    background-color: #4cae4c;
+    background-color: none;
     text-decoration: none;  
 }
 .nav > li.disabled > a {
