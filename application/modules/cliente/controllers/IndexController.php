@@ -25,6 +25,16 @@ class Cliente_IndexController extends Zend_Controller_Action {
         $modelMovimentacao = new Model_Movimentacao();
         
         /**
+         * faturas dos cartoes de credito
+         */        
+        
+        // busca os cartoes do usuario
+        $modelCartao = new Model_Cartao();
+        $cartoes = $modelCartao->getCartoesUsuario($id_usuario, 1);  
+        $this->view->cartoes = $cartoes;
+        //Zend_Debug::dump($cartoes);
+        
+        /**
          * busca as proximas receitas
          */
         $receitas = $modelMovimentacao->getProximasReceitas($id_usuario);
