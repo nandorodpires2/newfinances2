@@ -104,6 +104,9 @@ class Cliente_ChamadosController extends Zend_Controller_Action {
             if ($formResponder->isValid($dadosResposta)) {
                 $dadosResposta = $formResponder->getValues();
                 
+                $opt_fechar = $dadosResposta['opt_fechar'];
+                unset($dadosResposta['opt_fechar']);
+                
                 try {
                     $modelChamadoResposta->insert($dadosResposta);
                     
@@ -112,10 +115,14 @@ class Cliente_ChamadosController extends Zend_Controller_Action {
                         'message' => 'Resposta cadastrada com sucesso!'
                     ));
                     
+                    if ($opt_fechar) {
+                        $this->finalizarAction();
+                    }
+                    
                 } catch (Exception $ex) {
                     $this->_helper->flashMessenger->addMessage(array(
                         'class' => 'bg-danger text-danger padding-10px margin-10px-0px',
-                        'message' => 'Houve um erro ao cadastrar a resposta!'
+                        'message' => 'Houve um erro ao cadastrar a resposta!' . $ex->getMessage()
                     ));
                 }
                 
@@ -144,6 +151,7 @@ class Cliente_ChamadosController extends Zend_Controller_Action {
             
             $dadosUpdate['status'] = "Fechado";
             $dadosUpdate['data_fechamento'] = Controller_Helper_Date::getDateTimeNowDb();
+            $dadosUpdate['id_usuario_fechamento'] = $id_usuario;
             
             $whereUpdate = "id_chamado = " . $id_chamado;
             
