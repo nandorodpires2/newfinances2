@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-lg-12">
+        <?php echo View_Helper_Messages::render($this->messages); ?>
+        <div class="panel panel-info">
+            <div class="panel-heading">Meus Chamados</div>
+            <div class="panel-body">
+                <?php if ($this->chamados->count() > 0) : ?>                        
+                    <table class="table table-responsive table-striped margin-top-10px">
+                        <tr>
+                            <th>Usuário</th>
+                            <th class="text-center">Abertura</th>
+                            <th>Tipo</th>
+                            <th>Assunto</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                        <?php foreach ($this->chamados as $chamado) : ?>
+                            <tr>
+                                <td><?php echo $chamado->nome_completo; ?></td>
+                                <td class="text-center"><?php echo View_Helper_Date::getDateTimeView($chamado->data_abertura); ?></td>
+                                <td><?php echo $chamado->descricao; ?></td>
+                                <td><?php echo $chamado->assunto; ?></td>                                  
+                                <?php if ($chamado->status == 'Aberto') : ?>
+                                <td class="text-danger bold text-center"><?php echo $chamado->status; ?></td>  
+                                <?php else : ?>
+                                <td class="text-success bold text-center"><?php echo $chamado->status; ?></td>  
+                                <?php endif; ?>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-info" href="<?php echo $this->url(array(
+                                        'module' => 'admin',
+                                        'controller' => 'chamados',
+                                        'action' => 'conversas',
+                                        'id_chamado' => $chamado->id_chamado
+                                    ), null, true); ?>">Ver conversas</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>                        
+                <?php else : ?>
+                    <div class="text-warning padding-10px-0">Nenhum chamado</div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

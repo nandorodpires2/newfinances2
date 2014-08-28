@@ -29,7 +29,8 @@ class Model_Chamado extends Zend_Db_Table {
                     'u.email_usuario',
                     'u.cpf_usuario'
                 ))
-                ->order("c.status asc");
+                ->order("c.status asc")
+                ->order("c.data_abertura asc");
         
         return $this->fetchAll($select);
     }
@@ -55,7 +56,7 @@ class Model_Chamado extends Zend_Db_Table {
     /**
      * busca dados dos chamado
      */
-    public function getDadosChamado($id_chamado, $id_usuario) {
+    public function getDadosChamado($id_chamado, $id_usuario = null) {
         
         $select = $this->select()
                 ->from(array('c' => $this->_name), array('*'))
@@ -66,8 +67,10 @@ class Model_Chamado extends Zend_Db_Table {
                     'u.email_usuario',
                     'u.cpf_usuario'
                 ))
-                ->where("c.id_chamado = ?", $id_chamado)
-                ->where("c.id_usuario = ?", $id_usuario);
+                ->where("c.id_chamado = ?", $id_chamado);
+        if ($id_usuario) {
+            $select->where("c.id_usuario = ?", $id_usuario);
+        }                
         
         return $this->fetchRow($select);
         

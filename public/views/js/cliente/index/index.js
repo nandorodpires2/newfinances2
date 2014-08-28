@@ -85,20 +85,7 @@ function graficoReceitaDespesas() {
                     text: 'Anual'
                 },
                 xAxis: {
-                    categories: [
-                        'Jan',
-                        'Fev',
-                        'Mar',
-                        'Abr',
-                        'Mai',
-                        'Jun',
-                        'Jul',
-                        'Ago',
-                        'Set',
-                        'Out',
-                        'Nov',
-                        'Dez'
-                    ]
+                    categories: json.categories.data
                 },
                 yAxis: {
                     min: 0,

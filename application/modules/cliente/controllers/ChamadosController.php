@@ -144,6 +144,7 @@ class Cliente_ChamadosController extends Zend_Controller_Action {
             
             $dadosUpdate['status'] = "Fechado";
             $dadosUpdate['data_fechamento'] = Controller_Helper_Date::getDateTimeNowDb();
+            $dadosUpdate['id_usuario_fechamento'] = $id_usuario;
             
             $whereUpdate = "id_chamado = " . $id_chamado;
             

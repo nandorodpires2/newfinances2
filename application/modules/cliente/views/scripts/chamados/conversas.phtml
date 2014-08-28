@@ -19,7 +19,7 @@
             </div>
             <?php endif; ?>
         </div>
-        <ul class="timeline">
+        <ul class="timeline" style="margin: 0">
             <li> 
                 <div class="timeline-badge"><i class="glyphicon"></i></div> 
                 <div class="timeline-panel">
@@ -40,8 +40,9 @@
         <?php if ($this->respostas->count() > 0) : ?>
             <?php foreach ($this->respostas as $resposta) : ?>
             <?php $inverted = $resposta->id_usuario == $this->chamado->id_usuario ? '' : 'timeline-inverted'; ?>
-            <ul class="timeline">
+            <ul class="timeline" style="margin: 0">
                 <li class="<?php echo $inverted; ?>"> 
+                    <div class="timeline-badge"><i class="glyphicon"></i></div> 
                     <!--<div class="timeline-badge"><i class="glyphicon"></i></div>-->
                     <div class="timeline-panel">
                         <div class="timeline-heading">

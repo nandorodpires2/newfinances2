@@ -44,6 +44,19 @@ class Form_Cliente_Chamados_Responder extends Zend_Form {
             )
         ));
         
+        // option parcelar
+        $this->addElement("checkbox", "opt_fechar", array(
+            'label' => 'Finalizar este chamado?',
+            'decorators' => array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                'Label',
+                array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),                
+                array('HtmlTag', array('tag' => 'div'))                
+            )
+        ));   
+        
         $this->addElement('submit', 'submit', array(
             'label' => 'Responder',
             'class' => 'btn btn-submit navbar-right'
