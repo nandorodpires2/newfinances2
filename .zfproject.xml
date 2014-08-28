@@ -60,6 +60,9 @@
             <controllerFile controllerName="Chamados">
               <actionMethod actionName="index"/>
             </controllerFile>
+            <controllerFile controllerName="Pesquisas">
+              <actionMethod actionName="index"/>
+            </controllerFile>
           </controllersDirectory>
           <formsDirectory enabled="false"/>
           <layoutsDirectory enabled="false"/>
@@ -110,6 +113,9 @@
                 <viewScriptFile forActionName="excluirCartao"/>
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Chamados">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Pesquisas">
                 <viewScriptFile forActionName="index"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
