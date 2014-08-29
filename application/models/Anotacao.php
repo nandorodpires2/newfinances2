@@ -17,4 +17,13 @@ class Model_Anotacao extends Zend_Db_Table {
     
     protected $_primary = "id_anotacao";
         
+    public function getAnotacoes() {
+        $select = $this->select()
+                ->from(array('a' => $this->_name), array('*'))
+                ->order("a.status_anotacao asc");
+                
+        return $this->fetchAll($select);
+       
+    }
+    
 }
