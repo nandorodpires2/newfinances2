@@ -167,7 +167,7 @@ class Cliente_ChamadosController extends Zend_Controller_Action {
                 
                 $this->_helper->flashMessenger->addMessage(array(
                     'class' => 'bg-danger text-danger padding-10px margin-10px-0px',
-                    'message' => 'Houve um erro ao finalizar o chamado!'
+                    'message' => 'Houve um erro ao finalizar o chamado!' . $ex->getMessage()
                 ));
                 
             }

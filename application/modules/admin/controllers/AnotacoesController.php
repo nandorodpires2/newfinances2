@@ -20,11 +20,8 @@ class Admin_AnotacoesController extends Zend_Controller_Action {
     
     public function indexAction() {
         
-        $modelAnotacao = new Model_Anotacao();
-        
-        $order = "status_anotacao asc";
-        
-        $anotacoes = $modelAnotacao->fetchAll(null, $order);
+        $modelAnotacao = new Model_Anotacao();                
+        $anotacoes = $modelAnotacao->getAnotacoes();
         $this->view->anotacoes = $anotacoes;
         
     }
