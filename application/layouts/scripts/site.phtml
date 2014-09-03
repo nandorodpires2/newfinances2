@@ -51,18 +51,31 @@
                                 'module' => 'site',
                                 'controller' => 'sistema',
                                 'action' => 'index'
-                        ), null, true); ?>">O Sistema</a></li>
+                        ), null, true); ?>">O Sistema</a></li>  
                         <li><a href="<?php echo $this->url(array(
                                 'module' => 'site',
-                                'controller' => 'cadastro-usuario',
+                                'controller' => 'planos',
                                 'action' => 'index'
-                        ), null, true); ?>">Cadastre-se</a></li>                        
+                        ), null, true); ?>">Planos</a></li>  
                         <li><a href="<?php echo $this->url(array(
                                 'module' => 'site',
                                 'controller' => 'contato',
                                 'action' => 'index'
                         ), null, true); ?>">Contato</a></li>                        
                     </ul>
+                    <div class="navbar-form navbar-right">
+                        <a class="btn btn-sm btn-success" href="<?php echo $this->url(array(
+                                'module' => 'site',
+                                'controller' => 'cadastro-usuario',
+                                'action' => 'index'
+                        ), null, true); ?>">Cadastre-se</a>
+                        <a class="btn btn-sm btn-info" href="<?php echo $this->url(array(
+                                'module' => 'site',
+                                'controller' => 'usuarios',
+                                'action' => 'login'
+                        ), null, true); ?>">Acesse o sistema</a>
+                    </div>
+                    <!--
                     <form class="navbar-form navbar-right" method="post" action="<?php echo $this->baseUrl('usuarios/login'); ?>">
                         <input class="input-sm form-control" type="text" name="email_usuario" placeholder="e-mail" />                            
                         <input class="input-sm form-control" type="password" name="senha_usuario" placeholder="senha" />
@@ -73,6 +86,7 @@
                                 'action' => 'recuperar-senha'
                         )); ?>">Esqueci a senha</a>
                     </form>                    
+                    -->
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>              
@@ -128,34 +142,25 @@
         </div>
         <div class="container container-fluid">
             <div class="row">
-                <div class="col-lg-12 col-sm-12">
+                <div class="col-lg-12">
                     <?php echo $this->layout()->content; ?>                    
                 </div>                
-            </div>
-            
-            <hr>            
+            </div> 
         </div>
-        <footer class="background-color-orange">               
-            <div class="container container-fluid">
-                <div class="col-lg-4 text-left">
-                    <a class="redes-sociais" href="">
-                        <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_face_social2.png'); ?>" />
-                    </a>
-                    <a class="redes-sociais" href="">
-                        <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_twitter_social2.png'); ?>" />
-                    </a>
-                    <a class="redes-sociais" href="">
-                        <img class="img-rounded margin-10px" src="<?php echo $this->baseUrl('views/img/icon_google_plus_social2.png'); ?>" />
-                    </a>                                     
-                </div>              
-                <div class="col-lg-4 padding-top-10px text-center">                    
-                    <a href="">Termo de Uso</a> | 
-                    <a href="">Política de Privacidade</a>                    
+        <footer>               
+            <div class="col-lg-12 background-color-orange">
+                <div class="container container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">Footer 1</div>                    
+                    </div>                
+                </div>        
+            </div>
+            <div class="col-lg-12 background-color-black">
+                <div class="container container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">Footer 1</div>                    
+                    </div>                
                 </div>
-                <div class="col-lg-4 padding-top-10px text-right">
-                    <a href="">contato@newfinances.com.br</a>
-                </div>                
-                <div class="col-lg-12 small text-white text-center padding-10px">Todos os direitos reservados</div>
             </div>
         </footer>
         <!-- /container -->
