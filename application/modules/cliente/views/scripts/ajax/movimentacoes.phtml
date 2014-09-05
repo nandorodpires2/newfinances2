@@ -20,6 +20,9 @@
             <td class="col-lg-1"><?php echo $movimentacao->tipo_movimentacao; ?></td>
             <td class="col-lg-4">
                 <?php echo $movimentacao->descricao_movimentacao; ?>
+                <?php if ($movimentacao->id_movimentacao_pai) : ?>
+                <a href=""><img src="<?php echo $this->baseUrl('views/img/icon_repeat.png'); ?>" width="15"/></a>
+                <?php endif; ?>
                 <?php if ($movimentacao->id_tipo_movimentacao == 3) : ?>
                     <p class="small text-muted"><?php echo $movimentacao->descricao_cartao; ?></p>
                 <?php elseif ($movimentacao->id_tipo_movimentacao == 4) : ?>

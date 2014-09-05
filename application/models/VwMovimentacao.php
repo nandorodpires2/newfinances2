@@ -49,6 +49,8 @@ class Model_VwMovimentacao extends Zend_Db_Table {
                 ->from(array('mov' => $this->_name), array(
                     '*'
                 ))
+                ->setIntegrityCheck(false)
+                ->joinInner(array('m' => 'movimentacao'), 'mov.id_movimentacao = m.id_movimentacao', array('m.id_movimentacao_pai'))
                 ->where("mov.data_movimentacao = ?", $data)                
                 ->where("mov.id_usuario = ?", $id_usuario)
                 ->order("mov.data_inclusao asc");
