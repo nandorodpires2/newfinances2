@@ -77,18 +77,37 @@
     
         <div class="col-lg-8"></div>
         <div class="col-lg-4">
+            <p class="text-info">Resumo do dia:</p>
             <table class="table">
                 <tr class="text-green">
-                    <th colspan="5" class="text-right small">TOTAL RECEITAS:</th>
-                    <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->totalReceita); ?></th>            
+                    <th colspan="5" class="text-right small">
+                        TOTAL RECEITAS:
+                        <p class="text-muted small">Previsto:</p>
+                    </th>
+                    <th colspan="2" class="text-right">
+                        <?php echo View_Helper_Currency::getCurrency($this->totalReceita); ?>
+                        <p class="text-muted small"><?php echo View_Helper_Currency::getCurrency($this->totalReceitaPrevisto); ?></p>
+                    </th>            
                 </tr>
                 <tr class="text-red">
-                    <th colspan="5" class="text-right small">TOTAL DESPESAS:</th>
-                    <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->totalDespesa); ?></th>            
+                    <th colspan="5" class="text-right small">
+                        TOTAL DESPESAS:
+                        <p class="text-muted small">Previsto:</p>
+                    </th>
+                    <th colspan="2" class="text-right">
+                        <?php echo View_Helper_Currency::getCurrency($this->totalDespesa); ?>
+                        <p class="text-muted small"><?php echo View_Helper_Currency::getCurrency($this->totalDespesaPrevisto); ?></p>
+                    </th>            
                 </tr>
                 <tr class="<?php echo $this->saldo >= 0 ? 'text-green' : 'text-red'; ?>">
-                    <th colspan="5" class="text-right small">SALDO DIA:</th>
-                    <th colspan="2" class="text-center"><?php echo View_Helper_Currency::getCurrency($this->saldo); ?></th>            
+                    <th colspan="5" class="text-right small">
+                        SALDO DIA:
+                        <p class="text-muted small">Previsto:</p>
+                    </th>
+                    <th colspan="2" class="text-right">
+                        <?php echo View_Helper_Currency::getCurrency($this->saldo); ?>
+                        <p class="text-muted small"><?php echo View_Helper_Currency::getCurrency($this->saldoPrevisto); ?></p>
+                    </th>            
                 </tr>
             </table>
         </div>

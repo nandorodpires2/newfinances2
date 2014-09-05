@@ -38,13 +38,19 @@
                         <td><?php echo View_Helper_Meta::getStatusMeta($porcentagem); ?>%</td>
                         <td><?php echo View_Helper_Meta::getStatusMeta(View_Helper_Meta::getProjecaoMeta($porcentagem)); ?>%</td>
                         <td class="col-lg-1 text-center">
-                            <a href="">
+                            <a href="<?php echo $this->url(array(
+                                'module' => 'cliente',
+                                'controller' => 'orcamentos',
+                                'action' => 'editar-orcamento',
+                                'id_orcamento' => $meta->id_meta
+                            )); ?>">
                                 <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_edit.png'); ?>" width="20" title="Editar" />
                             </a>
                             <a href="<?php echo $this->url(array(
                                 'module' => 'cliente',
                                 'controller' => 'orcamentos',
                                 'action' => 'excluir-orcamento',
+                                'id_orcamento' => $meta->id_meta
                             )); ?>">
                                 <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_delete.png'); ?>" width="20" title="Excluir" />
                             </a>

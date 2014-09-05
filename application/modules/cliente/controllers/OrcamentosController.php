@@ -98,5 +98,102 @@ class Cliente_OrcamentosController extends Zend_Controller_Action {
         }   
     }
     
+    public function editarOrcamentoAction() {
+        
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $id_orcamento = $this->_getParam('id_orcamento');
+        
+        $modelOrcamento = new Model_Meta();
+        $meta = $modelOrcamento->getMetaByIdMeta($id_orcamento, $id_usuario);
+        //Zend_Debug::dump($meta); die();
+        if ($meta) {
+            
+            $this->view->meta = $meta;
+            
+            $formClienteMetasMeta = new Form_Cliente_Metas_Meta();
+            $formClienteMetasMeta->populate($meta->toArray());
+            $formClienteMetasMeta->submit->setLabel("Editar");
+            $formClienteMetasMeta->removeElement('id_categoria');
+            $formClienteMetasMeta->removeElement('repetir');
+            $this->view->formMeta = $formClienteMetasMeta;
+            
+            if ($this->_request->isPost()) {
+                $dadosUpdate = $this->_request->getPost();
+                if ($formClienteMetasMeta->isValid($dadosUpdate)) {
+                    $dadosUpdate = $formClienteMetasMeta->getValues();
+                    
+                    $dadosUpdate['valor_meta'] = View_Helper_Currency::setCurrencyDb($dadosUpdate['valor_meta'], "positivo");
+                    
+                    $where = "id_meta = " . $id_orcamento;
+                    try {
+                        $modelOrcamento->update($dadosUpdate, $where);
+                        
+                        $this->_helper->flashMessenger->addMessage(array(
+                            'class' => 'alert alert-success',
+                            'message' => "Orçamento alterado com sucesso!"
+                        ));
+                        
+                    } catch (Exception $ex) {
+                        $this->_helper->flashMessenger->addMessage(array(
+                            'class' => 'alert alert-danger',
+                            'message' => "Houve um erro ao editar o orçamento!"
+                        ));
+                    }
+                    $this->_redirect("cliente/orcamentos");
+                }
+            }
+            
+            
+        } else {                        
+            $this->_helper->flashMessenger->addMessage(array(
+                'class' => 'alert alert-danger',
+                'message' => "Nenhum orçamento encontrado!"
+            ));
+            $this->_redirect("cliente/orcamentos");
+        }
+        
+    }
+    
+    public function excluirOrcamentoAction() {
+        
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $id_orcamento = $this->_getParam('id_orcamento');
+        
+        $modelOrcamento = new Model_Meta();
+        $meta = $modelOrcamento->getMetaByIdMeta($id_orcamento, $id_usuario);
+        
+        if ($meta) {
+            
+            $where = "id_meta = " . $id_orcamento;
+            
+            try {
+                $modelOrcamento->delete($where);
+                $this->_helper->flashMessenger->addMessage(array(
+                    'class' => 'alert alert-success',
+                    'message' => "Orçamento excluído com sucesso!"
+                ));
+                $this->_redirect("cliente/orcamentos");
+            } catch (Exception $ex) {
+                $this->_helper->flashMessenger->addMessage(array(
+                    'class' => 'alert alert-danger',
+                    'message' => "Houve um erro ao excluir o orçamento!"
+                ));
+                $this->_redirect("cliente/orcamentos");
+            }
+            
+        } else {                        
+            $this->_helper->flashMessenger->addMessage(array(
+                'class' => 'alert alert-danger',
+                'message' => "Nenhum orçamento encontrado!"
+            ));
+            $this->_redirect("cliente/orcamentos");
+        }
+        
+    }
+    
 }
 

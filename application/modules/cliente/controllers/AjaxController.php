@@ -39,6 +39,8 @@ class Cliente_AjaxController extends Zend_Controller_Action {
          */
         $totalReceita = 0;
         $totalDespesa = 0;
+        $totalReceitaPrevisto = 0;
+        $totalDespesaPrevisto = 0;
         foreach ($movimentacoes as $movimentacao) {
             if ($movimentacao->realizado) {
                 if ($movimentacao->id_tipo_movimentacao == 1) {
@@ -46,11 +48,19 @@ class Cliente_AjaxController extends Zend_Controller_Action {
                 } elseif ($movimentacao->id_tipo_movimentacao == 2) {
                     $totalDespesa += $movimentacao->valor_movimentacao;
                 }
+            } 
+            if ($movimentacao->id_tipo_movimentacao == 1) {
+                $totalReceitaPrevisto += $movimentacao->valor_movimentacao;
+            } elseif ($movimentacao->id_tipo_movimentacao == 2) {
+                $totalDespesaPrevisto += $movimentacao->valor_movimentacao;
             }
         }        
         $this->view->totalReceita = $totalReceita;
         $this->view->totalDespesa = $totalDespesa;
+        $this->view->totalReceitaPrevisto = $totalReceitaPrevisto;
+        $this->view->totalDespesaPrevisto = $totalDespesaPrevisto;
         $this->view->saldo = $totalReceita + $totalDespesa;
+        $this->view->saldoPrevisto = $totalReceitaPrevisto + $totalDespesaPrevisto;
         
     }
     

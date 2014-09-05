@@ -39,6 +39,27 @@ class Model_Meta extends Zend_Db_Table {
         
     }    
     
+    public function getMetaByIdMeta($id_meta, $id_usuario) {
+        
+        $select = $this->select()
+                ->from(array('met' => $this->_name), array(                    
+                    'met.id_meta',
+                    'met.valor_meta',
+                    'met.id_categoria',
+                    'met.mes_meta',
+                    'met.ano_meta'
+                ))
+                ->setIntegrityCheck(false)
+                ->joinInner(array('cat' => 'categoria'), 'met.id_categoria = cat.id_categoria', array(
+                    'cat.descricao_categoria'
+                ))                
+                ->where("met.id_usuario = ?", $id_usuario)  
+                ->where("met.id_meta = ?", $id_meta);
+                        
+        return $this->fetchRow($select);        
+        
+    }
+    
     /**
      * 
      */
