@@ -46,34 +46,36 @@
                                 'module' => 'site',
                                 'controller' => 'index',
                                 'action' => 'index'
-                        ), null, true); ?>">Principal</a></li>
+                            ), null, true); ?>"><span class="glyphicon glyphicon-home"></span> Início</a></li>                        
                         <li><a href="<?php echo $this->url(array(
                                 'module' => 'site',
                                 'controller' => 'sistema',
                                 'action' => 'index'
-                        ), null, true); ?>">O Sistema</a></li>  
+                        ), null, true); ?>"><span class="glyphicon glyphicon-th-large"></span> O Sistema</a></li>  
+                        <!--
                         <li><a href="<?php echo $this->url(array(
                                 'module' => 'site',
                                 'controller' => 'planos',
                                 'action' => 'index'
                         ), null, true); ?>">Planos</a></li>  
+                        -->
                         <li><a href="<?php echo $this->url(array(
                                 'module' => 'site',
                                 'controller' => 'contato',
                                 'action' => 'index'
-                        ), null, true); ?>">Contato</a></li>                        
+                        ), null, true); ?>"><span class="glyphicon glyphicon-user"></span> Faça Contato</a></li>                        
                     </ul>
                     <div class="navbar-form navbar-right">
                         <a class="btn btn-sm btn-success" href="<?php echo $this->url(array(
                                 'module' => 'site',
                                 'controller' => 'cadastro-usuario',
                                 'action' => 'index'
-                        ), null, true); ?>">Cadastre-se</a>
+                        ), null, true); ?>"><span class="glyphicon glyphicon-new-window"></span> Cadastre-se</a>
                         <a class="btn btn-sm btn-info" href="<?php echo $this->url(array(
                                 'module' => 'site',
                                 'controller' => 'usuarios',
                                 'action' => 'login'
-                        ), null, true); ?>">Acesse o sistema</a>
+                        ), null, true); ?>"><span class="glyphicon glyphicon-log-in"></span> Acesse o sistema</a>
                     </div>
                     <!--
                     <form class="navbar-form navbar-right" method="post" action="<?php echo $this->baseUrl('usuarios/login'); ?>">
@@ -89,83 +91,80 @@
                     -->
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
-        </nav>              
-        <div class="business-header">              
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
-                </ol>
-
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img class="img-banner" src="<?php echo $this->baseUrl('views/img/banners/banner_1.png'); ?>" alt="">
-                        <div class="carousel-caption"></div>
-                    </div>
-                    <div class="item">
-                        <img class="img-banner" src="<?php echo $this->baseUrl('views/img/banners/banner_2.png'); ?>" alt="">
-                        <div class="carousel-caption"></div>
-                    </div>
-                    <div class="item">
-                        <img class="img-banner" src="<?php echo $this->baseUrl('views/img/banners/banner_3.png'); ?>" alt="">
-                        <div class="carousel-caption"></div>
-                    </div>
-                    <div class="item">
-                        <img class="img-banner" src="<?php echo $this->baseUrl('views/img/banners/banner_4.png'); ?>" alt="">
-                        <div class="carousel-caption"></div>
-                    </div>
-                    <div class="item">
-                        <img class="img-banner" src="<?php echo $this->baseUrl('views/img/banners/banner_5.png'); ?>" alt="">
-                        <div class="carousel-caption"></div>
-                    </div>
-                </div>
-                <!-- Controls 
-                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
-                -->
-            </div>
-            <div class="bg-banner"></div>
-            <div class="row-container-logo">
-                <div class="container container-logo">
-                    <img class="img-responsive logo" src="<?php echo $this->baseUrl('views/img/logo_newfinances.png'); ?>" width="300"/>            
-                </div>
-            </div>            
-        </div>
+        </nav>           
         <div class="container container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <?php echo $this->layout()->content; ?>                    
-                </div>                
-            </div> 
+            <div class="business-header">              
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img class="img-banner" src="<?php echo $this->baseUrl('views/img/banners/banner_1.png'); ?>" alt="">
+                            <div class="carousel-caption"></div>
+                        </div>
+                        <div class="item">
+                            <img class="img-banner" src="<?php echo $this->baseUrl('views/img/banners/banner_2.png'); ?>" alt="">
+                            <div class="carousel-caption"></div>
+                        </div>
+                        <div class="item">
+                            <img class="img-banner" src="<?php echo $this->baseUrl('views/img/banners/banner_3.png'); ?>" alt="">
+                            <div class="carousel-caption"></div>
+                        </div>
+                        <div class="item">
+                            <img class="img-banner" src="<?php echo $this->baseUrl('views/img/banners/banner_4.png'); ?>" alt="">
+                            <div class="carousel-caption"></div>
+                        </div>
+                        <div class="item">
+                            <img class="img-banner" src="<?php echo $this->baseUrl('views/img/banners/banner_5.png'); ?>" alt="">
+                            <div class="carousel-caption"></div>
+                        </div>
+                    </div>
+                    <!-- Controls 
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                    -->
+                </div>
+                <div class="bg-banner"></div>
+                <div class="row-container-logo">
+                    <div class="container container-logo">
+                        <img class="img-responsive logo" src="<?php echo $this->baseUrl('views/img/logo_newfinances.png'); ?>" width="300"/>            
+                    </div>
+                </div>            
+            </div>
+        </div>
+        <div class="container container-fluid">            
+            <div class="col-lg-12">
+                <?php echo $this->layout()->content; ?>                    
+            </div>                            
         </div>
         <footer>               
             <div class="col-lg-12 background-color-orange">
                 <div class="container container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">Footer 1</div>                    
+                    <div class="row padding-10px-0">
+                        <div class="col-lg-12">
+                            <a href="">contato@newfinances.com.br</a>                                
+                        </div>                                                
+                        <div class="col-lg-12 text-center small">Todos os direitos reservados</div>
                     </div>                
                 </div>        
-            </div>
-            <div class="col-lg-12 background-color-black">
-                <div class="container container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">Footer 1</div>                    
-                    </div>                
-                </div>
             </div>
         </footer>
         <!-- /container -->
     </body>
-
+    <div id="fb-root"></div>
+    
 </html>
 
 

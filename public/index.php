@@ -4,7 +4,7 @@
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
 
-if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_NAME'] == "localhost") {
     $application_env = "development";
 } elseif ($_SERVER['REMOTE_ADDR'] == '177.157.170.76') {
     $application_env = "testing";
