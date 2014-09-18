@@ -201,8 +201,12 @@ footer a {
     padding: 5px;
 }
 
-footer a.redes-sociais:hover {
+footer a.redes-sociais:hover {    
     background: none;    
+}
+
+footer img.redes-sociais {
+    width: 35px;
 }
 
 footer a:hover {
