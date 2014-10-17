@@ -115,7 +115,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     }
                     
                     $this->_helper->flashMessenger->addMessage(array(
-                        'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                        'class' => 'alert alert-success',
                         'message' => 'Receita Cadastrada com sucesso!'
                     ));
                     
@@ -208,7 +208,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     }
                     
                     $this->_helper->flashMessenger->addMessage(array(
-                        'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                        'class' => 'alert alert-success',
                         'message' => 'Despesa Cadastrada com sucesso!'
                     ));
                     
@@ -257,7 +257,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     $modelMovimentacao->insert($dadosTransferencia);
                     
                     $this->_helper->flashMessenger->addMessage(array(
-                        'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                        'class' => 'alert alert-success',
                         'message' => 'Transferência Cadastrada com sucesso!'
                     ));
                     
@@ -290,7 +290,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
             $modelMovimentacao->update($statusUpdate, $where);
             
             $this->_helper->flashMessenger->addMessage(array(
-                'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                'class' => 'alert alert-success',
                 'message' => 'Status atualizado com sucesso!'
             ));
             $this->_redirect("cliente/index/index");
@@ -412,7 +412,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                         }
 
                         $this->_helper->flashMessenger->addMessage(array(
-                            'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                            'class' => 'alert alert-success',
                             'message' => 'Lançamento alterado com sucesso!'
                         ));
                         $this->_redirect("cliente/index/index");
@@ -427,7 +427,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
         } else {
             $modelMovimentacao->delete($where);
             $this->_helper->flashMessenger->addMessage(array(
-                'class' => 'bg-DANGER text-danger padding-10px margin-10px-0px',
+                'class' => 'bg-danger text-danger padding-10px margin-10px-0px',
                 'message' => 'Página não encontrada!'
             ));
             $this->_redirect("cliente/index/index");
@@ -458,7 +458,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
             $dadosExclusao = $this->_request->getPost();            
             if ($dadosExclusao['btnResposta'] == 'Cancelar') {                
                 $this->_helper->flashMessenger->addMessage(array(
-                    'class' => 'bg-warning text-warning padding-10px margin-10px-0px',
+                    'class' => 'alert alert-warning',
                     'message' => 'Exclusão cancelada!'
                 ));
                 $this->_redirect("cliente/index/index");                
@@ -476,7 +476,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     try {
                         $modelMovimentacao->delete($where);
                          $this->_helper->flashMessenger->addMessage(array(
-                            'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                            'class' => 'alert alert-success',
                             'message' => 'Lançamento excluído com sucesso!'
                         ));
                         $this->_redirect("cliente/index/index");
@@ -508,7 +508,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     try {
                         $modelMovimentacao->delete($where);
                         $this->_helper->flashMessenger->addMessage(array(
-                            'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                            'class' => 'alert alert-success',
                             'message' => 'Lançamento excluído com sucesso!'
                         ));
                         $this->_redirect("cliente/index/index");
