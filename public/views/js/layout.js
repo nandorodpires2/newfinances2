@@ -8,7 +8,7 @@ function baseUrl() {
     var base_url = "";    
     
     // verifica se e base de teste
-    if (host == "localhost") {
+    if (host == "localhost" || host == "127.0.0.1") {
         base_url = "http://" + host + "/newfinances2/public/";        
     } else if (host == "newfinances2.newfinances.com.br") {
         base_url = "http://" + host + "/public/";        

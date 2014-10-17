@@ -94,7 +94,7 @@ class Model_Conta extends Zend_Db_Table {
                 ))                
                 ->setIntegrityCheck(false)
                 ->joinLeft(array('mov' => 'movimentacao'), 'mov.id_conta = ct.id_conta and mov.id_usuario = ct.id_usuario', array(
-                    'saldo' => "ifnull(sum(mov.valor_movimentacao), 0) + ct.saldo_inicial"
+                    "saldo" => new Zend_Db_Expr("ifnull(sum(mov.valor_movimentacao), 0) + ct.saldo_inicial")
                 ))                
                 ->joinInner(array('tc' => 'tipo_conta'), 'ct.id_tipo_conta = tc.id_tipo_conta', array(
                     'tc.descricao_tipo_conta'

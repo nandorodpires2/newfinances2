@@ -113,7 +113,7 @@ class Model_Meta extends Zend_Db_Table {
                 ))
                 ->setIntegrityCheck(false)
                 ->joinInner(array('mov' => 'movimentacao'), 'met.id_categoria = mov.id_categoria and met.id_usuario = mov.id_usuario', array(
-                    'total' => 'sum(mov.valor_movimentacao) * -1'
+                    "total" => new Zend_Db_Expr("sum(mov.valor_movimentacao) * -1")
                 ))
                 ->where("met.id_usuario = ?", $id_usuario)
                 ->where("mov.realizado = ?", 1)

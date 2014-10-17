@@ -55,6 +55,7 @@ class Model_Movimentacao extends Zend_Db_Table {
                 ))
                 ->setIntegrityCheck(false)
                 ->joinInner(array('tpm' => 'tipo_movimentacao'), 'mov.id_tipo_movimentacao = tpm.id_tipo_movimentacao', array(
+                    'tpm.id_tipo_movimentacao',
                     'tpm.tipo_movimentacao'
                 ))
                 ->joinInner(array('cat' => 'categoria'), 'mov.id_categoria = cat.id_categoria', array(

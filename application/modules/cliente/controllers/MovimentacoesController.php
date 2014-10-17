@@ -322,6 +322,8 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
         $data_movimentacao = $dadosMovimentacao->data_movimentacao;
                 
         if ($dadosMovimentacao) {
+            
+            //Zend_Debug::dump($dadosMovimentacao);
 
             $dadosMovimentacao = $dadosMovimentacao->toArray();
             
@@ -359,6 +361,8 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 if ($formUpdate->isValid($dadosMovimentacaoUpdate)) {
                     $dadosMovimentacaoUpdate = $formUpdate->getValues();
                     
+                    //Zend_Debug::Dump($dadosMovimentacaoUpdate);
+                    /*
                     if (isset ($dadosMovimentacaoUpdate['tipo_pgto'])) {                    
                         if ($dadosMovimentacaoUpdate['tipo_pgto'] == 'conta') {
                             $dadosMovimentacaoUpdate['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_DESPESA;
@@ -369,17 +373,17 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                         }                    
                         unset($dadosMovimentacaoUpdate['tipo_pgto']);
                     }
-
-                    $dadosMovimentacaoUpdate['data_movimentacao'] = Controller_Helper_Date::getDateDb($dadosMovimentacaoUpdate['data_movimentacao']);
-
+                    */
+                    
                     if ($dadosMovimentacao['id_tipo_movimentacao'] == self::TIPO_MOVIMENTACAO_TRANSFERENCIA ||
                         $dadosMovimentacao['id_tipo_movimentacao'] == self::TIPO_MOVIMENTACAO_RECEITA    
                         ) {
                         $dadosMovimentacaoUpdate['valor_movimentacao'] = View_Helper_Currency::setCurrencyDb($dadosMovimentacaoUpdate['valor_movimentacao']) * -1;
                     } else {
                         $dadosMovimentacaoUpdate['valor_movimentacao'] = View_Helper_Currency::setCurrencyDb($dadosMovimentacaoUpdate['valor_movimentacao']);
-                    }
-
+                    }                    
+                    
+                    $dadosMovimentacaoUpdate['data_movimentacao'] = Controller_Helper_Date::getDateDb($dadosMovimentacaoUpdate['data_movimentacao']);
                     if ( isset ($dadosMovimentacaoUpdate['id_conta_origem'])) {
                         $id_conta_origem = $dadosMovimentacaoUpdate['id_conta_origem'];
                         unset($dadosMovimentacaoUpdate['id_conta_origem']);
@@ -390,8 +394,9 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     unset($dadosMovimentacaoUpdate['modo_repeticao']);
                     unset($dadosMovimentacaoUpdate['parcelas']);
                     unset($dadosMovimentacaoUpdate['repetir']);                    
-                    unset($dadosMovimentacaoUpdate['modo_edicao']);                    
-
+                    unset($dadosMovimentacaoUpdate['modo_edicao']);   
+                    unset($dadosMovimentacaoUpdate['tipo_pgto']);
+                    
                     $whereUpdate = "id_movimentacao = " . $idMovimentacao;
 
                     try {

@@ -46,38 +46,12 @@
     </div>
     <div class="col-lg-12">
         <div class="panel panel-info">
-            <div class="panel-heading"><span class="text-blue">Faturas</span></div>
+            <div class="panel-heading"><span class="text-blue">Cartões de Crédito</span></div>
             <div class="panel-body">
-                <?php if ($this->cartoes->count() > 0) : ?>
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="active"><a href="#geral" role="tab" data-toggle="tab"><span class="text-info">Geral</span></a></li>           
+                <?php if ($this->cartoes->count() > 0) : ?>                
                     <?php foreach ($this->cartoes as $cartao) : ?>
-                    <li>
-                        <a href="#<?php echo $cartao->id_cartao; ?>" role="tab" data-toggle="tab">
-                            <span class="text-info">                                
-                                <?php echo $cartao->descricao_cartao; ?>
-                            </span>
-                        </a>
-                    </li>                                      
-                    <?php endforeach; ?>
-                </ul>
-                
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane fade in active" id="geral">                    
-                        <div class="col-lg-12 panel-bordered">
-                            faturas gerais
-                        </div>                        
-                    </div>  
-                    <?php foreach ($this->cartoes as $cartao) : ?>
-                    <div class="tab-pane fade" id="<?php echo $cartao->id_cartao; ?>">
-                        <div class="col-lg-12 panel-bordered">
-                            faturas <?php echo $cartao->descricao_cartao; ?>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>                    
-                </div>
+                    
+                    <?php endforeach; ?>                                
                 <?php else : ?>
                 <div class="text-warning">Nenhum cartão de crédito cadastrado</div>
                 <?php endif; ?>
