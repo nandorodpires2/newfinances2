@@ -30,7 +30,7 @@ class Cliente_IndexController extends Zend_Controller_Action {
         // busca os cartoes do usuario
         $modelCartao = new Model_Cartao();
         $cartoes = $modelCartao->getCartoesUsuario($id_usuario, 1);  
-        $this->view->cartoes = $cartoes;        
+        $this->view->cartoes = $cartoes;               
         
         /**
          * busca as proximas receitas

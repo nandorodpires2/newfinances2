@@ -19,7 +19,9 @@ class Model_Cartao extends Zend_Db_Table {
     public function getCartoesUsuario($id_usuario, $status = null) {
         
         $select = $this->select()
-                ->from(array('ct' => $this->_name), array('*'))
+                ->from(array('ct' => $this->_name), array(
+                    '*'
+                ))
                 ->where("ct.id_usuario = ?", $id_usuario);                
                 
         if (null !== $status) {

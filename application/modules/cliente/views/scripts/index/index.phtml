@@ -49,10 +49,30 @@
             <div class="panel-heading"><span class="text-blue">Cartões de Crédito</span></div>
             <div class="panel-body">
                 <?php if ($this->cartoes->count() > 0) : ?>                
-                    <?php foreach ($this->cartoes as $cartao) : ?>
-                    
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Cartão</th>
+                        <th>Vencimento</th>
+                        <th>Valor</th>
+                        <th>Fechamento</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                    <?php foreach ($this->cartoes as $key => $cartao) : ?>                    
+                    <tr>
+                        <td>
+                            <?php echo View_Helper_Cartoes::getBandeiraCartao($cartao->bandeira_cartao); ?>
+                            <?php echo $cartao->descricao_cartao; ?>
+                        </td>
+                        <td>25/10/2014</td>
+                        <td>R$235,52</td>
+                        <td>16/10/2014</td>
+                        <td>Fechado</td>
+                        <td></td>
+                    </tr>                    
                     <?php endforeach; ?>                                
-                <?php else : ?>
+                </table>
+                <?php else : ?>                
                 <div class="text-warning">Nenhum cartão de crédito cadastrado</div>
                 <?php endif; ?>
             </div>
