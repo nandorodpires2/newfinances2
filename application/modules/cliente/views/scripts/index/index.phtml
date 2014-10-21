@@ -19,27 +19,42 @@
                 </div>
                 <?php endif; ?>
             </div>
-            <div class="panel-body">
-                <div class="panel panel-success">
-                    <div class="panel-body">
-                        <div class="col-lg-4">    
-                            <div class="form-inline pull-left">                        
-                                <input class="form-control input-sm" placeholder="Ir para a data" type="text" name="data_movimentacao" id="data_movimentacao"/>
-                                <input class="btn btn-success btn-sm" type="submit" name="submit" id="btn_data_movimentacao" value="Ir" />                        
-                            </div>    
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="form-inline pull-right">
-                                <input class="form-control input-sm" placeholder="Pesquisar" type="text" name="data_movimentacao" id='pesquisar' />
-                                <a class="btn btn-xs btn-info" href="<?php echo $this->url(array(
-                                    'module' => 'cliente',
-                                    'controller' => 'pesquisas',
-                                    'action' => 'avancada'
-                                ), null, true); ?>">Pesquisa Avançada</a>
-                            </div>    
-                        </div>                
+            <div class="panel-body">                
+                <div class="row">
+                    <div class="col-lg-3">    
+                        <div class="form-group">
+                            <div class="input-group">       
+                                <div class="input-group-addon">
+                                    <img src="<?php echo $this->baseUrl('views/img/icon_calendar.png'); ?>" />
+                                </div>
+                                <input class="form-control input-sm" placeholder="Ir para a data" type="text" name="data_movimentacao" id="data_movimentacao"/>                                
+                            </div>
+                        </div>                            
                     </div>
-                </div>                
+                    <div class="col-lg-2" style="margin-top: 4px;">
+                         <a class="btn btn-xs btn-success" href="" data-toggle="modal" data-target="#modalTodosLancamentos" id="todos-lancamentos">Ver Todos os Lançamentos</a>
+                    </div>
+                    <div class="col-lg-1">&nbsp;</div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <div class="input-group"> 
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </div>
+                                <input class="form-control input-sm" placeholder="Pesquisar" type="text" name="data_movimentacao" id='pesquisar' />
+                                
+                            </div>
+                        </div>    
+                    </div>            
+                    <div class="col-lg-2" style="margin-top: 4px;">
+                        <a class="btn btn-xs btn-info" href="<?php echo $this->url(array(
+                            'module' => 'cliente',
+                            'controller' => 'pesquisas',
+                            'action' => 'avancada'
+                        ), null, true); ?>">Pesquisa Avançada</a>
+                    </div>                      
+                </div>         
+                <hr style="border-color: #DCDCDC;" />
                 <div id="movimentacoes"></div>
             </div>
         </div>    
@@ -48,27 +63,31 @@
         <div class="panel panel-info">
             <div class="panel-heading"><span class="text-blue">Cartões de Crédito</span></div>
             <div class="panel-body">
-                <?php if ($this->cartoes->count() > 0) : ?>                
+                <?php if ($this->faturas->count() > 0) : ?>                
                 <table class="table table-bordered">
                     <tr>
                         <th>Cartão</th>
                         <th>Vencimento</th>
                         <th>Valor</th>
-                        <th>Fechamento</th>
-                        <th>Status</th>
                         <th>Ações</th>
                     </tr>
-                    <?php foreach ($this->cartoes as $key => $cartao) : ?>                    
+                    <?php foreach ($this->faturas as $key => $fatura) : ?>                    
                     <tr>
                         <td>
-                            <?php echo View_Helper_Cartoes::getBandeiraCartao($cartao->bandeira_cartao); ?>
-                            <?php echo $cartao->descricao_cartao; ?>
+                            <?php echo View_Helper_Cartoes::getBandeiraCartao($fatura->bandeira_cartao); ?>
+                            <?php echo $fatura->descricao_cartao; ?>
                         </td>
-                        <td>25/10/2014</td>
-                        <td>R$235,52</td>
-                        <td>16/10/2014</td>
-                        <td>Fechado</td>
-                        <td></td>
+                        <td class="text-center"><?php echo View_Helper_Date::getDataView($fatura->vencimento_fatura); ?></td>
+                        <td class="text-right">
+                            <span class="<?php echo $fatura->valor_fatura > 0 ? 'text-success' : 'text-danger'; ?>">
+                                <?php echo View_Helper_Currency::getCurrency($fatura->valor_fatura); ?>
+                            </span>
+                        </td>                        
+                        <td class="text-center">
+                            <a href="">
+                                <img src="<?php echo $this->baseUrl('views/img/icon_list.png'); ?>" title="Ver Lançamentos" width="20" />
+                            </a>
+                        </td>
                     </tr>                    
                     <?php endforeach; ?>                                
                 </table>
@@ -218,6 +237,19 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- modal de todas as movimentacoes -->
+    <div class="modal fade" id="modalTodosLancamentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Lançamentos</h4>
+                </div>
+                <div class="modal-body" id="lancamentos-modal"></div>
             </div>
         </div>
     </div>

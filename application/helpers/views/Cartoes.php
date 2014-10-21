@@ -36,4 +36,8 @@ class View_Helper_Cartoes extends Zend_View_Helper_Abstract {
         
     }
     
+    public static function getSaldoCartao($id_cartao) {
+        
+    }
+    
 }
