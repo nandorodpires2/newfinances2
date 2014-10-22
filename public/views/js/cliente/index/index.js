@@ -17,24 +17,11 @@ $(document).ready(function(){
         graficoReceitaDespesas();
     });
     
-    $("#btn_data_movimentacao").click(function(){
+    $("#data_movimentacao").change(function(){
         var data = $("#data_movimentacao").val();
-        if (data == '') {
-            alert("Preencha uma data!");
-        } else {
+        if (data != '') {            
             buscaMovimentacoesData(data, id_conta);
         }
-    });
-    
-    /**
-     * campo de pesquisa
-     */
-    jQuery("#pesquisar").focus(function() {
-        jQuery(this).attr('style', 'width: 400px')
-    });
-    
-    jQuery("#pesquisar").blur(function() {
-        jQuery(this).attr('style', 'width: 200px')
     });
         
 });

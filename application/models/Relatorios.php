@@ -22,7 +22,7 @@ class Model_Relatorios extends Zend_Db_Table {
                     'ano' => 'year(data_movimentacao)',
                     'mes' => 'month(data_movimentacao)',                    
                     'id_tipo_movimentacao',
-                    'total' => 'ifnull(sum(valor_movimentacao), 0)'
+                    'total' => new Zend_Db_Expr('ifnull(sum(valor_movimentacao), 0)')
                 ))
                 ->where('id_usuario = ?', $id_usuario)
                 ->where('id_tipo_movimentacao in (1,2)')
