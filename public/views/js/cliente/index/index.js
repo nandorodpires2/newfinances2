@@ -19,9 +19,7 @@ $(document).ready(function(){
     
     $("#data_movimentacao").change(function(){
         var data = $("#data_movimentacao").val();
-        if (data == '') {
-            alert("Preencha uma data!");
-        } else {
+        if (data != '') {            
             buscaMovimentacoesData(data, id_conta);
         }
     });

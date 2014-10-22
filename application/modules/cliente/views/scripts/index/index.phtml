@@ -83,10 +83,9 @@
                                 <?php echo View_Helper_Currency::getCurrency($fatura->valor_fatura); ?>
                             </span>
                         </td>                        
-                        <td class="text-center">
-                            <a href="">
-                                <img src="<?php echo $this->baseUrl('views/img/icon_list.png'); ?>" title="Ver Lançamentos" width="20" />
-                            </a>
+                        <td class="col-sm-3 text-center">
+                            <a class="btn btn-xs btn-info" href="">Ver Lançamentos</a>
+                            <a class="btn btn-xs btn-success" href="">Pagar Fatura</a>
                         </td>
                     </tr>                    
                     <?php endforeach; ?>                                
