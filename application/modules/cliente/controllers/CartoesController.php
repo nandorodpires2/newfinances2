@@ -191,6 +191,24 @@ class Cliente_CartoesController extends Zend_Controller_Action {
         }
         
     }
+    
+    /**
+     * lançamentos fatura
+     */
+    public function lancamentosAction() {
+        
+        $id_cartao = $this->_getParam("cartao");        
+        $vencimento_fatura = $this->_getParam("fatura");        
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $modelVwLancamentosCartao = new Model_VwLancamentoCartao();
+        $lancamentos = $modelVwLancamentosCartao->getLancamentosFatura($id_cartao, $vencimento_fatura, $id_usuario);
+        $this->view->lancamentos = $lancamentos;        
+        
+        $total_fatura = $modelVwLancamentosCartao->getTotalFatura($id_cartao, $vencimento_fatura, $id_usuario);
+        $this->view->total_fatura = $total_fatura->valor_fatura;
+        
+    }
 
 }
 

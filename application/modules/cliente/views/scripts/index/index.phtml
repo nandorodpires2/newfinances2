@@ -84,8 +84,14 @@
                             </span>
                         </td>                        
                         <td class="col-sm-3 text-center">
-                            <a class="btn btn-xs btn-info" href="">Ver Lançamentos</a>
-                            <a class="btn btn-xs btn-success" href="">Pagar Fatura</a>
+                            <a class="btn btn-xs btn-info" href="<?php echo $this->url(array(
+                                'module' => 'cliente',
+                                'controller' => 'cartoes',
+                                'action' => 'lancamentos',
+                                'fatura' => $fatura->vencimento_fatura,
+                                'cartao' => $fatura->id_cartao
+                            )); ?>">Ver Lançamentos</a>
+                            <a class="btn btn-xs btn-success" href="<?php echo $this->url(array()); ?>">Pagar Fatura</a>
                         </td>
                     </tr>                    
                     <?php endforeach; ?>                                
@@ -251,5 +257,6 @@
                 <div class="modal-body" id="lancamentos-modal"></div>
             </div>
         </div>
-    </div>
+    </div>    
+    
 </div>

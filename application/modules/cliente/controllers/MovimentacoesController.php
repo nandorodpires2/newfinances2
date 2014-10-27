@@ -361,19 +361,20 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 if ($formUpdate->isValid($dadosMovimentacaoUpdate)) {
                     $dadosMovimentacaoUpdate = $formUpdate->getValues();
                     
-                    //Zend_Debug::Dump($dadosMovimentacaoUpdate);
-                    /*
+                    //Zend_Debug::Dump($dadosMovimentacaoUpdate);                    
                     if (isset ($dadosMovimentacaoUpdate['tipo_pgto'])) {                    
                         if ($dadosMovimentacaoUpdate['tipo_pgto'] == 'conta') {
-                            $dadosMovimentacaoUpdate['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_DESPESA;
+                            //$dadosMovimentacaoUpdate['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_DESPESA;
                             $dadosMovimentacaoUpdate['id_cartao'] = null;
                         } else {
-                            $dadosMovimentacaoUpdate['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_CARTAO;
+                            //$dadosMovimentacaoUpdate['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_CARTAO;
                             $dadosMovimentacaoUpdate['id_conta'] = null;
                         }                    
                         unset($dadosMovimentacaoUpdate['tipo_pgto']);
                     }
-                    */
+                    
+                    //Zend_Debug::Dump($dadosMovimentacaoUpdate);                    
+                    //die();
                     
                     if ($dadosMovimentacao['id_tipo_movimentacao'] == self::TIPO_MOVIMENTACAO_TRANSFERENCIA ||
                         $dadosMovimentacao['id_tipo_movimentacao'] == self::TIPO_MOVIMENTACAO_RECEITA    
