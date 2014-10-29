@@ -2,6 +2,9 @@
 
 class Cliente_CartoesController extends Zend_Controller_Action {
 
+    const TIPO_MOVIMENTACAO_DESPESA = 2;
+    const TIPO_MOVIMENTACAO_PGTO_FATURA = 6;
+    
     public function init() {
         $messages = $this->_helper->FlashMessenger->getMessages();
         $this->view->messages = $messages;
@@ -207,6 +210,49 @@ class Cliente_CartoesController extends Zend_Controller_Action {
         
         $total_fatura = $modelVwLancamentosCartao->getTotalFatura($id_cartao, $vencimento_fatura, $id_usuario);
         $this->view->total_fatura = $total_fatura->valor_fatura;
+        
+    }
+    
+    /**
+     * pagar fatura
+     */
+    public function pagarFaturaAction() {
+        
+        $id_cartao = $this->_getParam("cartao");        
+        $vencimento_fatura = $this->_getParam("fatura");        
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $modelVwLancamentoCartao = new Model_VwLancamentoCartao();
+        $fatura = $modelVwLancamentoCartao->getTotalFatura($id_cartao, $vencimento_fatura, $id_usuario);
+        $this->view->fatura = $fatura;
+        
+        // pagamento minimo
+        $pagamento_minimo = ($fatura->valor_fatura / 100) * 15;
+        $this->view->pagamento_minimo = $pagamento_minimo;
+        
+        // saldo anterior
+                
+        // pagamentos (saldo anterior)        
+        
+        // form de pagamento
+        $formCartoesPagarFatura = new Form_Cliente_Cartoes_PagarFatura();
+        $descricao_movimentacao = "Pagamento Fatura " . $fatura->descricao_cartao;
+        $formCartoesPagarFatura->descricao_movimentacao->setValue($descricao_movimentacao);
+        $this->view->formPagarFatura = $formCartoesPagarFatura;
+        
+        if ($this->_request->isPost()) {
+            $dadosPagamentoFatura = $this->_request->getPost();
+            if ($formCartoesPagarFatura->isValid($dadosPagamentoFatura)) {
+                $dadosPagamentoFatura = $formCartoesPagarFatura->getValues();
+                
+                $dadosPagamentoFatura['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_DESPESA;
+                $dadosPagamentoFatura['id_cartao'] = null;
+                $dadosPagamentoFatura['id_categoria'] = null;
+                $dadosPagamentoFatura['realizado'] = Controller_Helper_Movimentacao::getStatusMovimentacao($dadosPagamentoFatura['data_movimentacao']);                
+                
+                Zend_Debug::dump($dadosPagamentoFatura);
+            }
+        }        
         
     }
 
