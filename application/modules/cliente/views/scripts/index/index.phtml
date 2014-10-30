@@ -91,7 +91,13 @@
                                 'fatura' => $fatura->vencimento_fatura,
                                 'cartao' => $fatura->id_cartao
                             )); ?>">Ver Lançamentos</a>
-                            <a class="btn btn-xs btn-success" href="<?php echo $this->url(array()); ?>">Pagar Fatura</a>
+                            <a class="btn btn-xs btn-success" href="<?php echo $this->url(array(
+                                'module' => 'cliente',
+                                'controller' => 'cartoes',
+                                'action' => 'pagar-fatura',
+                                'fatura' => $fatura->vencimento_fatura,
+                                'cartao' => $fatura->id_cartao
+                            )); ?>">Pagar Fatura</a>
                         </td>
                     </tr>                    
                     <?php endforeach; ?>                                

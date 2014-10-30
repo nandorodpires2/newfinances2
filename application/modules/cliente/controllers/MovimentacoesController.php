@@ -6,6 +6,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
     const TIPO_MOVIMENTACAO_DESPESA = 2;
     const TIPO_MOVIMENTACAO_CARTAO = 3;
     const TIPO_MOVIMENTACAO_TRANSFERENCIA = 4;
+    const TIPO_MOVIMENTACAO_PGTO_FATURA = 6;
 
     public function init() {          
         $messages = $this->_helper->FlashMessenger->getMessages();
@@ -55,8 +56,6 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
             if ($formMovimentacoesReceitas->isValid($dadosReceita)) {
                 $dadosReceita = $formMovimentacoesReceitas->getValues();
                 
-                
-                
                 if ($dadosReceita['tipo_pgto'] == 'conta') {
                     $dadosReceita['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_RECEITA;
                     $dadosReceita['realizado'] = Controller_Helper_Movimentacao::getStatusMovimentacao($dadosReceita['data_movimentacao']);
@@ -72,8 +71,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 $dadosReceita['data_movimentacao'] = Controller_Helper_Date::getDateDb($dadosReceita['data_movimentacao']);
                 $dadosReceita['data_inclusao'] = Controller_Helper_Date::getDatetimeNowDb();                
                 $dadosReceita['valor_movimentacao'] = View_Helper_Currency::setCurrencyDb($dadosReceita['valor_movimentacao'], "positivo");
-                
-                
+                                
                 // verificando se a movimentacao repete                
                 if ((int)$dadosReceita['opt_repetir']) {
                     $dadosRepeticao = array();                    
@@ -99,7 +97,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 unset($dadosReceita['modo_repeticao']);
                 
                 try {
-                    $modelMovimentacao->insert($dadosReceita);
+                    $id_movimentacao = $modelMovimentacao->insert($dadosReceita);
                     
                     // recuperando o id da movimentacao
                     if ($repetir) {                        
@@ -113,6 +111,13 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                         $whereUpdateMovimentacao = "id_movimentacao = " . $modelMovimentacao->lastInsertId();
                         $modelMovimentacao->update($dadosUpdateMovimentacao, $whereUpdateMovimentacao);
                     }
+                    
+                    // se a movimentacao e em cartao de credito atualiza os dados
+                    if ($dadosReceita['id_tipo_movimentacao'] == self::TIPO_MOVIMENTACAO_CARTAO) {
+                        $pluginCartao = new Plugin_Cartao();
+                        $pluginCartao->atualizaFatura($id_movimentacao);
+                    }
+                    
                     
                     $this->_helper->flashMessenger->addMessage(array(
                         'class' => 'alert alert-success',

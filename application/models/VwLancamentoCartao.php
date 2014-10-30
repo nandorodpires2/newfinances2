@@ -34,7 +34,7 @@ class Model_VwLancamentoCartao extends Zend_Db_Table {
                 ->where("month(vlc.vencimento_fatura) = month(now())")
                 ->group("vlc.id_cartao")
                 ->group("vlc.vencimento_fatura");
-                
+        
         return $this->fetchAll($select);
         
     }
@@ -54,6 +54,45 @@ class Model_VwLancamentoCartao extends Zend_Db_Table {
                 ->group("vlc.vencimento_fatura");
         
         return $this->fetchAll($select);
+        
+    }
+    
+    /**
+     * fatura(s) atual
+     */
+    public function getFaturas($id_usuario) {
+        
+        $select = $this->select()
+                ->from(array('vlc' => $this->_name), array(
+                    "vlc.id_cartao",			
+                    "vlc.vencimento_fatura",
+                    "saldo_atual" => new Zend_Db_Expr("sum(vlc.valor_movimentacao)"),
+                    "valor_pago" => 0
+                ))                
+                ->where("vlc.id_usuario = ?", $id_usuario)
+                ->group("vlc.vencimento_fatura");
+        
+        return $this->fetchAll($select);
+        
+    }
+    
+    /**
+     * fatura(s) atual
+     */
+    public function getFaturaByVencimento($vencimento, $id_usuario) {
+        
+        $select = $this->select()
+                ->from(array('vlc' => $this->_name), array(
+                    "vlc.id_cartao",			
+                    "vlc.vencimento_fatura",
+                    "saldo_atual" => new Zend_Db_Expr("sum(vlc.valor_movimentacao)"),
+                    "valor_pago" => 0
+                ))                
+                ->where("vlc.vencimento_fatura = ?", $vencimento)
+                ->where("vlc.id_usuario = ?", $id_usuario)
+                ->group("vlc.vencimento_fatura");
+        
+        return $this->fetchRow($select);
         
     }
     
@@ -83,8 +122,12 @@ class Model_VwLancamentoCartao extends Zend_Db_Table {
         
         $select = $this->select()
                 ->from(array('vlc' => $this->_name), array(
-                    'valor_fatura' => 'sum(vlc.valor_movimentacao)'
-                ))                
+                    'descricao_cartao',
+                    'bandeira_cartao',
+                    'vencimento_fatura',
+                    'valor_fatura' => new Zend_Db_Expr('ifnull(sum(vlc.valor_movimentacao), 0)')
+                ))           
+                ->setIntegrityCheck(false)
                 ->where("vlc.id_usuario = ?", $id_usuario)
                 ->where("vlc.id_cartao = ?", $id_cartao)
                 ->where("vlc.vencimento_fatura = ?", $vencimento_fatura);
