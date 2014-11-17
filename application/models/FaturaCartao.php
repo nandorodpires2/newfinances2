@@ -16,11 +16,12 @@ class Model_FaturaCartao extends Zend_Db_Table {
     protected $_name = "fatura_cartao";    
     protected $_primary = "id_fatura_cartao";
     
-    public function isVencimentoFaturaTabela($vencimento) {
+    public function isVencimentoFaturaTabela($vencimento, $id_cartao) {
         
         $select = $this->select()
                 ->from($this->_name, array('*'))
-                ->where("vencimento_fatura = ?", $vencimento);
+                ->where("vencimento_fatura = ?", $vencimento)
+                ->where("id_fatura = ?", $id_cartao);
         
         $query = $this->fetchRow($select);
         

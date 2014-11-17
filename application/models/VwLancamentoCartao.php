@@ -26,6 +26,7 @@ class Model_VwLancamentoCartao extends Zend_Db_Table {
                     'vlc.id_cartao',
                     'vlc.bandeira_cartao',
                     'vlc.descricao_cartao',
+                    'vlc.fim_fatura',
                     'vencimento_fatura' => 'date(vlc.vencimento_fatura)',
                     'valor_fatura' => 'sum(vlc.valor_movimentacao)'
                 ))                
@@ -70,7 +71,8 @@ class Model_VwLancamentoCartao extends Zend_Db_Table {
                     "valor_pago" => 0
                 ))                
                 ->where("vlc.id_usuario = ?", $id_usuario)
-                ->group("vlc.vencimento_fatura");
+                ->group("vlc.vencimento_fatura")
+                ->group("vlc.id_cartao");
         
         return $this->fetchAll($select);
         
