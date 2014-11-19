@@ -19,26 +19,28 @@
                     </dl>
                     <dl class="dl-horizontal text-info">
                         <dt>Saldo Anterior:</dt>
-                        <dd><?php echo View_Helper_Currency::getCurrency(0); ?></dd>
+                        <dd><?php echo View_Helper_Currency::getCurrency($this->saldo_anterior); ?></dd>
                     </dl>
                     <dl class="dl-horizontal text-success">
                         <dt>(-) Pagamentos:</dt>
-                        <dd><?php echo View_Helper_Currency::getCurrency(0); ?></dd>
+                        <dd><?php echo View_Helper_Currency::getCurrency($this->valorPago->saldo); ?></dd>
                     </dl>
                     <dl class="dl-horizontal text-danger">
                         <dt>(+) Compras/Débitos:</dt>
-                        <dd><?php echo View_Helper_Currency::getCurrency(0); ?></dd>
-                    </dl>
-                    <dl class="dl-horizontal <?php echo $this->fatura->valor_fatura < 0 ? 'text-danger' : 'text-sucess'; ?>">
-                        <dt>(=) Total Fatura:</dt>
                         <dd><?php echo View_Helper_Currency::getCurrency($this->fatura->valor_fatura); ?></dd>
                     </dl>
+                    <dl class="dl-horizontal <?php echo $this->total_fatura < 0 ? 'text-danger' : 'text-sucess'; ?>">
+                        <dt>(=) Total Fatura:</dt>
+                        <dd><?php echo View_Helper_Currency::getCurrency($this->total_fatura); ?></dd>
+                    </dl>
+                    <?php if ($this->valorPago->saldo == 0) : ?>
                     <dl class="dl-horizontal">
                         <dt>Pagamento Mínimo:</dt>
                         <dd><?php echo View_Helper_Currency::getCurrency($this->pagamento_minimo); ?></dd>
                     </dl>
+                    <?php endif; ?>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4">                    
                     <?php echo $this->formPagarFatura; ?>
                 </div>
             </div>

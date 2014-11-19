@@ -226,17 +226,29 @@ class Cliente_CartoesController extends Zend_Controller_Action {
         $fatura = $modelVwLancamentoCartao->getTotalFatura($id_cartao, $vencimento_fatura, $id_usuario);
         $this->view->fatura = $fatura;
         
+        // saldo anterior
+        $saldo_anterior = 0;
+        $this->view->saldo_anterior = $saldo_anterior;
+        
+        // valor pago fatura
+        $modelFaturaCartao = new Model_FaturaCartao();
+        $valorPago = $modelFaturaCartao->getSaldoPago($id_cartao, $vencimento_fatura);
+        $this->view->valorPago = $valorPago;
+        
+        // total fatura
+        $total_fatura = ($saldo_anterior + $valorPago->saldo) + $fatura->valor_fatura; 
+        $this->view->total_fatura = $total_fatura;
+                
         // pagamento minimo
         $pagamento_minimo = ($fatura->valor_fatura / 100) * 15;
         $this->view->pagamento_minimo = $pagamento_minimo;
-        
-        // saldo anterior
                 
-        // pagamentos (saldo anterior)        
-        
         // form de pagamento
         $formCartoesPagarFatura = new Form_Cliente_Cartoes_PagarFatura();
         $descricao_movimentacao = "Pagamento Fatura " . $fatura->descricao_cartao;
+        $formCartoesPagarFatura->id_cartao->setValue($id_cartao);
+        $formCartoesPagarFatura->vencimento_fatura->setValue($vencimento_fatura);
+        $formCartoesPagarFatura->saldo_atual->setValue($fatura->valor_fatura);
         $formCartoesPagarFatura->descricao_movimentacao->setValue($descricao_movimentacao);
         $this->view->formPagarFatura = $formCartoesPagarFatura;
         
@@ -245,12 +257,41 @@ class Cliente_CartoesController extends Zend_Controller_Action {
             if ($formCartoesPagarFatura->isValid($dadosPagamentoFatura)) {
                 $dadosPagamentoFatura = $formCartoesPagarFatura->getValues();
                 
+                $dadosFaturaCartao['id_cartao'] = $dadosPagamentoFatura['id_cartao'];
+                $dadosFaturaCartao['saldo_atual'] = $dadosPagamentoFatura['saldo_atual'];
+                $dadosFaturaCartao['vencimento_fatura'] = $dadosPagamentoFatura['vencimento_fatura'];
+                //$dadosFaturaCartao['valor_pago'] = View_Helper_Currency::setCurrencyDb($dadosPagamentoFatura['valor_movimentacao'], 'positivo');
+                
+                unset($dadosPagamentoFatura['saldo_atual']);
+                unset($dadosPagamentoFatura['vencimento_fatura']);
+                
                 $dadosPagamentoFatura['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_DESPESA;
                 $dadosPagamentoFatura['id_cartao'] = null;
                 $dadosPagamentoFatura['id_categoria'] = null;
-                $dadosPagamentoFatura['realizado'] = Controller_Helper_Movimentacao::getStatusMovimentacao($dadosPagamentoFatura['data_movimentacao']);                
+                $dadosPagamentoFatura['realizado'] = Controller_Helper_Movimentacao::getStatusMovimentacao($dadosPagamentoFatura['data_movimentacao']);                 
+                $dadosPagamentoFatura['data_movimentacao'] = Controller_Helper_Date::getDateDb($dadosPagamentoFatura['data_movimentacao']);
                 
-                Zend_Debug::dump($dadosPagamentoFatura);
+                $dadosPagamentoFatura['valor_movimentacao'] = View_Helper_Currency::setCurrencyDb($dadosPagamentoFatura['valor_movimentacao']);
+                                                
+                $modelMovimentacao = new Model_Movimentacao();
+                
+                try {
+                    $id_movimentacao = $modelMovimentacao->insert($dadosPagamentoFatura);
+                    
+                    // insere na tabela de fatura
+                    $modelFaturaCartao = new Model_FaturaCartao();
+                    $dadosFaturaCartao['id_movimentacao'] = $id_movimentacao;
+                    $modelFaturaCartao->insert($dadosFaturaCartao);
+                    
+                    $this->_helper->flashMessenger->addMessage(array(
+                        'class' => 'alert alert-success',
+                        'message' => 'Fatura paga com sucesso!'
+                    ));
+                    
+                    $this->_redirect("cliente/index/index");
+                } catch (Exception $ex) {
+                    echo $ex->getMessage();
+                }
             }
         }        
         
