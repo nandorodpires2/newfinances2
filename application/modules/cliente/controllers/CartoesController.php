@@ -203,11 +203,19 @@ class Cliente_CartoesController extends Zend_Controller_Action {
         $id_cartao = $this->_getParam("cartao");        
         $vencimento_fatura = $this->_getParam("fatura");        
         $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
-        
+        $this->view->id_cartao = $id_cartao;
+                        
         $modelVwLancamentosCartao = new Model_VwLancamentoCartao();
+        
+        // busca as faturas
+        $faturas = $modelVwLancamentosCartao->getFaturas($id_usuario, $id_cartao);
+        $this->view->faturas = $faturas;
+        
+        // busca os lancamentos da fatura
+        
         $lancamentos = $modelVwLancamentosCartao->getLancamentosFatura($id_cartao, $vencimento_fatura, $id_usuario);
         $this->view->lancamentos = $lancamentos;        
-        
+        // total da fatura
         $total_fatura = $modelVwLancamentosCartao->getTotalFatura($id_cartao, $vencimento_fatura, $id_usuario);
         $this->view->total_fatura = $total_fatura->valor_fatura;
         

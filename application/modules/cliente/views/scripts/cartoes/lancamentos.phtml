@@ -1,9 +1,31 @@
+<?php echo $this->headScript()->appendFile($this->baseUrl('views/js/cliente/cartoes/lancamentos.js')); ?>
 <div class="row">    
     <div class="col-lg-12">    
         <?php echo View_Helper_Messages::render($this->messages); ?> 
         <div class="panel panel-info">
             <div class="panel-heading">Lançamento Fatura</div>
             <div class="panel-body">
+                <div class="col-lg-12">
+                    <form class="form-inline" role="form" method="post" action="<?php echo $this->url(array(
+                        'module' => 'cliente',
+                        'controller' => 'cartoes', 
+                        'action' => 'lancamentos'                        
+                        ), null, true); ?>" id="formLancamentos">
+                        <div class="form-group">
+                            <input type="hidden" class="sr-only" name="cartao" value="<?php echo $this->id_cartao; ?>" />
+                            <label class="">Outras Faturas:</label>
+                            <select class="form-control input-sm" id="lancamentosFatura" name="fatura">
+                                <?php if ($this->faturas->count() > 0) : ?>
+                                <?php foreach ($this->faturas as $fatura) : ?>
+                                <option value="<?php echo $fatura->vencimento_fatura; ?>"><?php echo View_Helper_Date::getDataView($fatura->vencimento_fatura); ?></option>
+                                <?php endforeach; ?>
+                                <?php else : ?>
+                                <option>Nenhuma outra fatura</option>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                    </form>
+                </div>                
                 <table class="table table-striped table-responsive">
                     <thead>
                         <tr>

@@ -62,7 +62,7 @@ class Model_VwLancamentoCartao extends Zend_Db_Table {
     /**
      * fatura(s) atual
      */
-    public function getFaturas($id_usuario) {
+    public function getFaturas($id_usuario, $id_cartao = null) {
         
         $select = $this->select()
                 ->from(array('vlc' => $this->_name), array(
@@ -74,6 +74,10 @@ class Model_VwLancamentoCartao extends Zend_Db_Table {
                 ->where("vlc.id_usuario = ?", $id_usuario)
                 ->group("vlc.vencimento_fatura")
                 ->group("vlc.id_cartao");
+        
+        if ($id_cartao) {
+            $select->where('vlc.id_cartao = ?', $id_cartao);
+        }        
         
         return $this->fetchAll($select);
         
