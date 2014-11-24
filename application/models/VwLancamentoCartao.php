@@ -26,11 +26,13 @@ class Model_VwLancamentoCartao extends Zend_Db_Table {
                     'vlc.id_cartao',
                     'vlc.bandeira_cartao',
                     'vlc.descricao_cartao',
+                    'vlc.fim_fatura',
                     'vencimento_fatura' => 'date(vlc.vencimento_fatura)',
                     'valor_fatura' => 'sum(vlc.valor_movimentacao)'
                 ))                
                 ->where("vlc.id_usuario = ?", $id_usuario)
                 ->where("year(vlc.vencimento_fatura) = year(now())")
+                ->where("vlc.realizado = ?", 1)
                 ->where("month(vlc.vencimento_fatura) = month(now())")
                 ->group("vlc.id_cartao")
                 ->group("vlc.vencimento_fatura");
@@ -60,7 +62,7 @@ class Model_VwLancamentoCartao extends Zend_Db_Table {
     /**
      * fatura(s) atual
      */
-    public function getFaturas($id_usuario) {
+    public function getFaturas($id_usuario, $id_cartao = null) {
         
         $select = $this->select()
                 ->from(array('vlc' => $this->_name), array(
@@ -70,7 +72,12 @@ class Model_VwLancamentoCartao extends Zend_Db_Table {
                     "valor_pago" => 0
                 ))                
                 ->where("vlc.id_usuario = ?", $id_usuario)
-                ->group("vlc.vencimento_fatura");
+                ->group("vlc.vencimento_fatura")
+                ->group("vlc.id_cartao");
+        
+        if ($id_cartao) {
+            $select->where('vlc.id_cartao = ?', $id_cartao);
+        }        
         
         return $this->fetchAll($select);
         
@@ -104,8 +111,8 @@ class Model_VwLancamentoCartao extends Zend_Db_Table {
         $select = $this->select()
                 ->from(array('vlc' => $this->_name), array('*'))
                 ->setIntegrityCheck(false)
-                ->joinInner(array('mov' => 'movimentacao'), 'vlc.id_movimentacao = mov.id_movimentacao', array('*'))
-                ->joinInner(array('cat' => 'categoria'), 'mov.id_categoria = cat.id_categoria', array('*'))
+                ->joinInner(array('mov' => 'movimentacao'), 'vlc.id_movimentacao = mov.id_movimentacao', array())
+                ->joinLeft(array('cat' => 'categoria'), 'mov.id_categoria = cat.id_categoria', array('*'))
                 ->where('vlc.id_cartao = ?', $id_cartao)
                 ->where('vlc.vencimento_fatura = ?', $vencimento_fatura)
                 ->where('vlc.id_usuario = ?', $id_usuario)

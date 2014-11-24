@@ -91,6 +91,13 @@ class Form_Cliente_Cartoes_PagarFatura extends Zend_Form {
             'value' => $formDefault->id_usuario
         ));
                 
+        // id_cartao
+        $this->addElement('hidden', 'id_cartao');        
+        // id_cartao
+        $this->addElement('hidden', 'saldo_atual');                
+        // id_cartao
+        $this->addElement('hidden', 'vencimento_fatura');                
+        
     }
         
 }

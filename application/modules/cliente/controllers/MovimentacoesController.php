@@ -110,15 +110,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                         $dadosUpdateMovimentacao['id_movimentacao_pai'] = $lastId;
                         $whereUpdateMovimentacao = "id_movimentacao = " . $modelMovimentacao->lastInsertId();
                         $modelMovimentacao->update($dadosUpdateMovimentacao, $whereUpdateMovimentacao);
-                    }
-                    
-                    // se a movimentacao e em cartao de credito atualiza os dados
-                    if ($dadosReceita['id_tipo_movimentacao'] == self::TIPO_MOVIMENTACAO_CARTAO) {
-                        $pluginCartao = new Plugin_Cartao();
-                        $pluginCartao->atualizaFatura($id_movimentacao);
-                    }
-                    
-                    
+                    }                    
                     $this->_helper->flashMessenger->addMessage(array(
                         'class' => 'alert alert-success',
                         'message' => 'Receita Cadastrada com sucesso!'
@@ -211,7 +203,6 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                         $modelMovimentacao->update($dadosUpdateMovimentacao, $whereUpdateMovimentacao);
                         
                     }
-                    
                     $this->_helper->flashMessenger->addMessage(array(
                         'class' => 'alert alert-success',
                         'message' => 'Despesa Cadastrada com sucesso!'
@@ -328,7 +319,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 
         if ($dadosMovimentacao) {
             
-            //Zend_Debug::dump($dadosMovimentacao);
+            //Zend_Debug::dump($dadosMovimentacao);            
 
             $dadosMovimentacao = $dadosMovimentacao->toArray();
             
@@ -366,21 +357,21 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 if ($formUpdate->isValid($dadosMovimentacaoUpdate)) {
                     $dadosMovimentacaoUpdate = $formUpdate->getValues();
                     
-                    //Zend_Debug::Dump($dadosMovimentacaoUpdate);                    
                     if (isset ($dadosMovimentacaoUpdate['tipo_pgto'])) {                    
                         if ($dadosMovimentacaoUpdate['tipo_pgto'] == 'conta') {
-                            //$dadosMovimentacaoUpdate['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_DESPESA;
+                            if ($dadosMovimentacaoUpdate['valor_movimentacao'] < 0) {
+                                $dadosMovimentacaoUpdate['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_DESPESA;                                
+                            } else {
+                                $dadosMovimentacaoUpdate['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_RECEITA;                                
+                            }
                             $dadosMovimentacaoUpdate['id_cartao'] = null;
                         } else {
-                            //$dadosMovimentacaoUpdate['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_CARTAO;
+                            $dadosMovimentacaoUpdate['id_tipo_movimentacao'] = self::TIPO_MOVIMENTACAO_CARTAO;
                             $dadosMovimentacaoUpdate['id_conta'] = null;
                         }                    
                         unset($dadosMovimentacaoUpdate['tipo_pgto']);
                     }
-                    
-                    //Zend_Debug::Dump($dadosMovimentacaoUpdate);                    
-                    //die();
-                    
+                                        
                     if ($dadosMovimentacao['id_tipo_movimentacao'] == self::TIPO_MOVIMENTACAO_TRANSFERENCIA ||
                         $dadosMovimentacao['id_tipo_movimentacao'] == self::TIPO_MOVIMENTACAO_RECEITA    
                         ) {
@@ -416,7 +407,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                             $dadosMovimentacaoUpdate['valor_movimentacao'] *= -1; 
                             $modelMovimentacao->update($dadosMovimentacaoUpdate, $whereOrigem);
                         }
-
+                        
                         $this->_helper->flashMessenger->addMessage(array(
                             'class' => 'alert alert-success',
                             'message' => 'Lançamento alterado com sucesso!'
@@ -481,7 +472,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
 
                     try {
                         $modelMovimentacao->delete($where);
-                         $this->_helper->flashMessenger->addMessage(array(
+                        $this->_helper->flashMessenger->addMessage(array(
                             'class' => 'alert alert-success',
                             'message' => 'Lançamento excluído com sucesso!'
                         ));

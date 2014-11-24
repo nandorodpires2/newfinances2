@@ -58,7 +58,7 @@ class Model_Movimentacao extends Zend_Db_Table {
                     'tpm.id_tipo_movimentacao',
                     'tpm.tipo_movimentacao'
                 ))
-                ->joinInner(array('cat' => 'categoria'), 'mov.id_categoria = cat.id_categoria', array(
+                ->joinLeft(array('cat' => 'categoria'), 'mov.id_categoria = cat.id_categoria', array(
                     'cat.descricao_categoria'
                 ))
                 ->where("mov.id_usuario = ?", $id_usuario)

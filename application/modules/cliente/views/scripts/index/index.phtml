@@ -69,6 +69,7 @@
                         <th>Cartão</th>
                         <th>Vencimento</th>
                         <th>Valor</th>
+                        <th>Status</th>
                         <th>Ações</th>
                     </tr>
                     <?php foreach ($this->faturas as $key => $fatura) : ?>                    
@@ -82,7 +83,14 @@
                             <span class="<?php echo $fatura->valor_fatura > 0 ? 'text-success' : 'text-danger'; ?>">
                                 <?php echo View_Helper_Currency::getCurrency($fatura->valor_fatura); ?>
                             </span>
-                        </td>                        
+                        </td>          
+                        <td>
+                            <?php if (!View_Helper_Cartoes::fechadaFatura($fatura->fim_fatura)) : ?>
+                            <span>Em Aberto</span>
+                            <?php else : ?>
+                            <span>Fechado</span>
+                            <?php endif; ?>
+                        </td>
                         <td class="col-sm-3 text-center">
                             <a class="btn btn-xs btn-info" href="<?php echo $this->url(array(
                                 'module' => 'cliente',
@@ -91,6 +99,7 @@
                                 'fatura' => $fatura->vencimento_fatura,
                                 'cartao' => $fatura->id_cartao
                             )); ?>">Ver Lançamentos</a>
+                            <?php if (View_Helper_Cartoes::fechadaFatura($fatura->fim_fatura)) : ?>
                             <a class="btn btn-xs btn-success" href="<?php echo $this->url(array(
                                 'module' => 'cliente',
                                 'controller' => 'cartoes',
@@ -98,6 +107,7 @@
                                 'fatura' => $fatura->vencimento_fatura,
                                 'cartao' => $fatura->id_cartao
                             )); ?>">Pagar Fatura</a>
+                            <?php endif; ?>
                         </td>
                     </tr>                    
                     <?php endforeach; ?>                                

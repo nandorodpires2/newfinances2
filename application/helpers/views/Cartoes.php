@@ -40,4 +40,19 @@ class View_Helper_Cartoes extends Zend_View_Helper_Abstract {
         
     }
     
+    /**
+     * verifica se uma fatura ja esta fechado
+     */
+    public static function fechadaFatura($data) {
+        
+        $zendDateNow = new Zend_Date();
+        $zendDate = new Zend_Date($data);
+        
+        if (!$zendDate->isLater($zendDateNow->now()->subDay(1))) {
+            return true;
+        }
+        return false;
+        
+    }
+    
 }
