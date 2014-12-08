@@ -87,13 +87,13 @@ class Site_CadastroUsuarioController extends Zend_Controller_Action {
                             
                             $messages = array(
                                 'type' => 'success',
-                                'class' => 'bg-success text-success padding-10px margin-10px-0px',
+                                'class' => 'alert alert-success',
                                 'message' => 'Cadastro realizado com sucesso! Seja bem-vindo ao NewFinances!'
                             );
                             $this->_helper->flashMessenger->addMessage($messages);
                             $messages = array(
                                 'type' => 'warning',
-                                'class' => 'bg-warning text-warning padding-10px margin-10px-0px',
+                                'class' => 'alert alert-warning',
                                 'message' => 'Você precisa ativar sua conta. Basta acessar o e-mail cadastrado e clicar no link enviado.'
                             );
                             $this->_helper->flashMessenger->addMessage($messages);
@@ -103,16 +103,16 @@ class Site_CadastroUsuarioController extends Zend_Controller_Action {
                                 $messages = array(
                                     array(
                                         'type' => 'warning',
-                                        'class' => 'bg-warning text-warning padding-10px margin-10px-0px',
+                                        'class' => 'alert alert-warning',
                                         'message' => 'Ja existe um usuário cadastrado com este CPF ou E-mail!'
                                     )
                                 );
-                            } else {
+                            } else {                                
                                 $messages = array(
                                     array(
                                         'type' => 'error',
-                                        'class' => 'bg-danger text-danger padding-10px margin-10px-0px',
-                                        'message' => 'Houve um erro ao realizar o cadastro. Favor entrar em contato e relatar o mesmo.'
+                                        'class' => 'alert alert-danger',
+                                        'message' => 'Houve um erro ao realizar o cadastro. Favor entrar em contato e relatar o mesmo. - Message: ' . $ex->getMessage()
                                     )
                                 );
                             }
