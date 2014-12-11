@@ -54,9 +54,134 @@ class Site_UsuariosController extends Zend_Controller_Action {
     }
 
     public function recuperarSenhaAction() {
-        // action body
+        
+        $formSiteRecuperarSenha = new Form_Site_RecuperarSenha();
+        $this->view->formSiteRecuperarSenha = $formSiteRecuperarSenha;
+        
+        if ($this->_request->isPost()) {
+            $dadosSenha = $this->_request->getPost();
+            if ($formSiteRecuperarSenha->isValid($dadosSenha)) {
+                
+                $modelUsuario = new Model_Usuario();
+                $usuario = $modelUsuario->fetchRow("email_usuario = '{$dadosSenha['email']}'");
+                
+                if ($usuario) {
+                    
+                    $dadosUpdate = array(
+                        'hash_senha' => md5(uniqid()),
+                        'ativo_usuario' => 0
+                    );
+                    
+                    try {
+                        $modelUsuario->update($dadosUpdate, "id_usuario = {$usuario->id_usuario}");
+                        
+                        // envia o email                        
+                        $this->_helper->flashMessenger->addMessage(
+                            array(
+                                'class' => "alert alert-success",
+                                'message' => "Foi enviado um link para o e-mail informado para alterar sua senha"
+                            )
+                        );
+                         
+                        $this->_redirect("usuarios/recuperar-senha");
+                    } catch (Exception $ex) {
+                        $this->view->messages = array(
+                            array(
+                                'class' => "alert alert-danger",
+                                'message' => "Houve um erro ao recuperar senha. Por favor tente mais tarde!"
+                            )
+                        );
+                    }
+                    
+                } else {
+                    $this->view->messages = array(
+                        array(
+                            'class' => "alert alert-danger",
+                            'message' => "E-mail não cadastrado em nosso sistema!"
+                        )
+                    );
+                }
+                
+            }
+        }
+        
     }
-    
+
+    /**
+     * altera a senha
+     */
+    public function alterarSenhaAction() {
+        
+        $hash = $this->_getParam("hash");
+        
+        if ($hash) {            
+            $modelUsuario = new Model_Usuario();
+            $usuario = $modelUsuario->fetchRow("hash_senha = '{$hash}'");
+            
+            if ($usuario) {
+
+                $formAlterarSenha = new Form_Site_AlterarSenha();
+                $this->view->formAlterarSenha = $formAlterarSenha;
+
+                if ($this->_request->isPost()) {
+                    $dadosSenha = $this->_request->getPost();
+                    if ($formAlterarSenha->isValid($dadosSenha)) {
+                        $dadosSenha = $formAlterarSenha->getValues();
+                        
+                        if ($dadosSenha['nova_senha'] == $dadosSenha['confirma_nova_senha']) {
+                            
+                            $dadosUpdate = array(
+                                'hash_senha' => null,
+                                'ativo_usuario' => 1,
+                                'senha_usuario' => md5($dadosSenha['nova_senha'])
+                            );
+                            
+                            try {
+                                $modelUsuario->update($dadosUpdate, "id_usuario = {$usuario->id_usuario}");
+                                $this->_helper->flashMessenger->addMessage(
+                                    array(
+                                        'class' => "alert alert-success",
+                                        'message' => "Senha alterada com sucesso!"
+                                    )
+                                );
+                            } catch (Exception $ex) {
+                                $this->_helper->flashMessenger->addMessage(
+                                    array(
+                                        'class' => "alert alert-danger",
+                                        'message' => "Houve um erro ao alterar a senha!" . $ex->getMessage()
+                                    )
+                                );
+                            }
+                            $this->_redirect("usuarios/login");
+                            
+                        } else {
+                            $this->view->messages = array(
+                                array(
+                                    'class' => "alert alert-danger",
+                                    'message' => "A confirmação da senha e diferente da senha digitada!"
+                                )
+                            );
+                        }
+                        
+                    }
+                }
+                
+                
+            } else {                        
+                $this->_helper->flashMessenger->addMessage(
+                    array(
+                        'class' => "alert alert-danger",
+                        'message' => "Houve um erro ao tentar alterar a senha!"
+                    )
+                );
+
+                $this->_redirect("usuarios/alterar-senha");
+            }
+            
+        }
+        
+    }
+
     public function ativarAction() {
         
         $hash = $this->_getParam('hash');
