@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : Fernando Rodrigues
 */
 
+hr {
+    border-bottom: 2px solid #DCDCDC;
+}
+
 /* backgronds */
 .background-color-white {
     background: #fff;
@@ -190,6 +194,14 @@ ul.error {
 .img-banner {
     width: 100%;
     height: 200px;
+}
+
+.slider-text {
+    background: #FFFAFA;
+    color: #000;
+    opacity:0.65;
+    -moz-opacity: 0.65;
+    filter: alpha(opacity=65);
 }
 
 .direitos {
