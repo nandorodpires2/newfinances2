@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : Fernando Rodrigues
 */
 
-body {
+.body-christmas {
     background-image: url(../img/themes/christmas.png);
     background-repeat: no-repeat;
     background-size: 100% auto;
