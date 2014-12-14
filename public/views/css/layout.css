@@ -8,6 +8,14 @@ and open the template in the editor.
     Author     : Fernando Rodrigues
 */
 
+body {
+    background-image: url(../img/themes/christmas.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center top;
+    background-attachment: fixed;
+}
+
 hr {
     border-bottom: 2px solid #DCDCDC;
 }
