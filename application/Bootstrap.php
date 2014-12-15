@@ -58,6 +58,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $controller->registerPlugin(new Plugin_Application());
         $controller->registerPlugin(new Plugin_Movimentacao());
         $controller->registerPlugin(new Plugin_Cartao());
+        $controller->registerPlugin(new Plugin_Acl());
     }
     
     /**
