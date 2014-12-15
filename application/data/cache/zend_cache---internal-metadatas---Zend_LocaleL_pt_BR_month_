@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-a:4:{s:4:"hash";i:-251488253;s:5:"mtime";i:1418223221;s:6:"expire";i:1418230421;s:4:"tags";a:1:{i:0;s:11:"Zend_Locale";}}
-=======
-a:4:{s:4:"hash";i:-251488253;s:5:"mtime";i:1418344114;s:6:"expire";i:1418351314;s:4:"tags";a:1:{i:0;s:11:"Zend_Locale";}}
->>>>>>> c86b725ffd4bfb57b3243693e18dd6d3442af6fb
+a:4:{s:4:"hash";i:-251488253;s:5:"mtime";i:1418386468;s:6:"expire";i:1418393668;s:4:"tags";a:1:{i:0;s:11:"Zend_Locale";}}
