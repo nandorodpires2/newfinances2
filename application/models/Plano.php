@@ -17,7 +17,31 @@ class Model_Plano extends Zend_Db_Table {
     protected $_primary = "id_plano";
     
     /**
-     * retorna os planos
+     * getQueryAll
+     */
+    protected function getQueryAll() {
+        
+        $select = $this->select()
+                ->from(array('p' => $this->_name), array('*'))
+                ->setIntegrityCheck(false);
+        
+        return $select;
+        
+    }
+    
+    /**
+     * 
+     */
+    public function getPlanoById($id_plano) {
+        $select = $this->getQueryAll()
+                ->where("p.id_plano = ?", $id_plano);
+        
+        return $this->fetchRow($select);
+                
+    }
+
+    /**
+     * retorna os planos do usuario
      */
     public function getPlanosUsuario() {
         

@@ -29,7 +29,7 @@ class Model_Funcionalidade extends Zend_Db_Table {
                 ->joinInner(array('mp' => 'menu_posicao'), 'f.id_menu_posicao = mp.id_menu_posicao', array(
                     'mp.posicao'
                 ))                
-                ->order("controller asc")
+                ->order(array("module asc", "controller asc", "action asc"))
                 ->order("descricao_permissao asc");
         
         return $this->fetchAll($select);
@@ -59,6 +59,16 @@ class Model_Funcionalidade extends Zend_Db_Table {
                 ->distinct()
                 ->from(array('f' => $this->_name), array(
                     'resource' => "concat(f.module,':',f.controller)"
+                ));
+
+        return $this->fetchAll($select);
+    }
+    
+    public function getModulesPlano() {
+        $select = $this->select()
+                ->distinct()
+                ->from(array('f' => $this->_name), array(
+                    "f.module"
                 ));
 
         return $this->fetchAll($select);

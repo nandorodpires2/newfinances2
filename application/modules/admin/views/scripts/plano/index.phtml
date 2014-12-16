@@ -1,0 +1,76 @@
+<div class="row">    
+    <?php echo View_Helper_Messages::render($this->messages); ?>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Planos
+            <div class="pull-right">
+                <a href="<?php echo $this->url(array(
+                    'module' => 'admin',
+                    'controller' => 'plano',
+                    'action' => 'novo-plano'
+                ), null, true); ?>">
+                    <img src="<?php echo $this->baseUrl('views/img/icon_add.png'); ?>" width="25px" title="Cadastrar Novo Plano"/>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Descrição</th>
+                        <th>Tempo</th>
+                        <th>Unid. Tempo</th>
+                        <th>Acesso Usuário</th>
+                        <th>Cobrança</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php if ($this->planos->count() > 0) : ?>
+                    <?php foreach ($this->planos as $plano) : ?>
+                    <tr>
+                        <td><?php echo $plano->id_plano; ?></td>
+                        <td><?php echo $plano->descricao_plano; ?></td>
+                        <td><?php echo $plano->tempo_plano; ?></td>
+                        <td><?php echo $plano->unidade_tempo_plano; ?></td>
+                        <td><?php echo $plano->usuario_plano == 1 ? 'Sim' : 'Não'; ?></td>
+                        <td><?php echo $plano->cobranca == 1 ? 'Sim' : 'Não'; ?></td>
+                        <td><?php echo $plano->ativo_plano == 1 ? 'Sim' : 'Não'; ?></td>
+                        <td class="col-md-2 text-center">
+                            <a href="<?php echo $this->url(array(
+                                'module' => 'admin',
+                                'controller' => 'plano',
+                                'action' => 'editar-plano',
+                                'id_plano' => $plano->id_plano
+                            ), null, true); ?>">
+                                <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_edit.png'); ?>" width="20" title="Editar" />
+                            </a>
+                            <a href="<?php echo $this->url(array(
+                                'module' => 'admin',
+                                'controller' => 'plano',
+                                'action' => 'excluir-plano',
+                                'id_plano' => $plano->id_plano
+                            ), null, true); ?>">
+                                <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_delete.png'); ?>" width="20" title="Excluir" />
+                            </a>
+                            <a href="<?php echo $this->url(array(
+                                'module' => 'admin',
+                                'controller' => 'plano',
+                                'action' => 'permissoes-plano',
+                                'id_plano' => $plano->id_plano
+                            ), null, true); ?>" class="btn btn-sm btn-info">Permissões</a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr>
+                        <td>Nenhum plano cadastrado</td>
+                    </tr>
+                <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

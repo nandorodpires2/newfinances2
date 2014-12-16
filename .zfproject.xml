@@ -194,6 +194,21 @@
             <controllerFile controllerName="Chamados">
               <actionMethod actionName="index"/>
             </controllerFile>
+            <controllerFile controllerName="Perfil">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Funcionalidade">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="editarFuncionalidade"/>
+              <actionMethod actionName="excluirFuncionalidade"/>
+            </controllerFile>
+            <controllerFile controllerName="Plano">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="novoPlano"/>
+              <actionMethod actionName="editarPlano"/>
+              <actionMethod actionName="excluirPlano"/>
+              <actionMethod actionName="permissoesPlano"/>
+            </controllerFile>
           </controllersDirectory>
           <formsDirectory enabled="false"/>
           <layoutsDirectory enabled="false">
@@ -211,6 +226,33 @@
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Chamados">
                 <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Perfil">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Funcionalidade">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Plano">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Plano">
+                <viewScriptFile forActionName="novoPlano"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Plano">
+                <viewScriptFile forActionName="editarPlano"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Plano">
+                <viewScriptFile forActionName="excluirPlano"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Plano">
+                <viewScriptFile forActionName="permissoesPlano"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Funcionalidade">
+                <viewScriptFile forActionName="editarFuncionalidade"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Funcionalidade">
+                <viewScriptFile forActionName="excluirFuncionalidade"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>

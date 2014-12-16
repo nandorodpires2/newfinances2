@@ -2,6 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/controllers/PlanoController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/forms/Admin/Anotacoes/Anotacao.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/views/scripts/plano/permissoes-plano.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/forms/Default.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/models/Plano.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/controllers/FuncionalidadeController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/models/Funcionalidade.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/forms/Admin/Plano/CadastroFuncionalidade.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/views/scripts/plano/index.phtml</file>
+        </group>
+>>>>>>> 5a5af947916f42cbecd5262b35282e9e274239b5
     </open-files>
 </project-private>

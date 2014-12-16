@@ -14,22 +14,22 @@
 <div class="container">                                
     <ul class="nav navbar-nav">                    
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Anotações <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acessos <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li><a href="<?php
                     echo $this->url(array(
                         'module' => 'admin',
-                        'controller' => 'anotacoes',
+                        'controller' => 'plano',
                         'action' => 'index'
                     ), null, true);
-                    ?>">Minhas Anotações</a></li>                
+                    ?>">Planos</a></li>                
                 <li><a href="<?php
                     echo $this->url(array(
                         'module' => 'admin',
-                        'controller' => 'anotacoes',
-                        'action' => 'nova-anotacao'
+                        'controller' => 'funcionalidade',
+                        'action' => 'index'
                     ), null, true);
-                    ?>">Nova Anotação</a></li>
+                    ?>">Funcionalidades</a></li>
             </ul>
         </li>
         <li class="active"><a href="<?php echo $this->url(array(
