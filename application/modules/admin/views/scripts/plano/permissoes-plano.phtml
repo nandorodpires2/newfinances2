@@ -1,0 +1,9 @@
+<div class="row">    
+    <?php echo View_Helper_Messages::render($this->messages); ?>
+    <div class="panel panel-info">
+        <div class="panel-heading">Permissões do plano: <?php echo $this->plano->descricao_plano; ?></div>
+        <div class="panel-body">
+            <?php echo $this->formPlanoFuncionalidadeCadastro; ?>
+        </div>
+    </div>
+</div>

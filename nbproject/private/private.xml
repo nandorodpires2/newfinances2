@@ -2,19 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/C:/wamp/www/newfinances2/application/forms/Site/RecuperarSenha.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/site/views/scripts/contato/index.phtml</file>
-            <file>file:/C:/wamp/www/newfinances2/application/forms/Site/Cadastro.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/site/views/scripts/cadastro-usuario/index.phtml</file>
-            <file>file:/C:/wamp/www/newfinances2/public/views/css/layout.css</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/site/views/scripts/index/index.phtml</file>
-            <file>file:/C:/wamp/www/newfinances2/application/layouts/scripts/site.phtml</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/index/index.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/controllers/PlanoController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/forms/Admin/Anotacoes/Anotacao.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/views/scripts/plano/permissoes-plano.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/forms/Default.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/models/Plano.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/controllers/FuncionalidadeController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/models/Funcionalidade.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/forms/Admin/Plano/CadastroFuncionalidade.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/views/scripts/plano/index.phtml</file>
         </group>
->>>>>>> dacb1554b1ad852fe0db10908928cd5040962041
     </open-files>
 </project-private>
