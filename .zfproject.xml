@@ -201,6 +201,7 @@
               <actionMethod actionName="index"/>
               <actionMethod actionName="editarFuncionalidade"/>
               <actionMethod actionName="excluirFuncionalidade"/>
+              <actionMethod actionName="novaFuncionalidade"/>
             </controllerFile>
             <controllerFile controllerName="Plano">
               <actionMethod actionName="index"/>
@@ -253,6 +254,9 @@
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Funcionalidade">
                 <viewScriptFile forActionName="excluirFuncionalidade"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Funcionalidade">
+                <viewScriptFile forActionName="novaFuncionalidade"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>

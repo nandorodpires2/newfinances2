@@ -22,6 +22,7 @@ class Form_Admin_Plano_CadastroFuncionalidade extends Zend_Form {
         foreach ($modulos as $modulo) {
             
             // busca as funcionalidade
+<<<<<<< HEAD
             $funcionalidades = $modelFuncionalidade->getFuncionalidadesByModule($modulo->module);            
             $multioptions = array();
             foreach ($funcionalidades as $funcionalidade) {
@@ -29,12 +30,29 @@ class Form_Admin_Plano_CadastroFuncionalidade extends Zend_Form {
             }            
             
             $this->addElement('multicheckbox', 'id_funcionalidade_' . $modulo->module, array(
+=======
+            $funcionalidades = $modelFuncionalidade->getFuncionalidadesByModule($modulo->module);
+            $multioptions = array();
+            foreach ($funcionalidades as $funcionalidade) {
+                $multioptions[$funcionalidade->id_funcionalidade] = ' ' . $funcionalidade->descricao_permissao;
+            }
+            
+            $this->addElement('multicheckbox', $modulo->module, array(
+>>>>>>> e1ae50c980bb522b74a320bbb69d03038b7519c3
                 'label' => strtoupper($modulo->module),
                 'registerInArray' => true,
                 'multioptions' => $multioptions
             ));
         }
         
+        // submit
+        $this->addElement('submit', 'submit', array(
+            'label' => 'Salvar',
+            'class' => 'btn btn-submit'
+        ));
+        
+        // id_plano (hidden)
+        $this->addElement('hidden', 'id_plano');
         
         
     }
