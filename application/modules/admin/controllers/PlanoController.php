@@ -36,7 +36,7 @@ class Admin_PlanoController extends Zend_Controller_Action
     public function permissoesPlanoAction()
     {
         
-        $id_plano = $this->getParam('id_plano');
+        $id_plano = $this->_getParam('id_plano');
         
         // busca dados do plano
         $modelPlano = new Model_Plano();
