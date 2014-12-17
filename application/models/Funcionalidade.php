@@ -26,11 +26,24 @@ class Model_Funcionalidade extends Zend_Db_Table {
         $select = $this->select()
                 ->from(array('f' => $this->_name), array('f.*'))
                 ->setIntegrityCheck(false)
-                ->joinInner(array('mp' => 'menu_posicao'), 'f.id_menu_posicao = mp.id_menu_posicao', array(
-                    'mp.posicao'
-                ))                
                 ->order(array("module asc", "controller asc", "action asc"))
                 ->order("descricao_permissao asc");
+        
+        return $this->fetchAll($select);
+    }
+    
+    /**
+     * 
+     * retorna as funcionalidades de um modulo
+     * 
+     * @return type
+     */
+    public function getFuncionalidadesByModule($modulo) {
+        $select = $this->select()
+                ->from(array('f' => $this->_name), array('f.*'))
+                ->setIntegrityCheck(false)      
+                ->where("f.module = ?", $modulo)
+                ->order(array("descricao_permissao asc","module asc", "controller asc", "action asc"));
         
         return $this->fetchAll($select);
     }
@@ -69,7 +82,8 @@ class Model_Funcionalidade extends Zend_Db_Table {
                 ->distinct()
                 ->from(array('f' => $this->_name), array(
                     "f.module"
-                ));
+                ))
+                ->where("f.module not in('site', 'mobile') ");
 
         return $this->fetchAll($select);
     }

@@ -13,8 +13,7 @@
  */
 class View_Helper_Messages extends Zend_View_Helper_Abstract {
     
-    public static function render($messages, $alerts = null) {
-        
+    public static function render($messages, $alerts = null) {        
         $render = "";
         
         if ($alerts && is_array($alerts)) {            

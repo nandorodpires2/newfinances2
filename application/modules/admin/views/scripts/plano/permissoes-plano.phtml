@@ -3,7 +3,14 @@
     <div class="panel panel-info">
         <div class="panel-heading">Permissões do plano: <?php echo $this->plano->descricao_plano; ?></div>
         <div class="panel-body">
-            <?php echo $this->formPlanoFuncionalidadeCadastro; ?>
+            <form method="post">                
+                <div class="col-lg-6"><?php echo $this->formPlanoFuncionalidadeCadastro->cliente; ?></div>
+                <div class="col-lg-6"><?php echo $this->formPlanoFuncionalidadeCadastro->admin; ?></div>
+                <div class="col-lg-12">
+                    <?php echo $this->formPlanoFuncionalidadeCadastro->submit; ?>
+                    <?php echo $this->formPlanoFuncionalidadeCadastro->id_plano; ?>
+                </div>
+            </form>
         </div>
     </div>
 </div>
