@@ -31,21 +31,7 @@ class Model_Funcionalidade extends Zend_Db_Table {
         
         return $this->fetchAll($select);
     }
-    
-    public function getFuncionalidadesByModule($module) {
-        $select = $this->select()
-                ->from(array('f' => $this->_name), array('f.*'))
-                ->setIntegrityCheck(false)
-                ->joinInner(array('mp' => 'menu_posicao'), 'f.id_menu_posicao = mp.id_menu_posicao', array(
-                    'mp.posicao'
-                ))                
-                ->where("f.module = ?", $module)
-                ->order(array("module asc", "controller asc", "action asc"))
-                ->order("descricao_permissao asc");
         
-        return $this->fetchAll($select);
-    }
-    
     /**
      * 
      * retorna as funcionalidades de um modulo
