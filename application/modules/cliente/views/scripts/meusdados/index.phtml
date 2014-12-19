@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-12 col-sm-12 text-justify">        
+    <div class="col-lg-12 col-sm-12">        
         <div class="col-lg-6">
             <div class="well background-color-white">
                 <h3 class="text-green">Meus Dados</h3>
@@ -9,10 +9,15 @@
         <div class="col-lg-6">
             <div class="well background-color-white">
                 <h3 class="text-green">Meu Plano</h3>
-                <p>Meu Plano: <?php echo $this->planoUsuario->descricao_plano; ?></p>
-                <p>Encerramento: <?php echo $this->planoUsuario->data_encerramento ? View_Helper_Date::getDataView($this->planoUsuario->data_encerramento) : 'Nunca'; ?></p>
-                <a href="" class="btn btn-sm btn-success">Trocar plano</a>
+                <p>Plano atual: <?php echo $this->planoUsuario->descricao_plano; ?></p>
+                <p>Encerramento: <?php echo $this->planoUsuario->data_encerramento ? View_Helper_Date::getDataView($this->planoUsuario->data_encerramento) : 'Nunca'; ?></p>                
             </div> 
-    </div>
+            <div class="well background-color-white">
+                <h3 class="text-green">Alertas</h3>                
+            </div> 
+            <div class="well background-color-white">
+                <h3 class="text-green">Configurações</h3>                
+            </div> 
+        </div>
     </div>    
 </div>
