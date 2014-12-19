@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/MeusdadosController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/forms/Site/Cadastro.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/meusdados/index.phtml</file>
+            <file>file:/C:/wamp/www/newfinances2/application/models/UsuarioPlano.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/plugins/Acl.php</file>
+        </group>
     </open-files>
 </project-private>

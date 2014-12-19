@@ -96,6 +96,17 @@ padding-5px {
     margin: 0 5px;
 }
 
+.margin-left-neg-15px {
+    margin-left: 0px;
+}
+
+.margin-left-5px {
+    margin-left: 5px;
+}
+
+.margin-right-10px {
+    margin-right: 10px;
+}
 /* texts */
 .text-orange {
     color: #ec971f;
@@ -213,6 +224,8 @@ ul.error {
     bottom: 0;
 }
 
+
+/* footer */
 footer a {
     padding: 5px;
 }
@@ -236,5 +249,10 @@ footer a:hover {
     list-style: none;
     margin-left: -30px;
     padding: 5px 0;
+}
+
+footer .col-lg-4 {
+    padding-top: 15px;
+    margin-bottom: 15px;
 }
 

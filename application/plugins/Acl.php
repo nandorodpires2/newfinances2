@@ -54,15 +54,14 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
                 $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
                 // busca o plano do usuario logado
                 $planoUsuario = $modelUsuarioPlano->getPlanoAtual($id_usuario);
-                $this->_role = $planoUsuario->descricao_plano;
-                // verifica se o usuario e gestor
-                if ($planoUsuario->id_plano != self::ID_PLANO_GESTOR) {                
-                    // busca os recursos do plano
-                    $this->_resources = $modelFuncionalidade->getResourcesPlano($planoUsuario->id_plano);
-                    // busca as funcionalidades que o plano pode acessar
-                    $this->_funcionalidades = $modelPlanoFuncionalidade->getFuncionalidadesPlano($planoUsuario->id_plano);                
-                    $this->startAcl();
-                }            
+                $this->_role = $planoUsuario->descricao_plano;               
+                
+                // busca os recursos do plano
+                $this->_resources = $modelFuncionalidade->getResourcesPlano($planoUsuario->id_plano);
+                // busca as funcionalidades que o plano pode acessar
+                $this->_funcionalidades = $modelPlanoFuncionalidade->getFuncionalidadesPlano($planoUsuario->id_plano);                
+                $this->startAcl();
+                
             }
         }
     }
@@ -88,11 +87,13 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
     protected function isAllowed() {        
         $url = $this->_request->getModuleName() . ':' . $this->_request->getControllerName();
 
+        // verificar se existe a url
+        
         $module = 0;
-        if ($this->_request->getModuleName() == 'gestor') {
-            $module =1;
+        if ($this->_request->getModuleName() == 'admin') {
+            $module = 1;
         } else {
-            $module =2;
+            $module = 2;
         }
         
         if (!$this->_acl->isAllowed($this->_role, $url, $this->_request->getActionName())) {           

@@ -27,17 +27,17 @@
                     'module' => 'cliente',
                     'controller' => 'movimentacoes',
                     'action' => 'nova-receita'
-                ), null, true); ?>">Nova Receita</a></li>
+                ), null, true); ?>"><span class="glyphicon glyphicon-arrow-left"></span> Nova Receita</a></li>
                 <li><a href="<?php echo $this->url(array(
                     'module' => 'cliente',
                     'controller' => 'movimentacoes',
                     'action' => 'nova-despesa'
-                ), null, true); ?>">Nova Despesa</a></li>
+                ), null, true); ?>"><span class="glyphicon glyphicon-arrow-right"></span> Nova Despesa</a></li>
                 <li><a href="<?php echo $this->url(array(
                     'module' => 'cliente',
                     'controller' => 'movimentacoes',
                     'action' => 'transferencia'
-                ), null, true); ?>">Transferência</a></li>
+                ), null, true); ?>"><span class="glyphicon glyphicon-transfer"></span> Transferência</a></li>
             </ul>
         </li>
         <li class="active"><a href="<?php echo $this->url(array(
@@ -60,22 +60,22 @@
                     'module' => 'cliente',
                     'controller' => 'contas',
                     'action' => 'index'
-                ), null, true); ?>">Minhas Contas</a></li>
+                ), null, true); ?>"><span class="glyphicon glyphicon-list"></span> Minhas Contas</a></li>
                 <li><a href="<?php echo $this->url(array(
                     'module' => 'cliente',
                     'controller' => 'contas',
                     'action' => 'nova-conta'
-                ), null, true); ?>">Nova Conta</a></li>
+                ), null, true); ?>"><span class="glyphicon glyphicon-record"></span> Nova Conta</a></li>
                 <li><a href="<?php echo $this->url(array(
                     'module' => 'cliente',
                     'controller' => 'cartoes',
                     'action' => 'index'
-                ), null, true); ?>">Meus Cartões</a></li>
+                ), null, true); ?>"><span class="glyphicon glyphicon-list"></span> Meus Cartões</a></li>
                 <li><a href="<?php echo $this->url(array(
                     'module' => 'cliente',
                     'controller' => 'cartoes',
                     'action' => 'novo-cartao'
-                ), null, true); ?>">Novo Cartão</a></li>
+                ), null, true); ?>"><span class="glyphicon glyphicon-record"></span> Novo Cartão</a></li>
             </ul>
         </li>
         <li class="active"><a href="<?php echo $this->url(array(
@@ -83,11 +83,13 @@
             'controller' => 'chamados',
             'action' => 'index'
         ), null, true); ?>"><span class="glyphicon glyphicon-comment"></span> Meus Chamados</a></li>
+        <!--
         <li class="active"><a href="<?php echo $this->url(array(
             'module' => 'cliente',
             'controller' => 'chamados',
             'action' => 'index'
         ), null, true); ?>"><span class="glyphicon glyphicon-pencil"></span> FAQ</a></li>
+        -->
     </ul>               
     <ul class="nav navbar-nav navbar-right">        
         <li class="dropdown">
@@ -101,7 +103,7 @@
                         'controller' => 'meusdados',
                         'action' => 'index'
                     ), null, true);
-                    ?>">Meus Dados</a></li>
+                    ?>"><span class="glyphicon glyphicon-cog"></span> Meus Dados</a></li>
                 <?php if ($auth->id_plano == 7) : ?>
                 <li><a href="<?php echo $this->url(array(
                         'module' => 'admin',
@@ -117,7 +119,7 @@
                         'controller' => 'usuarios',
                         'action' => 'logout'
                     ), null, true);
-                    ?>">Sair</a></li>
+                    ?>"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
             </ul>
         </li>
     </ul>               
