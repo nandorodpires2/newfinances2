@@ -2,8 +2,8 @@
 
 class Site_CadastroUsuarioController extends Zend_Controller_Action {
 
-    const PLANO_BASICO = 2;
-    const VALOR_PLANO_BASICO = 2;
+    const PLANO_BASICO = 8;
+    const VALOR_PLANO_BASICO = 9;
     
     public function init() {
         $messages = $this->_helper->FlashMessenger->getMessages();
@@ -160,7 +160,7 @@ class Site_CadastroUsuarioController extends Zend_Controller_Action {
     
     protected function sendHashAtivaUsuario($hash, $dados) {
         
-        $link = "http://newfinances2.newfinances.com.br/public/usuarios/ativar/hash/" . $hash;
+        $link = "http://newfinances.com.br/usuarios/ativar/hash/" . $hash;
         
         // envia um e-mail de resposta para o visitante
         $html = new Zend_View();

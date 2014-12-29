@@ -57,7 +57,7 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
                 $this->_role = $planoUsuario->descricao_plano;               
                 
                 // busca os recursos do plano
-                $this->_resources = $modelFuncionalidade->getResourcesPlano($planoUsuario->id_plano);
+                $this->_resources = $modelFuncionalidade->getResourcesPlano($planoUsuario->id_plano);                
                 // busca as funcionalidades que o plano pode acessar
                 $this->_funcionalidades = $modelPlanoFuncionalidade->getFuncionalidadesPlano($planoUsuario->id_plano);                
                 $this->startAcl();

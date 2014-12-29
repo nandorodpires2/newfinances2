@@ -81,7 +81,8 @@ class Form_Cliente_Contas_Conta extends Zend_Form {
                 'Errors',         
                 'Label',
                 array('Errors', array('class' => 'error padding-10px bg-danger text-danger')),
-                array('HtmlTag', array('tag' => 'div'))                
+                array('HtmlTag', array('tag' => 'div')),
+                array('Label', array('tag' => 'div'))
             )
         ));
         

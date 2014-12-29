@@ -38,7 +38,25 @@
             </div>
             <?php echo $this->partial('partials/menus-cliente.phtml'); ?>
         </nav>  
-        <div class="container" style="margin-top: 150px;">            
+        <div class="container" style="margin-top: 150px;"> 
+            
+            <div class="col-lg-7"></div>
+            <div class="col-lg-3 small text-right">
+                <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+                Ajude-nos a manter este sistema
+                <p>Faça uma doação.</p>
+            </div>
+            <div class="col-lg-2">
+                <div class="pull-right">
+                    <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
+                        <!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+                        <input type="hidden" name="currency" value="BRL" />
+                        <input type="hidden" name="receiverEmail" value="nandorodpires@gmail.com" />
+                        <input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/doacoes/164x37-doar-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+                    </form>
+                </div>
+            </div>
+                        
             <div class="col-lg-12 col-sm-12">
                 <?php echo $this->layout()->content; ?>                    
             </div>             

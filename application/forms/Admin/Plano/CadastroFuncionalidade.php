@@ -28,7 +28,7 @@ class Form_Admin_Plano_CadastroFuncionalidade extends Zend_Form {
                 $multioptions[$funcionalidade->id_funcionalidade] = '  ' . $funcionalidade->descricao_permissao;
             }            
             
-            $this->addElement('multicheckbox', $modulo->module, array(
+            $this->addElement('MultiCheckbox', $modulo->module, array(
                 'label' => strtoupper($modulo->module),
                 'registerInArray' => true,
                 'multioptions' => $multioptions

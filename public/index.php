@@ -33,7 +33,7 @@ if ($application_env == 'testing') {
 } elseif ($application_env == 'development') {
     defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://127.0.0.1/newfinances2/public/');
 } else {
-    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances2.newfinances.com.br/public/');
+    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances.com.br/');
 }
 
 if ($application_env == 'testing') {
@@ -51,7 +51,7 @@ if ($application_env == 'testing') {
 } else {
     // Ensure library/ is on include_path
     set_include_path(implode(PATH_SEPARATOR, array(
-        realpath(APPLICATION_PATH . '/../../../library'),
+        realpath(APPLICATION_PATH . '/../../library'),
         get_include_path(),
     )));
 }
