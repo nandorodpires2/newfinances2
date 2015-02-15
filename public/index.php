@@ -31,7 +31,7 @@ defined('PUBLIC_PATH') || define('PUBLIC_PATH', realpath(dirname(__FILE__)));
 if ($application_env == 'testing') {
     defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances2.newfinances.com.br/public/');
 } elseif ($application_env == 'development') {
-    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://127.0.0.1/newfinances2/public/');
+    defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://localhost/newfinances2/public/');
 } else {
     defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances.com.br/');
 }
