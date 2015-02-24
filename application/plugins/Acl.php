@@ -60,7 +60,7 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
                 $this->_resources = $modelFuncionalidade->getResourcesPlano($planoUsuario->id_plano);                
                 // busca as funcionalidades que o plano pode acessar
                 $this->_funcionalidades = $modelPlanoFuncionalidade->getFuncionalidadesPlano($planoUsuario->id_plano);                
-                //$this->startAcl();
+                $this->startAcl();
                 
             }
         }
@@ -90,7 +90,7 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         // verificar se existe a url
         
         $module = 0;
-        if ($this->_request->getModuleName() == 'admin') {
+        if ($this->_request->getModuleName() == 'gestor') {
             $module = 1;
         } else {
             $module = 2;

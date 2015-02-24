@@ -43,7 +43,7 @@ class Model_PlanoFuncionalidade extends Zend_Db_Table {
                 ->joinInner(array('p' => 'plano'), 'pf.id_plano = p.id_plano', array('*'))
                 ->joinInner(array('f' => 'funcionalidade'), 'pf.id_funcionalidade = f.id_funcionalidade', array('*'))
                 ->where("pf.id_plano = ?", $id_plano);
-                
+        
         return $this->fetchAll($select);
         
     }
