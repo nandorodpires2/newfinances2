@@ -70,13 +70,13 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $this->_acl->addRole(new Zend_Acl_Role($this->_role));
     }
 
-    protected function resources() {        
+    protected function resources() {    
         foreach ($this->_resources as $resource) {            
             $this->_acl->add(new Zend_Acl_Resource($resource->resource));
         }
     }
 
-    protected function previleges() {        
+    protected function previleges() {                        
         foreach ($this->_funcionalidades as $funcionalidade) {
             $moduleController = $funcionalidade->module .":".$funcionalidade->controller;
             $action = $funcionalidade->action;
