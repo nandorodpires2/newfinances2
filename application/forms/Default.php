@@ -34,7 +34,7 @@ class Form_Default extends Zend_Form {
         $multiOptions = array('' => 'Selecione...');
         
         $modelCategoria = new Model_Categoria();
-        $categorias = $modelCategoria->fetchAll("ativo_categoria = 1", "descricao_categoria asc");
+        $categorias = $modelCategoria->getCategoriasUsuario();
                 
         foreach ($categorias as $categoria) {
             $multiOptions[$categoria->id_categoria] = $categoria->descricao_categoria;

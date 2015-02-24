@@ -16,6 +16,18 @@ class Model_Categoria extends Zend_Db_Table {
     
     protected $_primary = "id_categoria";
  
+    public function getCategoriasUsuario() {    
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $select = $this->select()
+                ->from(array('c' => $this->_name), array('*'))
+                ->where("c.id_usuario is null or c.id_usuario = {$id_usuario}")
+                ->where("c.ativo_categoria = ?", 1)                
+                ->order("c.descricao_categoria asc");
+        
+        return $this->fetchAll($select);
+    }
+
     /**
      * 
      */
