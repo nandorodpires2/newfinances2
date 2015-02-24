@@ -19,7 +19,7 @@ $(document).ready(function(){
     
     $("#data_movimentacao").change(function(){
         var data = $("#data_movimentacao").val();
-        if (data != '') {            
+        if (data != '') {                          
             buscaMovimentacoesData(data, id_conta);
         }
     });
@@ -37,14 +37,15 @@ function buscaMovimentacoesData(data, id_conta) {
             id_conta: id_conta
         },
         dataType: "html",
-        beforeSend: function() {            
-            $("#movimentacoes").html("<span class='glyphicon glyphicon-refresh glyphicon-refresh-animate'></span> Buscando lançamentos...");
+        cache: false,
+        beforeSend: function() {                        
+            $("#movimentacoes").html("Carregando as movimentações... <img src='views/img/ajax-loader.gif' />");
         },
         success: function(dados) { 
-            $("#movimentacoes").html(dados);
+            $("#movimentacoes").html(dados);            
         },
         error: function(error) {
-            //alert('Houve um erro');
+            $("#movimentacoes").html("<div class='alert alert-danger'>Visualização indisponível!</div>");
         }
     });
     
@@ -57,7 +58,7 @@ function graficoReceitaDespesas() {
         url: base_url + 'cliente/ajax/grafico-receitas-despesas',
         dataType: "json",
         beforeSend: function() {            
-            $("#grafico-receitas-despesas").html("<span class='glyphicon glyphicon-refresh glyphicon-refresh-animate'></span> Gerando o gráfico...");
+            $("#grafico-receitas-despesas").html("Gerando o gráfico... <img src='views/img/ajax-loader.gif' />");
         },
         success: function(json) { 
             $('#grafico-receitas-despesas').highcharts({
@@ -125,7 +126,7 @@ function buscaGastosCategorias() {
         url: base_url + 'cliente/ajax/grafico-categorias',
         dataType: "json",
         beforeSend: function() {            
-            $("#dados-categorias").html("<span class='glyphicon glyphicon-refresh glyphicon-refresh-animate'></span> Gerando o gráfico...");
+            $("#dados-categorias").html("Gerando o gráfico... <img src='views/img/ajax-loader.gif' />");
         },
         success: function(json) { 
             if (json.dataCount > 0) {
@@ -180,7 +181,7 @@ function buscaGastosOrcamento() {
         url: base_url + 'cliente/ajax/grafico-orcamento',
         dataType: "json",
         beforeSend: function() {            
-            $("#dados-orcamentos").html("<span class='glyphicon glyphicon-refresh glyphicon-refresh-animate'></span> Gerando o gráfico...");
+            $("#dados-orcamentos").html("Gerando o gráfico... <img src='views/img/ajax-loader.gif' />");
         },
         success: function(json) { 
             if (json.dataCount > 0) {
