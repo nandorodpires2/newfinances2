@@ -112,8 +112,8 @@ function graficoReceitaDespesas() {
                 ]
             });
         },
-        error: function(error) {
-            //alert('Houve um erro');
+        error: function(error) {            
+            $("#grafico-receitas-despesas").html("<div class='alert alert-danger'>Visualização indisponível!</div>");
         }
     });
 }
@@ -167,7 +167,7 @@ function buscaGastosCategorias() {
             }
         },
         error: function(error) {
-            //alert('Houve um erro');
+            $("#dados-categorias").html("<div class='alert alert-danger'>Visualização indisponível!</div>");
         }
     });
 }
@@ -237,7 +237,7 @@ function buscaGastosOrcamento() {
             }
         },
         error: function(error) {
-            //alert('Houve um erro');
+            $("#dados-orcamentos").html("<div class='alert alert-danger'>Visualização indisponível!</div>");
         }
     });
 }

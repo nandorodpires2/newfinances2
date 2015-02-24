@@ -72,8 +72,7 @@ class Model_Funcionalidade extends Zend_Db_Table {
                 ->distinct()
                 ->from(array('f' => $this->_name), array(
                     'resource' => "concat(f.module,':',f.controller)"
-                ));
-
+                ));        
         return $this->fetchAll($select);
     }
     
