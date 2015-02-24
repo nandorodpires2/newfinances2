@@ -28,7 +28,7 @@ $(document).ready(function(){
 
 function buscaMovimentacoesData(data, id_conta) {
     
-    var base_url = baseUrl();        
+    var base_url = baseUrl();      
     $.ajax({        
         url: base_url + 'cliente/ajax/movimentacoes',
         type: "post",
@@ -39,7 +39,7 @@ function buscaMovimentacoesData(data, id_conta) {
         dataType: "html",
         cache: false,
         beforeSend: function() {                        
-            $("#movimentacoes").html("Carregando as movimentações... <img src='views/img/ajax-loader.gif' />");
+            $("#movimentacoes").html("Carregando as movimentações... <img src='" + base_url + "views/img/ajax-loader.gif' />");
         },
         success: function(dados) { 
             $("#movimentacoes").html(dados);            
@@ -58,7 +58,7 @@ function graficoReceitaDespesas() {
         url: base_url + 'cliente/ajax/grafico-receitas-despesas',
         dataType: "json",
         beforeSend: function() {            
-            $("#grafico-receitas-despesas").html("Gerando o gráfico... <img src='views/img/ajax-loader.gif' />");
+            $("#grafico-receitas-despesas").html("Gerando o gráfico... <img src='" + base_url + "views/img/ajax-loader.gif' />");
         },
         success: function(json) { 
             $('#grafico-receitas-despesas').highcharts({
@@ -126,7 +126,7 @@ function buscaGastosCategorias() {
         url: base_url + 'cliente/ajax/grafico-categorias',
         dataType: "json",
         beforeSend: function() {            
-            $("#dados-categorias").html("Gerando o gráfico... <img src='views/img/ajax-loader.gif' />");
+            $("#dados-categorias").html("Gerando o gráfico... <img src='" + base_url + "views/img/ajax-loader.gif' />");
         },
         success: function(json) { 
             if (json.dataCount > 0) {
@@ -181,7 +181,7 @@ function buscaGastosOrcamento() {
         url: base_url + 'cliente/ajax/grafico-orcamento',
         dataType: "json",
         beforeSend: function() {            
-            $("#dados-orcamentos").html("Gerando o gráfico... <img src='views/img/ajax-loader.gif' />");
+            $("#dados-orcamentos").html("Gerando o gráfico... <img src='" + base_url + "views/img/ajax-loader.gif' />");
         },
         success: function(json) { 
             if (json.dataCount > 0) {
