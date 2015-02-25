@@ -18,6 +18,11 @@ class Cliente_CategoriasController extends Zend_Controller_Action {
     }
     
     public function indexAction() {
+     
+        // busca as categorias do usuario
+        $modelCategoria = new Model_Categoria();
+        $categorias = $modelCategoria->getCategoriasUsuario();
+        $this->view->categorias = $categorias;
         
     }
     

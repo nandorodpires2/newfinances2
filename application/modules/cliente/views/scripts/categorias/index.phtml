@@ -6,7 +6,27 @@
                 <span class="text-info">Categorias</span>                
             </div>
             <div class="panel-body">  
-                
+                <table class="table table-striped table-responsive">
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Ativo</th>
+                        <th>Tipo</th>
+                        <th>Ações</th>                                                
+                    </tr>
+                    <?php if ($this->categorias->count() > 0) : ?>
+                    <?php foreach ($this->categorias as $categoria) : ?>
+                    <tr>
+                        <td><?php echo $categoria->descricao_categoria; ?></td>
+                        <td><?php echo $categoria->ativo_categoria ? 'Sim' : 'Não'; ?></td>
+                        <td><?php echo $categoria->id_usuario ? 'Usuário' : 'Sistema'; ?></td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                    <?php else : ?>
+                    <?php endif; ?>
+                </table>
             </div>
         </div>
     </div>
