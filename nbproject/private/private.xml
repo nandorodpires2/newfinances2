@@ -4,9 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/wamp/www/newfinances2/public/index.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/forms/Default.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/controllers/FuncionalidadeController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/models/Funcionalidade.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/AjaxController.php</file>
             <file>file:/C:/wamp/www/newfinances2/application/models/Movimentacao.php</file>
             <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/PendenciasController.php</file>
+            <file>file:/C:/wamp/www/newfinances2/public/views/js/cliente/index/index.js</file>
+            <file>file:/C:/wamp/www/newfinances2/application/models/PlanoFuncionalidade.php</file>
             <file>file:/C:/wamp/www/newfinances2/application/plugins/Acl.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/models/Categoria.php</file>
         </group>
     </open-files>
 </project-private>
