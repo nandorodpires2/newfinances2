@@ -12,6 +12,10 @@ hr {
     border-bottom: 2px solid #DCDCDC;
 }
 
+a {
+    color: #3071a9;
+}
+
 /* backgronds */
 .background-color-white {
     background: #fff;
