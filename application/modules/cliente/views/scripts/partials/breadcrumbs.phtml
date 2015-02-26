@@ -32,6 +32,6 @@ $container->addPage(
     ) 
 );
 
-echo '<div class="row"><div class="col-lg-12 small"><div class="thumbnail"><span>Você está em: </span>';
+echo '<div class="row"><div class="col-lg-12 text-muted small"><div class="thumbnail"><span>Você está em: </span>';
 echo $this->navigation()->breadcrumbs()->setLinkLast(false)->setMinDepth(0)->render();
 echo '</div></div></div>';

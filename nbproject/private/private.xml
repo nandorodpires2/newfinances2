@@ -2,22 +2,8 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/C:/wamp/www/newfinances2/public/index.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/forms/Default.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/admin/controllers/FuncionalidadeController.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/models/Funcionalidade.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/AjaxController.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/models/Movimentacao.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/controllers/PendenciasController.php</file>
-            <file>file:/C:/wamp/www/newfinances2/public/views/js/cliente/index/index.js</file>
-            <file>file:/C:/wamp/www/newfinances2/application/models/PlanoFuncionalidade.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/plugins/Acl.php</file>
-            <file>file:/C:/wamp/www/newfinances2/application/models/Categoria.php</file>
+            <file>file:/C:/wamp/www/newfinances2/application/modules/cliente/views/scripts/partials/breadcrumbs.phtml</file>
         </group>
-=======
-        <group/>
->>>>>>> a68c29f80f4480dc2f385e94898e602cfd0fe07a
     </open-files>
 </project-private>
