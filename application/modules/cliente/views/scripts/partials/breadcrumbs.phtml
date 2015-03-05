@@ -5,33 +5,55 @@ $this->navigation($container);
 
 $container->addPage(
     array(
-        'label' => 'Movimentações',
+        'label' => 'Início',
         'module' => 'cliente',
         'controller' => 'index',
         'action' => 'index',
         'pages' => array(
             array(
-                'label' => 'Nova Despesa',
+                'label' => 'Movimentações',
                 'module' => 'cliente',
-                'controller' => 'movimentacoes',
-                'action' => 'nova-despesa',
-            ),
+                'controller' => 'index',
+                'action' => 'index',
+                'pages' => array(
+                    array(
+                        'label' => 'Nova Despesa',
+                        'module' => 'cliente',
+                        'controller' => 'movimentacoes',
+                        'action' => 'nova-despesa',
+                    ),
+                    array(
+                        'label' => 'Nova Receita',
+                        'module' => 'cliente',
+                        'controller' => 'movimentacoes',
+                        'action' => 'nova-receita',
+                    ),
+                    array(
+                        'label' => 'Transferência',
+                        'module' => 'cliente',
+                        'controller' => 'movimentacoes',
+                        'action' => 'transferencia',
+                    )
+                )
+            ),            
             array(
-                'label' => 'Nova Receita',
+                'label' => 'Orçamentos',
                 'module' => 'cliente',
-                'controller' => 'movimentacoes',
-                'action' => 'nova-receita',
-            ),
-            array(
-                'label' => 'Transferência',
-                'module' => 'cliente',
-                'controller' => 'movimentacoes',
-                'action' => 'transferencia',
+                'controller' => 'orcamentos',
+                'action' => 'index',
+                'pages' => array(
+                    array(
+                        'label' => 'Novo Orçamento',
+                        'module' => 'cliente',
+                        'controller' => 'orcamentos',
+                        'action' => 'novo-orcamento'
+                    )
+                )
             )
         )
-    ) 
+    )    
 );
 
-echo '<div class="row"><div class="col-lg-12 text-muted small"><div class="thumbnail"><span>Você está em: </span>';
+echo '<div class="row"><div class="col-lg-12 small"><div class="thumbnail"><span>Você está em: </span>';
 echo $this->navigation()->breadcrumbs()->setLinkLast(false)->setMinDepth(0)->render();
 echo '</div></div></div>';

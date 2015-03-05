@@ -27,12 +27,12 @@
                     'module' => 'cliente',
                     'controller' => 'movimentacoes',
                     'action' => 'nova-receita'
-                ), null, true); ?>"><span class="glyphicon glyphicon-arrow-left"></span> Nova Receita</a></li>
+                ), null, true); ?>"><span class="glyphicon glyphicon-arrow-right"></span> Nova Receita</a></li>
                 <li><a href="<?php echo $this->url(array(
                     'module' => 'cliente',
                     'controller' => 'movimentacoes',
                     'action' => 'nova-despesa'
-                ), null, true); ?>"><span class="glyphicon glyphicon-arrow-right"></span> Nova Despesa</a></li>
+                ), null, true); ?>"><span class="glyphicon glyphicon-arrow-left"></span> Nova Despesa</a></li>
                 <li><a href="<?php echo $this->url(array(
                     'module' => 'cliente',
                     'controller' => 'movimentacoes',
@@ -104,7 +104,7 @@
                         'controller' => 'meusdados',
                         'action' => 'index'
                     ), null, true);
-                    ?>"><span class="glyphicon glyphicon-cog"></span> Meus Dados</a></li>
+                    ?>"><span class="glyphicon glyphicon-cog"></span> Configurações</a></li>
                 <?php if ($auth->id_plano == 7) : ?>
                 <li><a href="<?php echo $this->url(array(
                         'module' => 'admin',
