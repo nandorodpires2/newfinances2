@@ -39,9 +39,9 @@
                             <tr>
                                 <td>
                                     <?php if ($conta->logo_banco) : ?>
-                                    <img class="img" src="<?php echo $this->baseUrl('views/img/bancos/' . $conta->logo_banco); ?>" />
+                                    <img class="img" src="<?php echo $this->baseUrl('views/img/bancos/' . $conta->logo_banco); ?>" width="17px" />
                                     <?php else : ?>
-                                    <img class="img" src="<?php echo $this->baseUrl('views/img/bancos/icon_no.png'); ?>" />
+                                    <img class="img" src="<?php echo $this->baseUrl('views/img/bancos/icon_no.png'); ?>" width="17px" />
                                     <?php endif; ?>
                                     <?php echo $conta->nome_banco ? $conta->nome_banco : 'Nenhum'; ?>
                                 </td>
