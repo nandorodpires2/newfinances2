@@ -23,6 +23,7 @@ class Model_Categoria extends Zend_Db_Table {
                 ->from(array('c' => $this->_name), array('*'))
                 ->where("c.id_usuario is null or c.id_usuario = {$id_usuario}")
                 ->where("c.ativo_categoria = ?", 1)                
+                ->order("c.id_usuario desc")
                 ->order("c.descricao_categoria asc");
         
         return $this->fetchAll($select);
