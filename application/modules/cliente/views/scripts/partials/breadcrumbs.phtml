@@ -49,6 +49,26 @@ $container->addPage(
                         'action' => 'novo-orcamento'
                     )
                 )
+            ),
+            array(
+                'label' => 'Categorias',
+                'module' => 'cliente',
+                'controller' => 'categorias',
+                'action' => 'index',
+                'pages' => array(
+                    array(
+                        'label' => 'Nova Categoria',
+                        'module' => 'cliente',
+                        'controller' => 'categorias',
+                        'action' => 'nova-categoria'
+                    ),
+                    array(
+                        'label' => 'Editar Categoria',
+                        'module' => 'cliente',
+                        'controller' => 'categorias',
+                        'action' => 'editar'
+                    )
+                )
             )
         )
     )    
