@@ -15,6 +15,8 @@ class Form_Cliente_Categorias_Cadastro extends Zend_Form {
     
     public function init() {
         
+        $form = new Form_Default();
+        
         $this->setAttrib('id', "formCategoriasCadastro");
         
         // descricao_categoria
@@ -22,6 +24,13 @@ class Form_Cliente_Categorias_Cadastro extends Zend_Form {
             'label' => 'Categoria',
             'required' => true,
             'class' => 'form-control'
+        ));
+        
+        // id_categoria_pai
+        $this->addElement('select', 'id_categoria_pai', array(
+            'label' => 'Categoria pai',
+            'class' => 'form-control',
+            'multioptions' => $form->getCategoriasPai()
         ));
         
         // submit

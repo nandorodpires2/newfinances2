@@ -21,7 +21,25 @@ class Model_Categoria extends Zend_Db_Table {
         
         $select = $this->select()
                 ->from(array('c' => $this->_name), array('*'))
+                ->setIntegrityCheck(false)
+                ->joinLeft(array('c1' => 'categoria'), 'c.id_categoria_pai = c1.id_categoria', array(
+                    'descricao_categoria_pai' => 'c1.descricao_categoria'
+                ))
                 ->where("c.id_usuario is null or c.id_usuario = {$id_usuario}")
+                ->where("c.ativo_categoria = ?", 1)                
+                ->order("c.id_usuario desc")
+                ->order("c.descricao_categoria asc");
+        
+        return $this->fetchAll($select);
+    }
+    
+    public function getCategoriasPai() {    
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $select = $this->select()
+                ->from(array('c' => $this->_name), array('*'))
+                ->where("c.id_usuario is null or c.id_usuario = {$id_usuario}")
+                ->where("c.id_categoria_pai is null")
                 ->where("c.ativo_categoria = ?", 1)                
                 ->order("c.id_usuario desc")
                 ->order("c.descricao_categoria asc");
