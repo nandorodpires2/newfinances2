@@ -40,6 +40,10 @@ class Cliente_CategoriasController extends Zend_Controller_Action {
             if ($formCategoriasCadastro->isValid($dadosCategoria)) {
                 $dadosCategoria = $formCategoriasCadastro->getValues();
                 
+                if (empty($dadosCategoria['id_categoria_pai'])) {
+                    $dadosCategoria['id_categoria_pai'] = null;
+                }
+                
                 $modelCategoria = new Model_Categoria();
                 
                 if ($this->ifExist($dadosCategoria['descricao_categoria'])) {                
@@ -76,10 +80,39 @@ class Cliente_CategoriasController extends Zend_Controller_Action {
     public function editarAction() {
         
         $id_categoria = $this->_getParam("id_categoria");
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
         
         // busca dados da categoria
         $modelCategoria = new Model_Categoria();
+        $categoria = $modelCategoria->fetchRow("id_categoria = {$id_categoria} and id_usuario = {$id_usuario}");
         
+        // form de categoria
+        $formCategoriaCadastro = new Form_Cliente_Categorias_Cadastro();
+        $formCategoriaCadastro->populate($categoria->toArray());
+        $formCategoriaCadastro->submit->setLabel("Editar");
+        $this->view->formCategoriaCadastro = $formCategoriaCadastro;
+        
+        if ($this->_request->isPost()) {
+            $dadosUpdate = $this->_request->getPost();
+            if ($formCategoriaCadastro->isValid($dadosUpdate)) {
+                $dadosUpdate = $formCategoriaCadastro->getValues();
+                
+                try {
+                    $modelCategoria->update($dadosUpdate, "id_categoria = {$id_categoria}");
+                    $this->_helper->flashMessenger->addMessage(array(
+                        'class' => 'alert alert-success',
+                        'message' => 'Categoria editada com sucesso!'
+                    ));
+                } catch (Exception $ex) {
+                    $this->_helper->flashMessenger->addMessage(array(
+                        'class' => 'alert alert-danger',
+                        'message' => 'Houve um erro ao editar a categoria. Favor tente mais tarde!'
+                    ));
+                }
+                $this->_redirect("cliente/categorias/index");
+                
+            }
+        }
         
     }
     
@@ -87,6 +120,38 @@ class Cliente_CategoriasController extends Zend_Controller_Action {
      * 
      */
     public function excluirAction() {
+        $this->_helper->layout->disableLayout(true);
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $id_categoria = $this->_getParam("id_categoria");
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        // busca dados da categoria
+        $modelCategoria = new Model_Categoria();
+        $categoria = $modelCategoria->fetchRow("id_categoria = {$id_categoria} and id_usuario = {$id_usuario}");
+        
+        // caso a categoria nao seja do usuario
+        if (!$categoria) {
+            $this->_helper->flashMessenger->addMessage(array(
+                'class' => 'alert alert-danger',
+                'message' => 'Nenhuma categoria encontrada!'
+            ));
+            $this->_redirect("cliente/categorias/index");
+        }
+        
+        try {
+            $modelCategoria->update(array('ativo_categoria' => 0), "id_categoria = {$id_categoria}");
+            $this->_helper->flashMessenger->addMessage(array(
+                'class' => 'alert alert-success',
+                'message' => 'Categoria excluida com sucesso!'
+            ));
+        } catch (Exception $ex) {
+            $this->_helper->flashMessenger->addMessage(array(
+                'class' => 'alert alert-danger',
+                'message' => 'Houve um erro ao excluir a categoria. Favor tente mais tarde!'
+            ));
+        }
+        $this->_redirect("cliente/categorias/index");
         
     }
 

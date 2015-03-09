@@ -44,6 +44,26 @@ class Form_Default extends Zend_Form {
         
     }
     
+    /**
+     * Retorna as categorias pai
+     * 
+     * @return type
+     */
+    public function getCategoriasPai() {
+        
+        $multiOptions = array('' => 'Nenhuma...');
+        
+        $modelCategoria = new Model_Categoria();
+        $categorias = $modelCategoria->getCategoriasPai();
+                
+        foreach ($categorias as $categoria) {
+            $multiOptions[$categoria->id_categoria] = $categoria->descricao_categoria;
+        }
+        
+        return $multiOptions;
+        
+    }
+    
      /**
      * Retorna as categorias que ainda nao tem meta cadastrada
      * 

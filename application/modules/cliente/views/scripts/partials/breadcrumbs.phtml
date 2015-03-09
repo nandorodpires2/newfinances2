@@ -47,6 +47,12 @@ $container->addPage(
                         'module' => 'cliente',
                         'controller' => 'orcamentos',
                         'action' => 'novo-orcamento'
+                    ),
+                    array(
+                        'label' => 'Editar Orçamento',
+                        'module' => 'cliente',
+                        'controller' => 'orcamentos',
+                        'action' => 'editar-orcamento'
                     )
                 )
             ),
@@ -67,6 +73,98 @@ $container->addPage(
                         'module' => 'cliente',
                         'controller' => 'categorias',
                         'action' => 'editar'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Minhas Contas',
+                'module' => 'cliente',
+                'controller' => 'contas',
+                'action' => 'index',
+                'pages' => array(
+                    array(
+                        'label' => 'Nova Conta',
+                        'module' => 'cliente',
+                        'controller' => 'contas',
+                        'action' => 'nova-conta'
+                    ),
+                    array(
+                        'label' => 'Editar Conta',
+                        'module' => 'cliente',
+                        'controller' => 'contas',
+                        'action' => 'editar-conta'
+                    ),
+                    array(
+                        'label' => 'Excluir Conta',
+                        'module' => 'cliente',
+                        'controller' => 'contas',
+                        'action' => 'excluir-conta'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Meus Cartões',
+                'module' => 'cliente',
+                'controller' => 'cartoes',
+                'action' => 'index',
+                'pages' => array(
+                    array(
+                        'label' => 'Novo Cartão',
+                        'module' => 'cliente',
+                        'controller' => 'cartoes',
+                        'action' => 'novo-cartao'
+                    ),
+                    array(
+                        'label' => 'Editar Cartão',
+                        'module' => 'cliente',
+                        'controller' => 'cartoes',
+                        'action' => 'editar-cartao'
+                    ),
+                    array(
+                        'label' => 'Excluir Cartão',
+                        'module' => 'cliente',
+                        'controller' => 'cartoes',
+                        'action' => 'excluir-cartao'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Meus Chamados',
+                'module' => 'cliente',
+                'controller' => 'chamados',
+                'action' => 'index',
+                'pages' => array(
+                    array(
+                        'label' => 'Novo Chamado',
+                        'module' => 'cliente',
+                        'controller' => 'chamados',
+                        'action' => 'novo-chamado'
+                    ),
+                    array(
+                        'label' => 'Conversas',
+                        'module' => 'cliente',
+                        'controller' => 'chamados',
+                        'action' => 'conversas'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Configurações',
+                'module' => 'cliente',
+                'controller' => 'meusdados',
+                'action' => 'index',
+                'pages' => array(
+                    array(
+                        'label' => 'Novo Chamado',
+                        'module' => 'cliente',
+                        'controller' => 'chamados',
+                        'action' => 'novo-chamado'
+                    ),
+                    array(
+                        'label' => 'Conversas',
+                        'module' => 'cliente',
+                        'controller' => 'chamados',
+                        'action' => 'conversas'
                     )
                 )
             )

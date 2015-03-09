@@ -224,6 +224,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
     public function transferenciaAction() {
         
         $formMovimentacoesTransferencia = new Form_Cliente_Movimentacoes_Transferencia();
+        $formMovimentacoesTransferencia->removeElement("id_categoria");
         $this->view->formMovimentacaoTransferencia = $formMovimentacoesTransferencia;
         
         $modelMovimentacao = new Model_Movimentacao();
@@ -242,6 +243,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 $dadosTransferencia['data_inclusao'] = Controller_Helper_Date::getDatetimeNowDb();
                 $dadosTransferencia['realizado'] = Controller_Helper_Movimentacao::getStatusMovimentacao($dadosTransferencia['data_movimentacao']);                
                 $dadosTransferencia['valor_movimentacao'] = View_Helper_Currency::setCurrencyDb($dadosTransferencia['valor_movimentacao']) * -1;
+                $dadosTransferencia['valor_movimentacao'] = 9;
                 
                 try {
                     $modelMovimentacao->insert($dadosTransferencia);                 

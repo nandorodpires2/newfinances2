@@ -71,6 +71,7 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
     }
 
     protected function resources() {    
+        $this->_acl->add(new Zend_Acl_Resource("cliente:usuarios"));
         foreach ($this->_resources as $resource) {            
             $this->_acl->add(new Zend_Acl_Resource($resource->resource));
         }
@@ -87,7 +88,11 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
     protected function isAllowed() {        
         $url = $this->_request->getModuleName() . ':' . $this->_request->getControllerName();
 
-        // verificar se existe a url
+        $role = Zend_Auth::getInstance()->getIdentity()->descricao_plano;
+        
+        // permissoes gerais        
+        $this->_acl->allow($role, "cliente:usuarios", array('logout'));
+        $this->_acl->allow($role, "cliente:index", array('index'));
         
         $module = 0;
         if ($this->_request->getModuleName() == 'gestor') {
