@@ -243,7 +243,7 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 $dadosTransferencia['data_inclusao'] = Controller_Helper_Date::getDatetimeNowDb();
                 $dadosTransferencia['realizado'] = Controller_Helper_Movimentacao::getStatusMovimentacao($dadosTransferencia['data_movimentacao']);                
                 $dadosTransferencia['valor_movimentacao'] = View_Helper_Currency::setCurrencyDb($dadosTransferencia['valor_movimentacao']) * -1;
-                $dadosTransferencia['valor_movimentacao'] = 9;
+                $dadosTransferencia['id_categoria'] = 9;
                 
                 try {
                     $modelMovimentacao->insert($dadosTransferencia);                 
