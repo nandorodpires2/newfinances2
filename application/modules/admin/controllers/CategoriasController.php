@@ -43,7 +43,7 @@ class Admin_CategoriasController extends Zend_Controller_Action {
                     $modelCategoria->insert($dadosCategoria);
                     $this->_redirect("admin/categorias");
                 } catch (Exception $ex) {
-                    die($ex->getMessage());
+                    die("Erro: " . $ex->getMessage());
                 }
                 
             }
