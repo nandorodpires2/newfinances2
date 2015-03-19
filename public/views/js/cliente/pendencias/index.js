@@ -5,14 +5,14 @@
  */
 $(document).ready(function(){    
     $("#todos").click(function(){    
-        $('.pendencias').each(function() {            
-            var checked = $(".pendencias").prop("checked");                        
-            if (checked) {
-                $(".pendencias").prop("checked", false);
-            } else {
-                $(".pendencias").prop("checked", true);               
-            }
-        });
+       
+        var checked = $(".pendencias").prop("checked");                        
+        if (checked) {
+            $(".pendencias").prop("checked", false);
+        } else {
+            $(".pendencias").prop("checked", true);               
+        }
+       
     });
 });
 

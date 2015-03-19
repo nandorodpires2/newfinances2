@@ -46,6 +46,17 @@ class Model_Categoria extends Zend_Db_Table {
         
         return $this->fetchAll($select);
     }
+    
+    public function getCategoriasSistema() {    
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $select = $this->select()
+                ->from(array('c' => $this->_name), array('*'))                
+                ->where("c.id_usuario is null")
+                ->order("c.descricao_categoria asc");
+        
+        return $this->fetchAll($select);
+    }
 
     /**
      * 

@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-lg-12">
+        <?php echo View_Helper_Messages::render($this->messages); ?>
+        <div class="panel panel-info">
+            <div class="panel-heading">Categorias
+                <div class="pull-right">
+                    <a href="<?php echo $this->url(array(
+                        'module' => 'admin',
+                        'controller' => 'categorias',
+                        'action' => 'nova-categoria'
+                    ), null, true); ?>">
+                        <img src="<?php echo $this->baseUrl('views/img/icon_add.png'); ?>" width="25px" title="Cadastrar Nova Categoria"/>
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <?php if ($this->categorias->count() > 0) : ?>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                    <?php foreach ($this->categorias as $categoria) : ?>
+                    <tr>
+                        <td><?php echo $categoria->descricao_categoria; ?></td>
+                        <td class="col-md-2">
+                            
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+                <?php else : ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
