@@ -89,6 +89,10 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     }
                 }                
                 
+                if ( empty($dadosReceita['observacao_movimentacao'])) {
+                    $dadosReceita['observacao_movimentacao'] = null;
+                }
+                
                 // retirando campos nao necessarios                                
                 $repetir = (int)$dadosReceita['opt_repetir'];
                 unset($dadosReceita['repetir']);                
@@ -177,6 +181,10 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 $dadosDespesa['data_movimentacao'] = Controller_Helper_Date::getDateDb($dadosDespesa['data_movimentacao']);
                 $dadosDespesa['data_inclusao'] = Controller_Helper_Date::getDatetimeNowDb();
                 
+                if ( empty($dadosDespesa['observacao_movimentacao'])) {
+                    $dadosDespesa['observacao_movimentacao'] = null;
+                }
+                
                 // retirando campos nao necessarios
                 $repetir = (int)$dadosDespesa['opt_repetir'];
                 unset($dadosDespesa['tipo_pgto']);           
@@ -244,6 +252,10 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                 $dadosTransferencia['realizado'] = Controller_Helper_Movimentacao::getStatusMovimentacao($dadosTransferencia['data_movimentacao']);                
                 $dadosTransferencia['valor_movimentacao'] = View_Helper_Currency::setCurrencyDb($dadosTransferencia['valor_movimentacao']) * -1;
                 $dadosTransferencia['id_categoria'] = 9;
+                
+                if ( empty($dadosTransferencia['observacao_movimentacao'])) {
+                    $dadosTransferencia['observacao_movimentacao'] = null;
+                }
                 
                 try {
                     $modelMovimentacao->insert($dadosTransferencia);                 
@@ -393,8 +405,9 @@ class Cliente_MovimentacoesController extends Zend_Controller_Action {
                     
                     $whereUpdate = "id_movimentacao = " . $idMovimentacao;
 
-                    
-                    // Zend_Debug::dump($dadosMovimentacaoUpdate); die();                    
+                    if ( empty($dadosMovimentacaoUpdate['observacao_movimentacao'])) {
+                        $dadosMovimentacaoUpdate['observacao_movimentacao'] = null;
+                    }
                     
                     try {
                         $modelMovimentacao->update($dadosMovimentacaoUpdate, $whereUpdate);
