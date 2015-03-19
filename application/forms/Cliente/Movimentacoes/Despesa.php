@@ -134,6 +134,9 @@ class Form_Cliente_Movimentacoes_Despesa extends Zend_Form {
             )
         ));
         
+        // observaocao
+        $this->addElement($formDefault->_observacao);
+        
         // option parcelar
         $this->addElement("checkbox", "opt_repetir", array(
             'label' => 'Repetir essa movimentação',
