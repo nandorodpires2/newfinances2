@@ -117,6 +117,9 @@ class Form_Cliente_Movimentacoes_Transferencia extends Zend_Form {
             )
         ));
         
+        // observaocao
+        $this->addElement($formDefault->_observacao);
+        
         // submit        
         $this->addElement("submit", "submit", array(
             'label' => 'Salvar',

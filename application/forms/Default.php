@@ -13,6 +13,7 @@
 class Form_Default extends Zend_Form {
 
     public $id_usuario;
+    public $_observacao;    
     
     public function init() {        
         
@@ -21,6 +22,12 @@ class Form_Default extends Zend_Form {
         } else {
             $this->id_usuario = 0;
         }
+        
+        $this->_observacao = new Zend_Form_Element_Textarea('observacao_movimentacao', array(
+            'label' => 'Observações',
+            'class' => 'form-control',
+            'rows' => 5
+        ));
         
     }
 
