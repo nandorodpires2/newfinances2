@@ -45,7 +45,7 @@ class Cliente_ChamadosController extends Zend_Controller_Action {
                     
                 } catch (Exception $ex) {
                     $this->_helper->flashMessenger->addMessage(array(
-                        'class' => 'bg-danger text-danger padding-10px margin-10px-0px',
+                        'class' => 'alert alert-danger',
                         'message' => 'Houve um erro ao abrir o chamado!'
                     ));
                     
