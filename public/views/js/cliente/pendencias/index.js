@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){    
-        
-            }
-       
+    $("#todos").click(function() {
+        var checked = $(".pendencias").prop("checked");
+        if (checked) {
+            $(".pendencias").prop("checked", false);
+        } else {
+            $(".pendencias").prop("checked", true);               
+        }       
     });
 });
 
