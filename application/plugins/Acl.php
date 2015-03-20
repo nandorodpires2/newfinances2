@@ -60,7 +60,7 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
                 $this->_resources = $modelFuncionalidade->getResourcesPlano($planoUsuario->id_plano);                
                 // busca as funcionalidades que o plano pode acessar
                 $this->_funcionalidades = $modelPlanoFuncionalidade->getFuncionalidadesPlano($planoUsuario->id_plano);                
-                $this->startAcl();
+                //$this->startAcl();
                 
             }
         }
@@ -71,7 +71,7 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
     }
 
     protected function resources() {    
-        $this->_acl->add(new Zend_Acl_Resource("cliente:usuarios"));
+        
         foreach ($this->_resources as $resource) {            
             $this->_acl->add(new Zend_Acl_Resource($resource->resource));
         }

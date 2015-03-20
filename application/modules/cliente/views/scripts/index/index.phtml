@@ -159,10 +159,20 @@
                             <td><?php echo $receita->descricao_movimentacao; ?></td>
                             <td class="text-right"><?php echo View_Helper_Currency::getCurrency($receita->valor_movimentacao); ?></td>
                             <td>
-                                <a href="">
+                                <a href="<?php echo $this->url(array(
+                                    'module' => 'cliente',
+                                    'controller' => 'movimentacoes',
+                                    'action' => 'editar-movimentacao',
+                                    'id_movimentacao' => $receita->id_movimentacao
+                                ), null, true); ?>">
                                     <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_edit.png'); ?>" width="20" title="Editar" />
                                 </a>
-                                <a href="">
+                                <a href="<?php echo $this->url(array(
+                                    'module' => 'cliente',
+                                    'controller' => 'movimentacoes',
+                                    'action' => 'excluir-movimentacao',
+                                    'id_movimentacao' => $receita->id_movimentacao
+                                ), null, true); ?>">
                                     <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_delete.png'); ?>" width="20" title="Excluir" />
                                 </a>
                             </td>
@@ -196,10 +206,20 @@
                             <td><?php echo $despesa->descricao_movimentacao; ?></td>
                             <td class="text-center"><?php echo View_Helper_Currency::getCurrency($despesa->valor_movimentacao); ?></td>
                             <td>
-                                <a href="">
+                                <a href="<?php echo $this->url(array(
+                                    'module' => 'cliente',
+                                    'controller' => 'movimentacoes',
+                                    'action' => 'editar-movimentacao',
+                                    'id_movimentacao' => $receita->id_movimentacao
+                                ), null, true); ?>">
                                     <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_edit.png'); ?>" width="20" title="Editar" />
                                 </a>
-                                <a href="">
+                                <a href="<?php echo $this->url(array(
+                                    'module' => 'cliente',
+                                    'controller' => 'movimentacoes',
+                                    'action' => 'excluir-movimentacao',
+                                    'id_movimentacao' => $receita->id_movimentacao
+                                ), null, true); ?>">
                                     <img class="margin-0px-5px" src="<?php echo $this->baseUrl('views/img/icon_delete.png'); ?>" width="20" title="Excluir" />
                                 </a>
                             </td>
