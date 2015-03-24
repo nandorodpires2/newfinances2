@@ -55,8 +55,6 @@ class Site_CadastroUsuarioController extends Zend_Controller_Action {
                         $modelUsuario = new Model_Usuario();
                         unset($dadosCadastroUsuario['confirma_senha']);
                         
-                        Zend_Debug::dump($dadosCadastroUsuario); die();
-                        
                         try {
                             $id = $modelUsuario->insert($dadosCadastroUsuario);
                             
