@@ -1,0 +1,70 @@
+<?php $identity = Zend_Auth::getInstance()->hasIdentity(); ?>
+<?php $auth = Zend_Auth::getInstance()->getIdentity(); ?>
+<?php
+
+    $namePart = explode(" ", $auth->nome_completo);    
+    foreach ($namePart as $key => $value) {
+        $short_name = $namePart[0] . ' ';        
+        if ($key + 1 == count($namePart)) {
+            $short_name .= $value;
+        }
+    }
+
+?>
+<div class="container">                                
+    <ul class="nav navbar-nav">                    
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acessos <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="<?php
+                    echo $this->url(array(
+                        'module' => 'admin',
+                        'controller' => 'plano',
+                        'action' => 'index'
+                    ), null, true);
+                    ?>">Planos</a></li>                
+                <li><a href="<?php
+                    echo $this->url(array(
+                        'module' => 'admin',
+                        'controller' => 'funcionalidade',
+                        'action' => 'index'
+                    ), null, true);
+                    ?>">Funcionalidades</a></li>
+            </ul>
+        </li>
+        <li class="active"><a href="<?php echo $this->url(array(
+            'module' => 'admin',
+            'controller' => 'chamados',
+            'action' => 'index'
+        ), null, true); ?>">Chamados</a></li>               
+    </ul>               
+    <ul class="nav navbar-nav navbar-right">                    
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $short_name; ?> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="<?php
+                    echo $this->url(array(
+                        'module' => 'cliente',
+                        'controller' => 'meusdados',
+                        'action' => 'index'
+                    ), null, true);
+                    ?>">Meus Dados</a></li>
+                <li><a href="<?php
+                    echo $this->url(array(
+                        'module' => 'cliente',
+                        'controller' => 'index',
+                        'action' => 'index'
+                    ), null, true);
+                    ?>"><span class="text-success bold">Sistema</span></a></li> 
+                <li class="divider"></li>
+                <li><a href="<?php
+                    echo $this->url(array(
+                        'module' => 'cliente',
+                        'controller' => 'usuarios',
+                        'action' => 'logout'
+                    ), null, true);
+                    ?>">Sair</a></li>
+            </ul>
+        </li>
+    </ul>               
+</div>
