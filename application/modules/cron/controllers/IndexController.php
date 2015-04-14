@@ -1,6 +1,6 @@
 <?php
 
-class Admin_IndexController extends Zend_Controller_Action
+class Cron_IndexController extends Zend_Controller_Action
 {
 
     public function init()
@@ -8,23 +8,25 @@ class Admin_IndexController extends Zend_Controller_Action
         /* Initialize action controller here */
     }
 
-    public function indexAction()
-    {
-        // action body
-    }
+    public function indexAction() {
+        
+        // envia emails de teste        
+        $html = new Zend_View();
+        $html->setScriptPath(EMAILS_CRON . '/index/');
 
-    public function denyAction() {
+        // render view
+        $bodyText = $html->render('teste.phtml');
+
+        // envia os emails para os usuarios
+        $mail = new Zend_Mail('utf-8');
+        $mail->setBodyHtml($bodyText);
+        $mail->setFrom('noreply@newfinances.com.br', 'NewFinances - Controle Financeiro');
+        $mail->addTo("nandorodpires@gmail.com");                          
+        $mail->setSubject("Teste");
+
+        $mail->send(Zend_Registry::get('mail_transport'));
         
-        $module = $this->_getParam("module");
-        
-        // caso o bloqueio de acesso seja do tipo 1 
-        // e pq e o gestor do sistema e nao tem permissao para ver
-        // caso 2 e pq o plano nao contempla esta visualizacao
-        // envia uma msg especifica para o usurio        
-        $this->view->typeDeny = $module;
-        
-        
-    }
+    }    
     
 }
 

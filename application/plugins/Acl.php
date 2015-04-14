@@ -45,7 +45,7 @@ class Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $this->_request = $request;
        
         // caso o modulo seja de site nao habilita o ACL
-        if ($this->_module !== 'site') {
+        if ($this->_module !== 'site' && $this->_module !== 'cron') {            
             /**
             * caso nao tenha usuario logado ou o usuario logado seja gestor do
             * sistema, nao "starta" o ACL
