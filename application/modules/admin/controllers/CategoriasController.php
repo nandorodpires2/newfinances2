@@ -44,8 +44,7 @@ class Admin_CategoriasController extends Zend_Controller_Action {
                     $this->_redirect("admin/categorias");
                 } catch (Exception $ex) {
                     die("Erro: " . $ex->getMessage());
-                }
-                
+                }                
             }
         }
         
