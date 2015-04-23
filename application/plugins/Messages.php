@@ -27,8 +27,8 @@ class Plugin_Messages extends Zend_Controller_Plugin_Abstract {
             $url_cadastro = SYSTEM_URL . "cliente/contas/nova-conta";              
             $flashMessenger->alerts = array(
                 array(
-                    'class' => 'bg-danger text-danger padding-10px margin-10px-0px',
-                    'message' => "Por favor cadastre uma conta! <a class='text-info' href='{$url_cadastro}'>Cadastrar</a>"
+                    'class' => 'alert alert-warning',
+                    'message' => "Por favor cadastre uma nova conta! <a class='text-info' href='{$url_cadastro}'>Cadastrar Conta</a>"
                 )
             );
         }        

@@ -50,6 +50,7 @@ class Site_CadastroUsuarioController extends Zend_Controller_Action {
                         $dadosCadastroUsuario['senha_usuario'] = md5($dadosCadastroUsuario['senha_usuario']);
                         
                         /* formatando a data de nascimento */
+                        $dadosCadastroUsuario['data_nascimento'] = Controller_Helper_Date::getDateDb($dadosCadastroUsuario['data_nascimento']);                        
                         
                         $modelUsuario = new Model_Usuario();
                         unset($dadosCadastroUsuario['confirma_senha']);
