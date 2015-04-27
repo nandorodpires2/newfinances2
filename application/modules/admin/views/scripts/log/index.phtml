@@ -1,0 +1,27 @@
+<div class="row">    
+    <?php echo View_Helper_Messages::render($this->messages); ?>
+    <div class="panel panel-info">
+        <div class="panel-heading">Logs</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>Data</th>
+                    <th>Usuário</th>
+                    <th>Url</th>
+                </tr>      
+                <?php if ($this->logs->count() > 0) : ?>
+                <?php foreach ($this->logs as $log) : ?>
+                <tr>
+                    <td><?php echo $log->id_log; ?></td>
+                    <td><?php echo $log->data_log; ?></td>
+                    <td><?php echo $log->nome_completo; ?></td>
+                    <td><?php echo Plugin_Log::getLogUrl($log->parametros_log); ?></td>
+                </tr>
+                <?php endforeach; ?>
+                <?php else : ?>
+                <?php endif; ?>
+            </table>
+        </div>
+    </div>
+</div>
