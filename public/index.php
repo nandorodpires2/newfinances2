@@ -24,6 +24,10 @@ defined('APPLICATION_PATH')
 defined('EMAILS_SITE')
     || define('EMAILS_SITE', APPLICATION_PATH . '/modules/site/views/emails');
 
+// Define path to emails cron
+defined('EMAILS_CRON')
+    || define('EMAILS_CRON', APPLICATION_PATH . '/modules/cron/views/emails');
+
 // Define path to public directory
 defined('PUBLIC_PATH') || define('PUBLIC_PATH', realpath(dirname(__FILE__)));
 

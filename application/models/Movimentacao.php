@@ -225,5 +225,26 @@ class Model_Movimentacao extends Zend_Db_Table {
         return null;
     }
     
+    /**
+     * lancamentos
+     */
+    public function getLancamentosCron($data) {
+        
+        $select = $this->select()
+                ->from(array('mov' => $this->_name), array('*'))
+                ->setIntegrityCheck(false)
+                ->joinInner(array('usu' => 'usuario'), 'mov.id_usuario = usu.id_usuario', array('*'))
+                ->joinInner(array('cat' => 'categoria'), 'mov.id_categoria = cat.id_categoria', array('*'))
+                ->joinLeft(array('cta' => 'conta'), 'mov.id_conta = cta.id_conta', array('*'))
+                ->joinLeft(array('ctr' => 'cartao'), 'mov.id_cartao = ctr.id_cartao', array('*'))
+                ->where("mov.data_movimentacao = ?", $data)
+                ->where("mov.realizado = ?", 0)
+                ->where("usu.ativo_usuario = ?", 1);
+        
+        //Zend_Debug::dump($select->__toString()); die();
+        return $this->fetchAll($select);
+        
+    }
+    
 }
 
