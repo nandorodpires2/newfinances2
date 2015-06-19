@@ -20,7 +20,7 @@ class Plugin_Auth extends Zend_Controller_Plugin_Abstract {
                  
         $auth = Zend_Auth::getInstance();      
         
-        if (($moduleName !== 'site' && $moduleName !== 'cron') && $actionName !== 'login') {               
+        if (($moduleName !== 'site' && $moduleName !== 'cron' && $moduleName !== 'mobile') && $actionName !== 'login') {               
             if (!$auth->hasIdentity()) {
                 $request->setModuleName('site')
                         ->setControllerName('usuarios')
