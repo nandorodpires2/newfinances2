@@ -2,23 +2,9 @@
 
 class Site_UsuariosController extends Zend_Controller_Action {
 
-    private $_device;
-    private $_mobile;
-    
     public function init() {
         $messages = $this->_helper->FlashMessenger->getMessages();
-        $this->view->messages = $messages;
-        
-        $this->_device = $_SERVER['HTTP_USER_AGENT'];
-        
-        if (preg_match("/iPhone|iPod|BlackBerry|MotoE|Android|PalmSource|/", $this->_device, $matches)) {             
-            $this->_mobile = true;
-        } else {
-            $this->_mobile = false;
-        }
-        
-        Zend_Debug::dump($this->_mobile);
-        
+        $this->view->messages = $messages;        
     }
 
     public function indexAction() {

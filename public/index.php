@@ -31,6 +31,13 @@ defined('EMAILS_CRON')
 // Define path to public directory
 defined('PUBLIC_PATH') || define('PUBLIC_PATH', realpath(dirname(__FILE__)));
 
+// Define URL mobile
+if ($application_env == "production") {
+    defined('MOBILE_URL') || define('MOBILE_URL', "http://mobile.newfinances.com.br/");
+} else {
+    defined('MOBILE_URL') || define('MOBILE_URL', "http://localhost/nf-mobile");
+}
+
 // Define path to public directory
 if ($application_env == 'testing') {
     defined('SYSTEM_URL') || define('SYSTEM_URL', 'http://newfinances2.newfinances.com.br/public/');
