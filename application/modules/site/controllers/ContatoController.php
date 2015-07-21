@@ -33,6 +33,9 @@ class Site_ContatoController extends Zend_Controller_Action {
                 // grava o contato no banco                
                 $modelContato = new Model_Contato();
                 if ($modelContato->insert($dadosContato)) {
+                    
+                    try {
+                    
                     // data da mensagem
                     $data = date("d/m/Y H:i:s");
 
@@ -92,6 +95,17 @@ class Site_ContatoController extends Zend_Controller_Action {
                             array(
                                 'type' => 'warning',
                                 'class' => 'bg-warning text-warning padding-10px margin-10px-0px',
+                                'message' => 'Contato registrado, porém houve um problema ao enviar o e-mail.'
+                            )
+                        );
+                        $this->view->messages = $messages;
+                    }
+                    
+                    } catch (Exception $ex) {
+                        $messages = array(
+                            array(
+                                'type' => 'warning',
+                                'class' => 'alert alert-warning',
                                 'message' => 'Contato registrado, porém houve um problema ao enviar o e-mail.'
                             )
                         );

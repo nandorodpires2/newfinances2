@@ -46,8 +46,6 @@ class Plugin_Auth extends Zend_Controller_Plugin_Abstract {
     
     private function isMobile() {
         
-        return true;
-        
         $iphone = strpos($this->_device,"iPhone");
         $ipad = strpos($this->_device,"iPad");
         $android = strpos($this->_device,"Android");
@@ -56,7 +54,7 @@ class Plugin_Auth extends Zend_Controller_Plugin_Abstract {
         $ipod = strpos($this->_device,"iPod");
         $symbian =  strpos($this->_device,"Symbian");
         
-        if ($iphone || $ipad || $android || $palmpre || $berry || $ipod || $symbian) {
+        if ($iphone || $ipad || $android || $palmpre || $berry || $ipod || $symbian) {            
             return true;
         }
         

@@ -47,7 +47,13 @@ $container->addPage(
                         'action' => 'editar-movimentacao',
                     )
                 )
-            ),            
+            ),       
+            array(
+                'label' => 'Pesquisa Avançada',
+                'module' => 'cliente',
+                'controller' => 'pesquisas',
+                'action' => 'avancada',
+            ),
             array(
                 'label' => 'Orçamentos',
                 'module' => 'cliente',

@@ -35,12 +35,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'password' => $config->mail->password
         );
         
-        if (APPLICATION_ENV === 'development') {
-            $transport = new Zend_Mail_Transport_File($config->mail->host, $mail_config);
-        } else {
-            $transport = new Zend_Mail_Transport_Smtp($config->mail->host, $mail_config);
-        }        
-        
+        $transport = new Zend_Mail_Transport_Smtp($config->mail->host, $mail_config);
         Zend_Registry::set('mail_transport', $transport);
         
     }
