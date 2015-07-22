@@ -19,12 +19,39 @@ $(document).ready(function(){
     
     $("#data_movimentacao").change(function(){
         var data = $("#data_movimentacao").val();
-        if (data != '') {                          
+        if (data !== '') {                          
             buscaMovimentacoesData(data, id_conta);
         }
     });
+    
+    $("#pesquisar").keypress(function(){
+        var value = $(this).val(); 
+        pesquisaSimples(value);
+    });
         
 });
+
+function pesquisaSimples(value) {
+    var base_url = baseUrl();      
+    $.ajax({        
+        url: base_url + 'cliente/ajax/pesquisa-simples',
+        type: "post",
+        data: {
+            value: value,
+        },
+        dataType: "html",
+        cache: false,
+        beforeSend: function() {                        
+            $("#movimentacoes").html("Pesquisando as movimentações... <img src='" + base_url + "views/img/ajax-loader.gif' />");
+        },
+        success: function(dados) { 
+            $("#movimentacoes").html(dados);            
+        },
+        error: function(error) {
+            $("#movimentacoes").html("<div class='alert alert-danger'>Visualização indisponível!</div>");
+        }
+    });
+}
 
 function buscaMovimentacoesData(data, id_conta) {
     

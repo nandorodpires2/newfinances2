@@ -65,6 +65,20 @@ class Cliente_AjaxController extends Zend_Controller_Action {
     }
     
     /**
+     * PESQUISA SIMPLES
+     */
+    public function pesquisaSimplesAction() {
+        
+        $id_usuario = Zend_Auth::getInstance()->getIdentity()->id_usuario;
+        
+        $valor = $this->_getParam("value");        
+        $modelMovimentacao = new Model_VwMovimentacao();
+        $movimentacoes = $modelMovimentacao->getMovimentacoesPesquisa($id_usuario, $valor);
+        $this->view->movimentacoes = $movimentacoes;
+        
+    }
+
+    /**
      * GRAFICOS
      */
     public function graficoReceitasDespesasAction() {

@@ -64,6 +64,24 @@ class Model_VwMovimentacao extends Zend_Db_Table {
     } 
     
     /**
+     * 
+     * @param type $valor
+     */
+    public function getMovimentacoesPesquisa($id_usuario, $valor = null) {
+        $select = $this->select()
+                ->from(array('mov' => $this->_name), array(
+                    '*'
+                ))
+                ->setIntegrityCheck(false)
+                ->joinInner(array('m' => 'movimentacao'), 'mov.id_movimentacao = m.id_movimentacao', array('m.id_movimentacao_pai'))
+                ->where("mov.descricao_movimentacao like '%$valor%'")                
+                ->where("mov.id_usuario = ?", $id_usuario)
+                ->order("mov.data_inclusao asc");
+                
+        return $this->fetchAll($select);
+    }
+
+    /**
      * Busca o saldo previsto
      */
     public function getSaldoPrevisto($data_fim, $id_usuario, $data_ini) {
