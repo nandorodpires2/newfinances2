@@ -24,11 +24,12 @@ $(document).ready(function(){
         }
     });
     
+    /*
     $("#pesquisar").keypress(function(){
         var value = $(this).val(); 
         pesquisaSimples(value);
     });
-        
+    */  
 });
 
 function pesquisaSimples(value) {

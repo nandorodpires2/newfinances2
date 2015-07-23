@@ -12,6 +12,9 @@ class Cliente_PesquisasController extends Zend_Controller_Action {
 
     public function avancadaAction() {
         
+        $formMovimentacoesPesquisa = new Form_Cliente_Movimentacoes_Pesquisa();
+        $this->view->formPesquisa = $formMovimentacoesPesquisa;
+        
     }
 
 }
